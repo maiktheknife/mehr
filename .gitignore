@@ -1,0 +1,12 @@
+.idea/
+
+Magazin.iml
+
+**/__pycache__/
+**/migrations/
+
+*.pyc
+
+public/
+
+db.sqlite3

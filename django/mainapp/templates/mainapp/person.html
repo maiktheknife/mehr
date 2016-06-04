@@ -1,0 +1,6 @@
+<h1>{{ person.name }}</h1>
+<ul>
+    {% for chapter in person.chapter_set.all %}
+    <li>chapter {{ chapter.index }}; vid: {{ chapter.video_url }}</li>
+    {% endfor %}
+</ul>
