@@ -29,6 +29,18 @@ class Chapter(models.Model):
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
+	def get_next(self):
+		next_chapters = self.person.chapter_set.filter(id__gt=self.id)
+		if next_chapters:
+			return next_chapters.first()
+		return False
+
+	def get_previous(self):
+		previous_chapters = self.person.chapter_set.filter(id__lt=self.id).order_by('-id')
+		if previous_chapters:
+			return previous_chapters.first()
+		return False
+
 	def __str__(self):
 		return "Chapter {} of {}".format(self.index, self.person)
 

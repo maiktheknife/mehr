@@ -20,8 +20,11 @@ def person_view(request, person_id):
 	return render(request, "mainapp/person.html", {"person": person})
 
 
-def chapter(request, person_id, chapter_id):
-	return HttpResponse("this is the chapter {} of person {}".format(chapter_id, person_id))
+def chapter_view(request, person_id, chapter_id):
+	person = get_object_or_404(Person, pk=person_id)
+	chapter = person.chapter_set.get(id=chapter_id)
+	return render(request, "mainapp/chapter.html", {"person": person, "chapter": chapter})
+	#return HttpResponse("this is the chapter {} of person {}".format(chapter_id, person))
 
 
 def additional_content(request, person_id, chapter_id, content_id):
