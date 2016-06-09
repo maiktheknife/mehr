@@ -1,6 +1,16 @@
 <h1>{{ person.name }}</h1>
 <ul>
     {% for chapter in person.chapter_set.all %}
-    <li>chapter {{ chapter.index }}; vid: {{ chapter.video_url }}</li>
+        <li>chapter {{ chapter.index }}; vid: {{ chapter.video_url }}</li>
     {% endfor %}
 </ul>
+
+{% with next_person=person.get_next previous_person=person.get_previous %}
+    {% if previous_person %}
+        <a href="{% url 'mainapp:personPage' previous_person.id %}">previous</a> ({{ previous_person.name }})<br/>
+    {% endif %}
+
+    {% if next_person %}
+        <a href="{% url 'mainapp:personPage' next_person.id %}">next</a> ({{ next_person.name }})
+    {% endif %}
+{% endwith %}

@@ -6,6 +6,18 @@ class Person(models.Model):
 	name = models.CharField(max_length=100)
 	twitter_account = models.CharField(max_length=255)
 
+	def get_next(self):
+		next_persons = Person.objects.filter(id__gt=self.id)
+		if next_persons:
+			return next_persons.first()
+		return False
+
+	def get_previous(self):
+		previous_persons = Person.objects.filter(id__lt=self.id).order_by('-id')
+		if previous_persons:
+			return previous_persons.first()
+		return False
+
 	def __str__(self):
 		return self.name + "; " + self.twitter_account
 
