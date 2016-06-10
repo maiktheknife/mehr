@@ -1,9 +1,8 @@
 .idea/
 
-Magazin.iml
+*.iml
 
 **/__pycache__/
-**/migrations/
 
 *.pyc
 

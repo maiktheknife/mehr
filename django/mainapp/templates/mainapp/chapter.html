@@ -1,4 +1,4 @@
-<h1>{{ person.name }}</h1>
+<h1>{{ person.name }} - Chapter {{ chapter.index }}</h1>
 
 {{ person.chapter_set.count }} chapters.
 <ul>
@@ -8,7 +8,12 @@
 </ul><br/>
 
 currently playing: chapter {{ chapter }}.<br/>
-({{ chapter.video_url }})<br/><br/>
+<video width="320" height="240" controls>
+    <source src={{ chapter.video_url }} type="video/mp4">
+    <source src={{ chapter.video_url }} type="video/webm">
+    Your browser does not support the video tag.
+</video>
+<br/><br/>
 
 {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
     {% if previous_chapter %}

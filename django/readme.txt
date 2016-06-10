@@ -1,10 +1,12 @@
+if starting for the first time, run the following:
+$ python manage.py makemigrations mainapp
+$ python manage.py migrate
+
 to start the application:
 $ python manage.py runserver
 
-if starting for the first time, run the following beforehand:
-$ python manage.py makemigrations
-$ python manage.py migrate
-
-The running application can be reached at <http://127.0.0.1:8000/mainapp>.
+-> The running application can be reached at <http://127.0.0.1:8000/mainapp>.
 
 To provide data visit <http://127.0.0.1:8000/admin>.
+you may need an admin user:
+$ python manage.py createsuperuser

@@ -8,6 +8,16 @@
     {% endfor %}
 </ul>
 
+{% with chapter=person.chapter_set.first %}
+    currently playing: chapter {{ chapter }}.<br/>
+    <video width="320" height="240" controls>
+        <source src={{ chapter.video_url }} type="video/mp4">
+        <source src={{ chapter.video_url }} type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+    <br/><br/>
+{% endwith %}
+
 {% with next_person=person.get_next previous_person=person.get_previous %}
     {% if previous_person %}
         <a href="{% url 'mainapp:personPage' previous_person.id %}">previous</a> ({{ previous_person.name }})<br/>
