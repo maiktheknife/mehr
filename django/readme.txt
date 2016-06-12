@@ -10,3 +10,7 @@ $ python manage.py runserver
 To provide data visit <http://127.0.0.1:8000/admin>.
 you may need an admin user:
 $ python manage.py createsuperuser
+
+
+TODO:
+https://getbootstrap.com/javascript/#carousel

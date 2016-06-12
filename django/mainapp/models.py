@@ -1,4 +1,8 @@
 from django.db import models
+from django.conf import settings
+from os import listdir
+from os.path import join
+
 
 # Create your models here.
 class Person(models.Model):
@@ -17,8 +21,11 @@ class Person(models.Model):
             return previous_persons.first()
         return False
 
+    def get_images(self):
+        return self.image_set.all()
+
     def __str__(self):
-        return self.name + "; " + self.twitter_account
+        return self.name
 
 
 class Chapter(models.Model):
@@ -62,3 +69,12 @@ class Page(models.Model):
 
     def __str__(self):
         return "Page as {}".format(self.additional_content)
+
+
+class Image(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=('images/' + str(person.name)))  # FIXME: person.name ?!
+
+    def __str__(self):
+        return "%s -> %s" % (self.person.name, self.image)
+

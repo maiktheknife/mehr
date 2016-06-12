@@ -1,42 +1,64 @@
-{% load staticfiles %}
-{% load embed_video_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <!-- CSS -->
+    <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
+    <link href='{% static "mainapp/css/custom.css" %}' rel="stylesheet" type="text/css">
+    <!-- JS -->
+    <script src='{% static "mainapp/js/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "mainapp/js/custom.js" %}'></script>
+</head>
+<body>
+<div id="person-carousel" class="carousel slide" >
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for _, clazz in people %}
+            <li data-target="#person-carousel" data-slide-to="{{forloop.counter0}}" class="{{clazz}}"></li>
+        {% endfor %}
+    </ol>
 
-<ul>
-    {% for chapter in person.chapter_set.all %}
-    <li>
-        <a href="{% url 'mainapp:chapterPage' person.id chapter.id %}">Chapter {{ chapter.index }}</a>
-        ; vid: {{ chapter.video_url }}
-    </li>
-    {% endfor %}
-</ul>
-<h1>{{ person.name }}</h1>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for person, clazz in people %}
+        <div class="item {{clazz}}">
+            <h1 class="text-center">{{person.name}}</h1>
+            {% if person.get_images %}
+            <div id="rotating-item-wrapper">
+                {% for image in person.get_images %}
+                <img src="{{ image.image.url }}" class="rotating-item img-responsive center-block" width="500" height="500"/>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="carousel-caption">
+                <h3>lorem</h3>
+                <p>{% lorem %}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
-{% with chapter=person.chapter_set.first %}
-    currently playing: chapter {{ chapter }}.<br/>
-    {% with 'mainapp/video/'|add:chapter.video_url as video_static %}
-        <video width="320" height="240" controls>
-            <source src="{% static video_static %}" type="video/mp4">
-            <source src="{% static video_static %}" type="video/webm">
-            Your browser does not support the video tag.
-        </video>
-        <br/><br/>
+    <!-- Controls -->
+    <div class="slider-nav">
+    {% with next_person=person.get_next previous_person=person.get_previous %}
+        {% if previous_person %}
+        <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.id %}" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        {% endif %}
+        {% if next_person %}
+        <a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.id %}" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        {% endif %}
     {% endwith %}
-{% endwith %}
+    </div>
 
-{% for chapter in person.chapter_set.all %}
-<li>
-    {% with 'mainapp/video/'|add:chapter.video_url as image_static %}
-        {% static image_static %}
-    {% endwith %}
-</li>
-{% endfor %}
-
-{% with next_person=person.get_next previous_person=person.get_previous %}
-    {% if previous_person %}
-        <a href="{% url 'mainapp:personPage' previous_person.id %}">previous</a> ({{ previous_person.name }})<br/>
-    {% endif %}
-
-    {% if next_person %}
-        <a href="{% url 'mainapp:personPage' next_person.id %}">next</a> ({{ next_person.name }})
-    {% endif %}
-{% endwith %}
+</div>
+</body>
+</html>

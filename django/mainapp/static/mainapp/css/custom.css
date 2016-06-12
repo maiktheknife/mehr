@@ -1,0 +1,42 @@
+
+/* Image Rotator */
+
+#rotating-item-wrapper {
+	position: relative;
+	width: 980px;
+	height: 347px;
+}
+
+.rotating-item {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+html,body{
+    height:100%;
+}
+
+/* Carousel */
+
+.carousel, .item, .active {
+    height:100%;
+}
+
+.carousel-inner{
+    height:100%;
+}
+
+.fill{
+    width:100%;
+    height:100%;
+    background-position:center;
+    background-size:cover;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }

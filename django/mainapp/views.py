@@ -15,14 +15,18 @@ def index(request):
 
 def person_view(request, person_id):
     person = get_object_or_404(Person, pk=person_id)
-    return render(request, "mainapp/person.html", {"person": person})
+    people = list(map(lambda p: (p, "active" if p.id == int(person_id) else ""), Person.objects.all()))
+    context = {
+        "person": person,
+        "people": people
+    }
+    return render(request, "mainapp/person.html", context)
 
 
 def chapter_view(request, person_id, chapter_id):
     person = get_object_or_404(Person, pk=person_id)
     chapter = person.chapter_set.get(id=chapter_id)
     return render(request, "mainapp/chapter.html", {"person": person, "chapter": chapter})
-    # return HttpResponse("this is the chapter {} of person {}".format(chapter_id, person))
 
 
 def additional_content(request, person_id, chapter_id, content_id):
