@@ -35,14 +35,13 @@
             {% endif %}
             <div class="carousel-caption">
                 <h3>lorem</h3>
-                <p>{% lorem %}</p>
+                <p>{% lorem 5 p %}</p>
             </div>
         </div>
         {% endfor %}
     </div>
 
     <!-- Controls -->
-    <div class="slider-nav">
     {% with next_person=person.get_next previous_person=person.get_previous %}
         {% if previous_person %}
         <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.id %}" role="button" data-slide="prev">
@@ -57,7 +56,6 @@
         </a>
         {% endif %}
     {% endwith %}
-    </div>
 
 </div>
 </body>

@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom
     'mainapp.apps.MainappConfig',
-    # Libs
-    'embed_video' #https://github.com/yetty/django-embed-video
 ]
 
 MIDDLEWARE_CLASSES = [

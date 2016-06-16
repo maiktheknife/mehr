@@ -1,17 +1,35 @@
 
 var main = function(){
     console.log('main')
+    initPageAnimation();
     initCarousel();
     initImageRotator();
+}
+
+var initPageAnimation = function(){
+    console.log("initPageAnimation");
+
+    $("body").css("display", "none");
+
+    $("body").fadeIn(2000);
+
+	$("a.transition").click(function(event){
+		event.preventDefault();
+		linkLocation = this.href;
+		$("body").fadeOut(1000, redirectPage);
+	});
+
+	function redirectPage() {
+		window.location = linkLocation;
+	}
+
 }
 
 var initCarousel = function(){
 // https://getbootstrap.com/javascript/#carousel
     console.log("initCarousel");
-    $('.carousel').carousel({
-        interval:5000,
-        keyboard:true
-    });
+    $('.carousel').carousel();
+    $('.carousel').carousel('pause');
 
     // slid  -> before animation
     // slide -> after animation

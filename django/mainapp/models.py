@@ -7,6 +7,7 @@ from os.path import join
 # Create your models here.
 class Person(models.Model):
     name = models.CharField(max_length=100)
+    preview_text = models.TextField(max_length=300)
     twitter_account = models.URLField(max_length=255)
 
     def get_next(self):
@@ -73,8 +74,12 @@ class Page(models.Model):
 
 class Image(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=('images/' + str(person.name)))  # FIXME: person.name ?!
+
+    def user_directory_path(self, file_name):
+        # file will be uploaded to MEDIA_ROOT/images/name/
+        return 'images/{0}/{1}'.format(self.person.name, file_name)
+
+    image = models.ImageField(upload_to=user_directory_path)
 
     def __str__(self):
         return "%s -> %s" % (self.person.name, self.image)
-
