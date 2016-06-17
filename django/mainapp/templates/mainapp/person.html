@@ -13,11 +13,11 @@
     <script src='{% static "mainapp/js/custom.js" %}'></script>
 </head>
 <body>
-<div id="person-carousel" class="carousel slide" >
+<div id="person-carousel" class="carousel slide">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         {% for _, clazz in people %}
-            <li data-target="#person-carousel" data-slide-to="{{forloop.counter0}}" class="{{clazz}}"></li>
+        <li data-target="#person-carousel" data-slide-to="{{forloop.counter0}}" class="{{clazz}}"></li>
         {% endfor %}
     </ol>
 
@@ -43,18 +43,20 @@
 
     <!-- Controls -->
     {% with next_person=person.get_next previous_person=person.get_previous %}
-        {% if previous_person %}
-        <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.id %}" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        {% endif %}
-        {% if next_person %}
-        <a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.id %}" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        {% endif %}
+    {% if previous_person %}
+    <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.id %}" role="button"
+       data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    {% endif %}
+    {% if next_person %}
+    <a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.id %}" role="button"
+       data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    {% endif %}
     {% endwith %}
 
 </div>

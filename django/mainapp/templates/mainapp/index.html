@@ -14,21 +14,20 @@
     <script src='{% static "mainapp/js/custom.js" %}'></script>
 </head>
 <body>
-    <video id="bgvid" autoplay controls>
-        <source src="{{ video_path }}" type="video/mp4">
-        <source src="{{ video_path }}" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+<video id="bgvid" autoplay controls>
+    <source src="{{ video_path }}" type="video/mp4">
+    <source src="{{ video_path }}" type="video/webm">
+    Your browser does not support the video tag.
+</video>
 
-    {% if people %}
-    <ul>
-        {% for person in people %}
-        <li><a href="{% url 'mainapp:personPage' person.id %}">{{ person.name }}</a></li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>no people available.</p>
-    {% endif %}
-
+{% if people %}
+<ul>
+    {% for person in people %}
+    <li><a href="{% url 'mainapp:personPage' person.id %}">{{ person.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>no people available.</p>
+{% endif %}
 
 </body>
