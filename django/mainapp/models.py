@@ -1,10 +1,6 @@
 from django.db import models
-from django.conf import settings
-from os import listdir
-from os.path import join
 
 
-# Create your models here.
 class Person(models.Model):
 	name = models.CharField(max_length=100)
 	preview_text = models.TextField(max_length=300)
@@ -25,8 +21,18 @@ class Person(models.Model):
 	def get_images(self):
 		return self.image_set.all()
 
+	def get_images_count(self):
+		return self.image_set.count()
+
+	def get_chapter_count(self):
+		return self.chapter_set.count()
+
 	def __str__(self):
 		return self.name
+
+	# Admin Page Anpassungen
+	get_images_count.short_description = 'Bilder'
+	get_chapter_count.short_description = 'Chapter'
 
 
 class Chapter(models.Model):
@@ -48,8 +54,13 @@ class Chapter(models.Model):
 			return previous_chapters.first()
 		return False
 
+	def get_additional_count(self):
+		return self.additionalcontent_set.count()
+
 	def __str__(self):
 		return "Chapter {} of {}".format(self.index, self.person)
+
+	get_additional_count.short_description = 'Ebenen'
 
 
 class AdditionalContent(models.Model):

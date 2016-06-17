@@ -1,11 +1,9 @@
 .idea/
-
-*.iml
+public/
 
 **/__pycache__/
 
+*.iml
 *.pyc
-
-public/
 
 db.sqlite3
