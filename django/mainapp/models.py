@@ -27,6 +27,9 @@ class Person(models.Model):
 	def get_chapter_count(self):
 		return self.chapter_set.count()
 
+	def get_chapter_id(self):
+		return self.chapter_set.first().index
+
 	def __str__(self):
 		return self.name
 
@@ -37,6 +40,7 @@ class Person(models.Model):
 
 class Chapter(models.Model):
 	index = models.IntegerField()  # add uniqueness is combination with the person
+	name = models.CharField(max_length=100)
 	video_url = models.CharField(max_length=255)
 	start_time = models.IntegerField()
 
