@@ -21,7 +21,7 @@ class AdditionalContentInline(admin.TabularInline):
 
 class ChapterAdmin(admin.ModelAdmin):
 	list_filter = ['person']
-	list_display = ['person', 'index', 'video_url', 'start_time', 'get_additional_count']
+	# list_display = ['person', 'index', 'video_url', 'start_time', 'get_additional_count']
 	ordering = ['person', 'index']
 	inlines = [AdditionalContentInline, ]
 

@@ -1,4 +1,5 @@
 from django.db import models
+from .utils.metadatareader import MetadataReader
 
 
 class Person(models.Model):
@@ -36,11 +37,28 @@ class Person(models.Model):
 
 
 class Chapter(models.Model):
-	index = models.IntegerField()  # add uniqueness is combination with the person
-	video_url = models.CharField(max_length=255)
-	start_time = models.IntegerField()
+	video = models.FileField(null=True)
+	duration = models.FloatField(default=0, editable=False)
+	start_time = models.FloatField(default=0, editable=False)
+	# the index shouldn't be needed if we demand the chapters to be uploaded in order
+	index = models.IntegerField()
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+	def save(self, *args, **kwargs):
+		# save first, so we can work with the uploaded file
+		super(Chapter, self).save(*args, **kwargs)
+
+		metadata = MetadataReader(self.video.path)
+		self.duration = metadata.get_duration()
+
+		previous_chapters = self.person.chapter_set.filter(id__lt=self.id).order_by('-id')
+		if previous_chapters:
+			chapter = previous_chapters.first()
+			self.start_time = chapter.start_time + chapter.duration
+
+		# there might be a better solution than resaving.
+		super(Chapter, self).save(*args, **kwargs)
 
 	def get_next(self):
 		next_chapters = self.person.chapter_set.filter(id__gt=self.id)
@@ -58,7 +76,7 @@ class Chapter(models.Model):
 		return self.additionalcontent_set.count()
 
 	def __str__(self):
-		return "Chapter {} of {}".format(self.index, self.person)
+		return "Chapter {} of {}; start: {}; duration: {}".format(self.index, self.person, self.start_time, self.duration)
 
 	get_additional_count.short_description = 'Ebenen'
 
