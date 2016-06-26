@@ -40,8 +40,15 @@ class Person(models.Model):
 
 
 class Chapter(models.Model):
+
+	# What is wrong with you python,
+	# order counts, but without forward declaration
+	def user_video_path(self, file_name):
+		# file will be uploaded to MEDIA_ROOT/video/name/
+		return 'videos/{0}/{1}'.format(self.person.name, file_name)
+
 	name = models.CharField(max_length=100)
-	video = models.FileField(null=True)
+	video = models.FileField(null=True, upload_to=user_video_path)
 	duration = models.FloatField(default=0, editable=False)
 	start_time = models.FloatField(default=0, editable=False)
 	# the index shouldn't be needed if we demand the chapters to be uploaded in order
@@ -108,11 +115,11 @@ class Page(models.Model):
 class Image(models.Model):
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
-	def user_directory_path(self, file_name):
+	def user_image_path(self, file_name):
 		# file will be uploaded to MEDIA_ROOT/images/name/
 		return 'images/{0}/{1}'.format(self.person.name, file_name)
 
-	image = models.ImageField(upload_to=user_directory_path)
+	image = models.ImageField(upload_to=user_image_path)
 
 	def __str__(self):
 		return "%s -> %s" % (self.person.name, self.image)
