@@ -1,34 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ person.name }} - awesome video magazine</title>
+    {% load staticfiles %}
+    <!-- CSS -->
+    <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
+    <link href='{% static "mainapp/css/custom.css" %}' rel="stylesheet" type="text/css">
+    <!-- JS -->
+    <script src='{% static "mainapp/js/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "mainapp/js/custom.js" %}'></script>
+</head>
+<body>
+
 <h1>{{ person.name }} - Chapter {{ chapter.index }}</h1>
 
-{{ person.chapter_set.count }} chapters.
-<ul>
-    {% for chapter in person.chapter_set.all %}
-        <li>chapter {{ chapter.index }}; vid: {{ chapter.video_url }}</li>
-    {% endfor %}
-</ul><br/>
+<div id="timeline">
 
-currently playing: chapter {{ chapter }}.<br/>
-<video width="320" height="240" controls>
-    <source src={{ chapter.video_url }} type="video/mp4">
-    <source src={{ chapter.video_url }} type="video/webm">
-    Your browser does not support the video tag.
-</video>
-<br/><br/>
+</div>
+<div class="container-fluid">
 
-{% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
+    <div class="row">
+        <div class="col-md-12">
+            .col-md-12
+            <video width="320" height="240" autoplay controls>
+                <source src="{{ chapter.video_url }}" type="video/mp4">
+                <source src="{{ chapter.video_url }}" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">.col-md-6</div>
+        <div class="col-md-6">.col-md-6</div>
+    </div>
+
+    {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
     {% if previous_chapter %}
-        <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.id %}">previous</a> Chapter {{ previous_chapter.id }}<br/>
+    <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.id %}">previous</a> Chapter {{ previous_chapter.id
+    }}<br/>
     {% endif %}
 
     {% if next_chapter %}
-        <a href="{% url 'mainapp:chapterPage' person.id next_chapter.id %}">next</a> Chapter {{ next_chapter.id }}
+    <a href="{% url 'mainapp:chapterPage' person.id next_chapter.id %}">next</a> Chapter {{ next_chapter.id }}
     {% endif %}
-{% endwith %}
+    {% endwith %}
 
-<br/>
-bonus content of this chapter:<br/>
-<ul>
-    {% for bonus in chapter.additionalcontent_set.all %}
+    <br/>
+    bonus content of this chapter:<br/>
+    <ul>
+        {% for bonus in chapter.additionalcontent_set.all %}
         <li>{{ bonus }}; vid: {{ bonus.video_url }}</li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>

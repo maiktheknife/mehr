@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ person.name }} - awesome video magazine</title>
     {% load staticfiles %}
     <!-- CSS -->
     <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
@@ -27,11 +27,14 @@
         <div class="item {{clazz}}">
             <h1 class="text-center">{{person.name}}</h1>
             {% if person.get_images %}
-            <div id="rotating-item-wrapper">
-                {% for image in person.get_images %}
-                <img src="{{ image.image.url }}" class="rotating-item img-responsive center-block" width="500" height="500"/>
-                {% endfor %}
-            </div>
+            <!-- FIXME: set first chapter id -->
+            <a href="{% url 'mainapp:chapterPage' person.id 0 %}">
+                <div id="rotating-item-wrapper">
+                    {% for image in person.get_images %}
+                    <img src="{{ image.image.url }}" class="rotating-item img-responsive center-block" width="500" height="500"/>
+                    {% endfor %}
+                </div>
+            </a>
             {% endif %}
             <div class="carousel-caption">
                 <h3>lorem</h3>

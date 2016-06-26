@@ -28,6 +28,9 @@ class Person(models.Model):
 	def get_chapter_count(self):
 		return self.chapter_set.count()
 
+	def get_chapter_id(self):
+		return self.chapter_set.first().index
+
 	def __str__(self):
 		return self.name
 
@@ -37,11 +40,12 @@ class Person(models.Model):
 
 
 class Chapter(models.Model):
+	name = models.CharField(max_length=100)
 	video = models.FileField(null=True)
 	duration = models.FloatField(default=0, editable=False)
 	start_time = models.FloatField(default=0, editable=False)
 	# the index shouldn't be needed if we demand the chapters to be uploaded in order
-	index = models.IntegerField()
+	index = models.IntegerField()  # add uniqueness is combination with the person
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
