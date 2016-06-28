@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>awesome video magazine</title>
+    <title>{{ layer.person.name }} - awesome video magazine</title>
     {% load staticfiles %}
     <!-- CSS -->
     <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
@@ -15,18 +15,9 @@
 </head>
 <body oncontextmenu="return false">
 <video id="bgvid" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay controls>
-    <source src="{{ video_path }}" type="video/mp4">
-    <source src="{{ video_path }}" type="video/webm">
+    <source src="{{ layer.video_url }}" type="video/mp4">
+    <source src="{{ layer.video_url }}" type="video/webm">
     Your browser does not support the video tag.
 </video>
-{% if people %}
-<ul>
-    {% for person in people %}
-    <li><a href="{% url 'mainapp:personPage' person.id %}">{{ person.name }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>no people available.</p>
-{% endif %}
 </body>
 </html>

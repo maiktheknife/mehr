@@ -1,22 +1,33 @@
 from django.contrib import admin
-from .models import Person, Chapter, AdditionalContent, Page, Image
+from .models import Person, Chapter, AdditionalContent, Image
 
 
 # AdditionalContent
 
-class PageInline(admin.TabularInline):
-	model = Page
-	extra = 3
-
-
 class AdditionalContentAdmin(admin.ModelAdmin):
-	inlines = [PageInline, ]
+	list_filter = ['chapter']
+	list_display = ['chapter', 'index', 'type']
+	ordering = ['chapter', 'index']
+	fieldsets = [
+		(None, {'fields': ['index', 'type', 'chapter']}),
+		('Video', {
+			'fields': ['video_url'],
+		}),
+		('Image and Text', {
+			'fields': ['pictures_array', 'textblocks_array'],
+		})
+	]
+
+	# https://stackoverflow.com/questions/9330354/django-admin-disable-field-dynamically-based-on-other-selections
+	class Media:
+		js = ("mainapp/js/jquery.js", "admin/js/admin.js", )
 
 
 # Chapter
 
 class AdditionalContentInline(admin.TabularInline):
 	model = AdditionalContent
+	extra = 3
 
 
 class ChapterAdmin(admin.ModelAdmin):

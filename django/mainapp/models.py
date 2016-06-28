@@ -40,7 +40,6 @@ class Person(models.Model):
 
 
 class Chapter(models.Model):
-
 	# What is wrong with you python,
 	# order counts, but without forward declaration
 	def user_video_path(self, file_name):
@@ -93,23 +92,24 @@ class Chapter(models.Model):
 
 
 class AdditionalContent(models.Model):
+	TYPE_VIDEO = 0
+	TYPE_IMAGES = 1
+
 	index = models.IntegerField()
-	video_url = models.CharField(max_length=255)
+	type_choices = (
+		(TYPE_VIDEO, "Video"), (TYPE_IMAGES, "Images and Text")
+	)
+	type = models.IntegerField(choices=type_choices)
+	# Videos
+	video_url = models.CharField(max_length=255, blank=True)
+	# Image and Text
+	pictures_array = models.CharField(max_length=255, blank=True)
+	textblocks_array = models.CharField(max_length=1000, blank=True)
 
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return "Additional Content {} for {}".format(self.index, self.chapter)
-
-
-class Page(models.Model):
-	pictures_array = models.CharField(max_length=255)
-	textblocks_array = models.CharField(max_length=1000)
-
-	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return "Page as {}".format(self.additional_content)
 
 
 class Image(models.Model):

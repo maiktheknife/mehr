@@ -1,13 +1,10 @@
 # AwesomeDev
-Team Awesome Devs
 
 # Libs
-## hachoir3
-https://bitbucket.org/haypo/hachoir3
-https://pypi.python.org/pypi/hachoir3-superdesk/3.0a1.post2
+#####[Django](https://www.djangoproject.com/)
+#####[hachoir3](https://bitbucket.org/haypo/hachoir3) [hachoir3 windows](https://pypi.python.org/pypi/hachoir3-superdesk/3.0a1.post2)
 
 # Run
-
 if starting for the first time, run the following:
 $ python manage.py makemigrations mainapp
 $ python manage.py migrate
