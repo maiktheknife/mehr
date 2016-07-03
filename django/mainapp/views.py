@@ -37,7 +37,9 @@ def person_view(request, person_id):
 
 def chapter_view(request, person_id, chapter_id):
 	person = get_object_or_404(Person, pk=person_id)
-	chapter = person.chapter_set.get(id=chapter_id)
+	chapters = list(person.chapter_set.all())
+	chapter = chapters[int(chapter_id)]
+
 	return render(request, "mainapp/chapter.html", {"person": person, "chapter": chapter})
 
 
