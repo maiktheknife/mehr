@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h1>{{ person.name }} - Chapter {{ chapter.index }}</h1>
+<h1>{{ person.name }} - Chapter {{ chapter.get_relative_id }}</h1>
 
 <div id="timeline">
 
@@ -24,9 +24,9 @@
     <div class="row">
         <div class="col-md-12">
             .col-md-12
-            <video width="320" height="240" autoplay controls>
-                <source src="{{ chapter.video_url }}" type="video/mp4">
-                <source src="{{ chapter.video_url }}" type="video/webm">
+            <video id="chapterVideo" width="320" height="240" autoplay controls>
+                <source src="{% static chapter.video_url %}" type="video/mp4">
+                <source src="{% static chapter.video_url %}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -39,12 +39,20 @@
 
     {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
     {% if previous_chapter %}
-    <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.id %}">previous</a> Chapter {{ previous_chapter.id
-    }}<br/>
+        <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.get_relative_id %}">previous</a>
+        Chapter {{ previous_chapter.get_relative_id }}<br/>
     {% endif %}
 
     {% if next_chapter %}
-    <a href="{% url 'mainapp:chapterPage' person.id next_chapter.id %}">next</a> Chapter {{ next_chapter.id }}
+        <a href="{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}">next</a>
+        Chapter {{ next_chapter.get_relative_id }}
+
+        <script type='text/javascript'>
+            document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+            function myHandler(e) {
+                document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
+            }
+        </script>
     {% endif %}
     {% endwith %}
 
