@@ -12,6 +12,7 @@ def index(request):
 	video_path = join(settings.STATIC_URL, 'mainapp', 'video', 'Start.mp4')
 	context = {
 		"people": Person.objects.all(),
+		"firstID": Person.objects.all().first().id,
 		"video_path": video_path
 	}
 	return render(request, "mainapp/index.html", context)

@@ -50,7 +50,6 @@ class Chapter(models.Model):
 	video = models.FileField(null=True, upload_to=user_video_path)
 	duration = models.FloatField(default=0, editable=False)
 	start_time = models.FloatField(default=0, editable=False)
-	video_url = "/media/videos/Mona Sax/yeah0.webm"
 	# the index shouldn't be needed if we demand the chapters to be uploaded in order
 	index = models.IntegerField()  # add uniqueness is combination with the person
 

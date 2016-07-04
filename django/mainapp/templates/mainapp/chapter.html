@@ -6,27 +6,27 @@
     {% load staticfiles %}
     <!-- CSS -->
     <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
-    <link href='{% static "mainapp/css/custom.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css">
     <!-- JS -->
     <script src='{% static "mainapp/js/jquery.js" %}'></script>
     <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
     <script src='{% static "mainapp/js/custom.js" %}'></script>
+    <script src='{% static "mainapp/js/chapter.js" %}'></script>
 </head>
 <body>
 
 <h1>{{ person.name }} - Chapter {{ chapter.get_relative_id }}</h1>
 
 <div id="timeline">
-
 </div>
 <div class="container-fluid">
 
     <div class="row">
         <div class="col-md-12">
             .col-md-12
-            <video id="chapterVideo" width="320" height="240" autoplay controls>
-                <source src="{% static chapter.video_url %}" type="video/mp4">
-                <source src="{% static chapter.video_url %}" type="video/webm">
+            <video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' width="640" height="480" autoplay controls>
+                <source src="{{ chapter.video.url }}" type="video/mp4">
+                <source src="{{ chapter.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -42,11 +42,9 @@
         <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.get_relative_id %}">previous</a>
         Chapter {{ previous_chapter.get_relative_id }}<br/>
     {% endif %}
-
     {% if next_chapter %}
         <a href="{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}">next</a>
         Chapter {{ next_chapter.get_relative_id }}
-
         <script type='text/javascript'>
             document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
             function myHandler(e) {
@@ -64,5 +62,6 @@
         {% endfor %}
     </ul>
 </div>
+
 
 </body>
