@@ -18,12 +18,9 @@ def index(request):
 	return render(request, "mainapp/index.html", context)
 
 
-# FIXME: redirect geht nicht -.-
 def person_view_start(request):
-	person_id = Person.objects.first().id
-	# return redirect('person_view', person_id=person_id)
-	return HttpResponseRedirect(
-		reverse('personPage', kwargs={'person_id': person_id}))
+	return redirect('0/')
+	# return redirect('person_view', args=[0])
 
 
 def person_view(request, relative_person_id):
