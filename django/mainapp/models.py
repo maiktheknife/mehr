@@ -7,6 +7,9 @@ class Person(models.Model):
 	preview_text = models.TextField(max_length=300)
 	twitter_account = models.URLField(max_length=255)
 
+	def get_relative_id(self):
+		return Person.objects.filter(id__lt=self.id).count()
+
 	def get_next(self):
 		next_persons = Person.objects.filter(id__gt=self.id)
 		if next_persons:

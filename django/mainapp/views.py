@@ -26,8 +26,11 @@ def person_view_start(request):
 		reverse('personPage', kwargs={'person_id': person_id}))
 
 
-def person_view(request, person_id):
-	person = get_object_or_404(Person, pk=person_id)
+def person_view(request, relative_person_id):
+	persons = list(Person.objects.all())
+	person = persons[int(relative_person_id)]
+	person_id = person.id
+
 	people = list(map(lambda p: (p, "active" if p.id == int(person_id) else ""), Person.objects.all()))
 	context = {
 		"person": person,
@@ -36,10 +39,11 @@ def person_view(request, person_id):
 	return render(request, "mainapp/person.html", context)
 
 
-def chapter_view(request, person_id, chapter_id):
-	person = get_object_or_404(Person, pk=person_id)
+def chapter_view(request, relative_person_id, relative_chapter_id):
+	persons = list(Person.objects.all())
+	person = persons[int(relative_person_id)]
 	chapters = list(person.chapter_set.all())
-	chapter = chapters[int(chapter_id)]
+	chapter = chapters[int(relative_chapter_id)]
 
 	return render(request, "mainapp/chapter.html", {"person": person, "chapter": chapter})
 

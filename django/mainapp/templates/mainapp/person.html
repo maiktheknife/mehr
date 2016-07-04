@@ -48,14 +48,14 @@
     <!-- Controls -->
     {% with next_person=person.get_next previous_person=person.get_previous %}
     {% if previous_person %}
-    <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.id %}" role="button"
+    <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.get_relative_id %}" role="button"
        data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
     {% endif %}
     {% if next_person %}
-    <a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.id %}" role="button"
+    <a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.get_relative_id %}" role="button"
        data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
