@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom
     'mainapp.apps.MainappConfig',
+    # libs
+    'bootstrap3',
+    'fontawesome',
 ]
 
 MIDDLEWARE_CLASSES = [

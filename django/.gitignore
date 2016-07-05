@@ -7,3 +7,4 @@ public/
 *.pyc
 
 db.sqlite3
+/mainapp/static/mainapp/video/Start.mp4

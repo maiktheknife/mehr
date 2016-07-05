@@ -5,15 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ person.name }} - awesome video magazine</title>
     {% load staticfiles %}
-    <!-- CSS -->
-    <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
-    <link href='{% static "mainapp/css/custom.css" %}' rel="stylesheet" type="text/css">
-    <!-- JS -->
-    <script src='{% static "mainapp/js/jquery.js" %}'></script>
-    <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
-    <script src='{% static "mainapp/js/custom.js" %}'></script>
+    {# Load jquery and custom javascript #}
+    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/libs/jquery.navgoco.min.js" %}'></script>
+    <script src='{% static "mainapp/js/person.js" %}'></script>
+    {# Load bootstrap3 #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {# Load fontawesome #}
+    {% load fontawesome %}
+    {% fontawesome_stylesheet %}
+    {# Load custom css #}
+    <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css">
 </head>
 <body>
+<nav>
+    <ul class="list-unstyled main-menu">
+        <li class="text-left"><a href="#" id="nav-close">X</a></li>
+        <li><a href="#">Menu One <span class="icon"></span></a></li>
+        <li><a href="#">Menu Two <span class="icon"></span></a></li>
+        <li><a href="#">Menu Three <span class="icon"></span></a></li>
+        <li><a href="#">Dropdown</a>
+            <ul class="list-unstyled">
+                <li class="sub-nav"><a href="#">Sub Menu One <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Two <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Three <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Four <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Five <span class="icon"></span></a></li>
+            </ul>
+        </li>
+        <li><a href="#">Menu Four <span class="icon"></span></a></li>
+        <li><a href="#">Menu Five <span class="icon"></span></a></li>
+    </ul>
+</nav>
+
+<a id="nav-expander" class="nav-expander fixed">
+    {% bootstrap_icon "menu-hamburger" %}
+</a>
+
 <div id="person-carousel" class="carousel slide">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -32,7 +62,7 @@
             <a href="{% url 'mainapp:chapterPage' person.id 0 %}">
                 <div id="rotating-item-wrapper">
                     {% for image in person.get_images %}
-                    <img src="{{ image.image.url }}" class="rotating-item img-responsive center-block" width="500" height="500"/>
+                    <img src="{{ image.image.url }}" class="rotating-item img-responsive img-center" width="500" height="500"/>
                     {% endfor %}
                 </div>
             </a>

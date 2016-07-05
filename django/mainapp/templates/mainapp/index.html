@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>awesome video magazine</title>
     {% load staticfiles %}
-    <!-- CSS -->
-    <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
-    <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
-    <!-- JS -->
-    <script src='{% static "mainapp/js/jquery.js" %}'></script>
-    <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
+    {# Load jquery and custom javascript #}
+    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
     <script src='{% static "mainapp/js/index.js" %}'></script>
+    {# Load bootstrap3 #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <script>
         // http://www.mutaku.com/wp/index.php/2012/03/accessing-django-template-variables-in-javascript/
         var firstPersonID = "{% url 'mainapp:personPage' firstID %}";
     </script>
+    {# Load custom css #}
+    <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
 </head>
 <body oncontextmenu="return false">
-<video id="bgvid" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay controls>
+<video id="bgvid" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
     <source src="{{ video_path }}" type="video/mp4">
     <source src="{{ video_path }}" type="video/webm">
     Your browser does not support the video tag.

@@ -20,7 +20,7 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 
 	# https://stackoverflow.com/questions/9330354/django-admin-disable-field-dynamically-based-on-other-selections
 	class Media:
-		js = ("mainapp/js/jquery.js", "admin/js/admin.js", )
+		js = ("mainapp/js/libs/jquery.js", "admin/js/admin.js", )
 
 
 # Chapter
