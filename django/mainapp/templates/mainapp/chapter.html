@@ -58,7 +58,11 @@
     bonus content of this chapter:<br/>
     <ul>
         {% for bonus in chapter.additionalcontent_set.all %}
-        <li>{{ bonus }}; vid: {{ bonus.video_url }}</li>
+        <li>
+            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id bonus.get_relative_id %}">
+                {{ bonus }}
+            </a>
+        </li>
         {% endfor %}
     </ul>
 </div>

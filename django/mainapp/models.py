@@ -118,6 +118,9 @@ class AdditionalContent(models.Model):
 	pictures_array = models.CharField(max_length=255, blank=True)
 	textblocks_array = models.CharField(max_length=1000, blank=True)
 
+	def get_relative_id(self):
+		return self.chapter.additionalcontent_set.filter(id__lt=self.id).count()
+
 	def __str__(self):
 		return "Additional Content {} for {}".format(self.id, self.chapter)
 
