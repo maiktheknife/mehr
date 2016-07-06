@@ -13,11 +13,16 @@
     <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
     <script src='{% static "mainapp/js/index.js" %}'></script>
 </head>
-<body oncontextmenu="return false">
-    <video id="chapterLayerVideo" poster='{% static "mainapp/images/yeah.jpg" %}' width="640" height="480" autoplay controls>
+<body oncontextmenu="return false" onclick="backToChapter()">
+    <video id="chapterLayerVideo" style="cursor: url(https://cdn4.iconfinder.com/data/icons/podcast-collection/100/delete-48.png), crosshair" poster='{% static "mainapp/images/yeah.jpg" %}' width="640" height="480" autoplay controls>
         <source src="{{ video.url }}" type="video/mp4">
         <source src="{{ video.url }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
 </body>
+<script type='text/javascript'>
+            function backToChapter() {
+                document.location.href = "{% url 'mainapp:chapterPage' person.get_relative_id chapter.get_relative_id %}";
+            }
+</script>
 </html>

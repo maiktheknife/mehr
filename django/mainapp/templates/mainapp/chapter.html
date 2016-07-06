@@ -1,16 +1,19 @@
-{% extends "mainapp/base.html" %}
-
-{% load staticfiles %}
-{% block title %}
-    {{ chapter.name }} - awesome video magazine
-{% endblock %}
-{% block js %}
-    <script src='{% static "mainapp/js/chapter.js" %}'></script>
-{% endblock %}
-{% block css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ person.name }} - awesome video magazine</title>
+    {% load staticfiles %}
+    <!-- CSS -->
+    <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
     <link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css">
-{% endblock %}
-{% block content %}
+    <!-- JS -->
+    <script src='{% static "mainapp/js/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "mainapp/js/custom.js" %}'></script>
+    <script src='{% static "mainapp/js/chapter.js" %}'></script>
+</head>
+<body>
 
 <h1>{{ person.name }} - Chapter {{ chapter.get_relative_id }}</h1>
 
@@ -19,7 +22,8 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12">
+            .col-md-12
             <video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' width="640" height="480" autoplay controls>
                 <source src="{{ chapter.video.url }}" type="video/mp4">
                 <source src="{{ chapter.video.url }}" type="video/webm">
@@ -29,45 +33,26 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            {% with previous_chapter=chapter.get_previous %}
-            {% if previous_chapter %}
-            Previous: <a href="{% url 'mainapp:chapterPage' person.get_relative_id previous_chapter.get_relative_id %}">Chapter {{ previous_chapter.get_relative_id }}</a>
-            {% endif %}
-            {% endwith %}
-        </div>
-        <div class="col-md-6">
-            {% with next_chapter=chapter.get_next %}
-            {% if next_chapter %}
-            Next: <a href="{% url 'mainapp:chapterPage' person.get_relative_id next_chapter.get_relative_id %}">Chapter {{ next_chapter.get_relative_id }}</a>
-            <script type='text/javascript'>
-                document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
-                function myHandler(e) {
-                    document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
-                }
-            </script>
-            {% endif %}
-            {% endwith %}
-        </div>
+        <div class="col-md-6">.col-md-6</div>
+        <div class="col-md-6">.col-md-6</div>
     </div>
 
-    {% if chapter.get_additional_count >= 3 %}
-    {% with add0=chapter.additionalcontent_set.all.0 add1=chapter.additionalcontent_set.all.1 add2=chapter.additionalcontent_set.all.2 %}
-
-    <div class="text-center">bonus content of this chapter</div>
-    <div class="row">
-        <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id add0.index %}">{{ add0.name }}</a>
-        </div>
-        <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id add1.index %}">{{ add1.name }}</a>
-        </div>
-        <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id add2.index %}">{{ add2.name }}</a>
-        </div>
-    </div>
-    {% endwith %}
+    {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
+    {% if previous_chapter %}
+        <a href="{% url 'mainapp:chapterPage' person.get_relative_id previous_chapter.get_relative_id %}">previous</a>
+        Chapter {{ previous_chapter.get_relative_id }}<br/>
     {% endif %}
+    {% if next_chapter %}
+        <a href="{% url 'mainapp:chapterPage' person.get_relative_id next_chapter.get_relative_id %}">next</a>
+        Chapter {{ next_chapter.get_relative_id }}
+        <script type='text/javascript'>
+            document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+            function myHandler(e) {
+                document.location.href = "{% url 'mainapp:chapterPage' person.get_relative_id next_chapter.get_relative_id %}";
+            }
+        </script>
+    {% endif %}
+    {% endwith %}
 
     <br/>
     bonus content of this chapter:<br/>
@@ -80,7 +65,7 @@
         </li>
         {% endfor %}
     </ul>
-
 </div>
 
-{% endblock %}
+
+</body>
