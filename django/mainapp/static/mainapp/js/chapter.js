@@ -16,10 +16,6 @@ var toggleVideoStatus = function(){
     }
 }
 
-var navTo = function(target){
-    window.location = target;
-}
-
 var initVideoPlayer = function(){
     $("#chapterVideo").click(function(event){
         toggleVideoStatus();

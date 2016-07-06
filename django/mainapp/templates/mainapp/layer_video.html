@@ -1,28 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ layer.person.name }} - awesome video magazine</title>
-    {% load staticfiles %}
-    <!-- CSS -->
-    <link href='{% static "mainapp/css/bootstrap.min.css" %}' rel="stylesheet" media="screen">
-    <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
-    <!-- JS -->
-    <script src='{% static "mainapp/js/jquery.js" %}'></script>
-    <script src='{% static "mainapp/js/bootstrap.min.js" %}'></script>
-    <script src='{% static "mainapp/js/index.js" %}'></script>
-</head>
-<body oncontextmenu="return false" onclick="backToChapter()">
-    <video id="chapterLayerVideo" style="cursor: url(https://cdn4.iconfinder.com/data/icons/podcast-collection/100/delete-48.png), crosshair" poster='{% static "mainapp/images/yeah.jpg" %}' width="640" height="480" autoplay controls>
+{% extends "mainapp/base.html" %}
+
+{% load staticfiles %}
+{% block title %}
+    {{ person.name }} - awesome video magazine
+{% endblock %}
+{% block js %}
+    <script type='text/javascript'>
+        function backToChapter() {
+            document.location.href = "{% url 'mainapp:chapterPage' person.get_relative_id chapter.get_relative_id %}";
+        }
+
+        $(document).ready(function() {
+            $('body').click(function(event) {
+                backToChapter();
+            });
+        });
+    </script>
+{% endblock %}
+{% block css %}
+    <style type="text/css" >
+        #chapterLayerVideo {
+            width: 640px;
+            height: 480px;
+            cursor: url({% static 'mainapp/images/Close.png' %}), crosshair;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <video id="chapterLayerVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay controls>
         <source src="{{ video.url }}" type="video/mp4">
         <source src="{{ video.url }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
-</body>
-<script type='text/javascript'>
-            function backToChapter() {
-                document.location.href = "{% url 'mainapp:chapterPage' person.get_relative_id chapter.get_relative_id %}";
-            }
-</script>
-</html>
+{% endblock %}

@@ -55,7 +55,11 @@ def additional_content_view(request, relative_person_id, relative_chapter_id, re
 
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]
 
-	context = {"person": person, "chapter": chapter}
+	context = {
+		"person": person,
+		"chapter": chapter,
+		"layer": additional_content
+	}
 
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:
 		context["video"] = additional_content.video
