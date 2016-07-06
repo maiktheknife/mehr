@@ -20,18 +20,17 @@ def index(request):
 
 def person_view_start(request):
 	return redirect('0/')
-	# return redirect('person_view', args=[0])
 
 
 def person_view(request, relative_person_id):
 	persons = list(Person.objects.all())
 	person = persons[int(relative_person_id)]
-	person_id = person.id
+	index = persons.index(person)
 
-	people = list(map(lambda p: (p, "active" if p.id == int(person_id) else ""), Person.objects.all()))
 	context = {
+		"people": persons,
 		"person": person,
-		"people": people,
+		"index": index,
 	}
 	return render(request, "mainapp/person.html", context)
 

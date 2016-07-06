@@ -2,7 +2,6 @@
 var main = function(){
     console.log('main')
     initPageAnimation();
-    initCarousel();
     initImageRotator();
     initMenu();
 }
@@ -24,20 +23,6 @@ var initPageAnimation = function(){
 		window.location = linkLocation;
 	}
 
-}
-
-var initCarousel = function(){
-// https://getbootstrap.com/javascript/#carousel
-    console.log("initCarousel");
-    $('.carousel').carousel();
-    $('.carousel').carousel('pause');
-
-    // slid  -> before animation
-    // slide -> after animation
-    // FIXME: navigate to next page
-    $('.carousel').on('slid.bs.carousel', function () {
-        console.log("Slide Event");
-    })
 }
 
 var initImageRotator = function(){
@@ -81,7 +66,7 @@ var initMenu = function(){
     // Initialize navgoco with default options
     $(".main-menu").navgoco({
         caret: '<span class="caret"></span>',
-        accordion: false,
+        accordion: true,
         openClass: 'open',
         save: true,
         cookie: {
