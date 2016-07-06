@@ -106,16 +106,20 @@ class AdditionalContent(models.Model):
 		(TYPE_VIDEO, "Video"), (TYPE_IMAGES, "Images and Text")
 	)
 	type = models.IntegerField(choices=type_choices)
+
+	def user_video_path(self, file_name):
+		return 'videos/{0}/{1}/{2}'.format(self.chapter.person.name, self.chapter.id, file_name)
+
+	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
+
 	# Videos
-	video_url = models.CharField(max_length=255, blank=True)
+	video = models.FileField(null=True, upload_to=user_video_path)
 	# Image and Text
 	pictures_array = models.CharField(max_length=255, blank=True)
 	textblocks_array = models.CharField(max_length=1000, blank=True)
 
-	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
-
 	def __str__(self):
-		return "Additional Content {} for {}".format(self.index, self.chapter)
+		return "Additional Content {} for {}".format(self.id, self.chapter)
 
 
 class Image(models.Model):

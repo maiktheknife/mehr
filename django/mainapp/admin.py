@@ -11,7 +11,7 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 	fieldsets = [
 		(None, {'fields': ['index', 'type', 'chapter']}),
 		('Video', {
-			'fields': ['video_url'],
+			'fields': ['video'],
 		}),
 		('Image and Text', {
 			'fields': ['pictures_array', 'textblocks_array'],
