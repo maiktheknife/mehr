@@ -48,7 +48,7 @@
         <script type='text/javascript'>
             document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
             function myHandler(e) {
-                document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
+                document.location.href = "{% url 'mainapp:chapterPage' person.get_relative_id next_chapter.get_relative_id %}";
             }
         </script>
     {% endif %}
