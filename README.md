@@ -9,17 +9,21 @@ pip install django-fontawesome
 
 ## Run
 if starting for the first time, run the following:
+```bash
 $ python manage.py makemigrations mainapp
 $ python manage.py migrate
-
+```
 to start the application:
+```bash
 $ python manage.py runserver
-
+```
 -> The running application can be reached at <http://127.0.0.1:8000/mainapp>.
 
-To provide data visit <http://127.0.0.1:8000/admin>.
+To provide data visit <http://127.0.0.1:8000/admin>
 you may need an admin user:
+```bash
 $ python manage.py createsuperuser
+```
 
 ## Libs
 * [Django](https://www.djangoproject.com/)
