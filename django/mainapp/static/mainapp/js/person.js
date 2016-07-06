@@ -1,9 +1,9 @@
 
 var main = function(){
-    console.log('main')
+    console.log('main');
     initPageAnimation();
     initImageRotator();
-    initMenu();
+    initMouseMovementAwareness();
 }
 
 var initPageAnimation = function(){
@@ -52,32 +52,17 @@ var initImageRotator = function(){
 
 }
 
-var initMenu = function(){
-    //Navigation Menu Slider
-    $('#nav-expander').on('click',function(e){
-        e.preventDefault();
-        $('body').toggleClass('nav-expanded');
-    });
-    $('#nav-close').on('click',function(e){
-        e.preventDefault();
-        $('body').removeClass('nav-expanded');
-    });
-
-    // Initialize navgoco with default options
-    $(".main-menu").navgoco({
-        caret: '<span class="caret"></span>',
-        accordion: true,
-        openClass: 'open',
-        save: true,
-        cookie: {
-            name: 'navgoco',
-            expires: false,
-            path: '/'
-        },
-        slide: {
-            duration: 300,
-            easing: 'swing'
+var initMouseMovementAwareness = function(){
+    var timeout = null;
+    $(document).on('mousemove', function() {
+        if (timeout !== null) {
+            $('.carousel-control').fadeIn();
+            clearTimeout(timeout);
         }
+
+        timeout = setTimeout(function() {
+            $('.carousel-control').fadeOut();
+        }, 2000);
     });
 }
 

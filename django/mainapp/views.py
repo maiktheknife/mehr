@@ -41,7 +41,12 @@ def chapter_view(request, relative_person_id, relative_chapter_id):
 	chapters = list(person.chapter_set.all())
 	chapter = chapters[int(relative_chapter_id)]
 
-	return render(request, "mainapp/chapter.html", {"person": person, "chapter": chapter})
+	context = {
+		"people": persons,
+		"person": person,
+		"chapter": chapter,
+	}
+	return render(request, "mainapp/chapter.html", context)
 
 
 def additional_content_view(request, relative_person_id, relative_chapter_id, relative_additional_content_id):

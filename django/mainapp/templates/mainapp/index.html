@@ -1,38 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>awesome video magazine</title>
-    {% load staticfiles %}
-    {# Load jquery and custom javascript #}
-    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
+{% extends "mainapp/base.html" %}
+
+{% load staticfiles %}
+{% block title %}
+    awesome video magazine
+{% endblock %}
+{% block js %}
     <script src='{% static "mainapp/js/index.js" %}'></script>
-    {# Load bootstrap3 #}
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
     <script>
         // http://www.mutaku.com/wp/index.php/2012/03/accessing-django-template-variables-in-javascript/
         var firstPersonID = "{% url 'mainapp:personPage' firstID %}";
     </script>
-    {# Load custom css #}
+{% endblock %}
+{% block css %}
     <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
-</head>
-<body oncontextmenu="return false">
-<video id="bgvid" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
-    <source src="{{ video_path }}" type="video/mp4">
-    <source src="{{ video_path }}" type="video/webm">
-    Your browser does not support the video tag.
-</video>
-{% if people %}
-<ul>
-    {% for person in people %}
-    <li><a href="{% url 'mainapp:personPage' person.id %}">{{ person.name }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>no people available.</p>
-{% endif %}
-</body>
-</html>
+{% endblock %}
+{% block content %}
+    <video id="bgvid" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
+        <source src="{{ video_path }}" type="video/mp4">
+        <source src="{{ video_path }}" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+{% endblock %}

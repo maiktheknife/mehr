@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    {# Load jquery and custom javascript #}
+    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/libs/jquery.navgoco.min.js" %}'></script>
+    <script src='{% static "mainapp/js/menu.js" %}'></script>
+    {% block js %} {% endblock %}
+    {% block css %} {% endblock %}
+    {# Load bootstrap3 #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {# Load fontawesome #}
+    {% load fontawesome %}
+    {% fontawesome_stylesheet %}
+    {# Load custom css #}
+    <link href='{% static "mainapp/css/menu.css" %}' rel="stylesheet" type="text/css">
+</head>
+<body oncontextmenu="return false">
+{# nav #}
+{% if people %}
+<nav>
+    <ul class="list-unstyled main-menu">
+        <li class="text-left"><a href="#" id="nav-close">X</a></li>
+        <li><a href="{% url 'mainapp:index' %}">Home<span class="icon"></span></a></li>
+        {% for p in people %}
+        {% if p.get_chapter_count > 0 %}
+        <!-- FIXME: highlight current artist via {{index}} and a css class -->
+        <li><a href="#">{{p.name}}</a>
+            <ul class="list-unstyled">
+                <li class="sub-nav"><a href="{% url 'mainapp:personPage' p.get_relative_id %}">Übersicht<span class="icon"></span></a></li>
+                {% for c in p.chapter_set.all %}
+                <li class="sub-nav"><a href="{% url 'mainapp:chapterPage' p.get_relative_id c.get_relative_id %}">{{ c.name }}<span class="icon"></span></a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+<a id="nav-expander" class="nav-expander fixed">
+    <img src='{% static "mainapp/images/hamburger.png." %}' />
+</a>
+{% endif %}
+{% block content %} {% endblock %}
+</body>
+</html>

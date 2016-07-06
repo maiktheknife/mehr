@@ -20,7 +20,6 @@ var navTo = function(target){
     window.location = target;
 }
 
-// http://www.mutaku.com/wp/index.php/2012/03/accessing-django-template-variables-in-javascript/
 var initVideoPlayer = function(){
     $("#chapterVideo").click(function(event){
         toggleVideoStatus();

@@ -102,6 +102,7 @@ class AdditionalContent(models.Model):
 	TYPE_IMAGES = 1
 
 	index = models.IntegerField()
+	name = models.CharField(max_length=30)
 	type_choices = (
 		(TYPE_VIDEO, "Video"), (TYPE_IMAGES, "Images and Text")
 	)

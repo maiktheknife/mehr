@@ -1,82 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ person.name }} - awesome video magazine</title>
-    {% load staticfiles %}
-    {# Load jquery and custom javascript #}
-    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
-    <script src='{% static "mainapp/js/libs/jquery.navgoco.min.js" %}'></script>
+{% extends "mainapp/base.html" %}
+
+{% load staticfiles %}
+{% block title %}
+    {{ person.name }} - awesome video magazine
+{% endblock %}
+{% block js %}
     <script src='{% static "mainapp/js/person.js" %}'></script>
-    {# Load bootstrap3 #}
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {# Load fontawesome #}
-    {% load fontawesome %}
-    {% fontawesome_stylesheet %}
-    {# Load custom css #}
+{% endblock %}
+{% block css %}
     <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css">
-</head>
-<body>
-{# nav #}
-{% if people %}
-<nav>
-    <ul class="list-unstyled main-menu">
-        <li class="text-left"><a href="#" id="nav-close">X</a></li>
-        {% for p in people %}
-            {% if p.get_chapter_count > 0 %}
-            <!-- FIXME: highlight current artist via {{index}} and a css class -->
-            <li><a href="#">{{p.name}}</a>
-                <ul class="list-unstyled">
-                    {% for c in p.chapter_set.all %}
-                    <li class="sub-nav"><a href="{% url 'mainapp:chapterPage' p.get_relative_id c.get_relative_id %}">{{ c.name }}<span class="icon"></span></a></li>
-                    {% endfor %}
-                </ul>
-            </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</nav>
-<a id="nav-expander" class="nav-expander fixed">
-    {% bootstrap_icon "menu-hamburger" %}
-</a>
-{% endif %}
-
-{# Content #}
-<div>
-    <h1 class="text-center">{{person.name}}</h1>
-    <a href="{% url 'mainapp:chapterPage' person.get_relative_id person.get_chapter_id %}">
-        <div id="rotating-item-wrapper">
-            {% for image in person.get_images %}
-            <img src="{{ image.image.url }}" class="rotating-item img-responsive img-center" width="500" height="500"/>
-            {% endfor %}
+    <style type="text/css" >
+            /* Change Cursor */
+            .left {
+                cursor: url({% static 'mainapp/images/ChevronLeft.png' %}), pointer;
+            }
+            .right {
+                cursor: url({% static 'mainapp/images/ChevronRight.png' %}), pointer;
+            }
+        </style>
+{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="text-center">{{person.name}}</h1>
+        <a href="{% url 'mainapp:chapterPage' person.get_relative_id person.get_chapter_id %}">
+            <div id="rotating-item-wrapper">
+                {% for image in person.get_images %}
+                <img src="{{ image.image.url }}" class="rotating-item img-responsive img-center" width="500" height="500"/>
+                {% endfor %}
+            </div>
+        </a>
+        <div class="carousel-caption">
+            <h3>lorem</h3>
+            <p>{% lorem 5 p %}</p>
         </div>
-    </a>
-    <div class="carousel-caption">
-        <h3>lorem</h3>
-        <p>{% lorem 5 p %}</p>
     </div>
-</div>
+    <!-- Controls -->
+    {% with next_person=person.get_next previous_person=person.get_previous %}
+    {% if previous_person %}
+    <a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.get_relative_id %}" >
+        <span class="sr-only">Previous</span>
+    </a>
+    {% endif %}
+    {% if next_person %}
+    <a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.get_relative_id %}" >
+        <span class="sr-only">Next</span>
+    </a>
+    {% endif %}
+    {% endwith %}
 
-<!-- Controls -->
-{% with next_person=person.get_next previous_person=person.get_previous %}
-{% if previous_person %}
-<a class="left carousel-control" href="{% url 'mainapp:personPage' previous_person.get_relative_id %}" role="button"
-   data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-</a>
-{% endif %}
-{% if next_person %}
-<a class="right carousel-control" href="{% url 'mainapp:personPage' next_person.get_relative_id %}" role="button"
-   data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-</a>
-{% endif %}
-{% endwith %}
-
-</body>
-</html>
+{% endblock %}
