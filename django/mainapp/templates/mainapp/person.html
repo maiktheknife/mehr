@@ -22,7 +22,7 @@
 {% block content %}
     <div>
         <h1 class="text-center">{{person.name}}</h1>
-        <a href="{% url 'mainapp:chapterPage' person.get_relative_id person.get_chapter_id %}">
+        <a href="{% url 'mainapp:chapterPage' person.get_relative_id 0 %}">
             <div id="rotating-item-wrapper">
                 {% for image in person.get_images %}
                 <img src="{{ image.image.url }}" class="rotating-item img-responsive img-center" width="500" height="500"/>

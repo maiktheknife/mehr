@@ -31,8 +31,8 @@ class Person(models.Model):
 	def get_chapter_count(self):
 		return self.chapter_set.count()
 
-	def get_chapter_id(self):
-		return self.chapter_set.first().index
+	def get_first_chapter(self):
+		return self.chapter_set.first()
 
 	def __str__(self):
 		return self.name
