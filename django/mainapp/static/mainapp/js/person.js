@@ -1,67 +1,70 @@
 
-var main = function(){
+function main(){
     console.log('main');
     initPageAnimation();
-    initImageRotator();
+    initPageNavigation();
     initMouseMovementAwareness();
+    initBackGroundImageRotator();
 }
 
-var initPageAnimation = function(){
+function initPageAnimation(){
     console.log("initPageAnimation");
-
     $("body").css("display", "none");
-
     $("body").fadeIn(2000);
-
-	$("a.transition").click(function(event){
-		event.preventDefault();
-		linkLocation = this.href;
-		$("body").fadeOut(1000, redirectPage);
-	});
-
-	function redirectPage() {
-		window.location = linkLocation;
-	}
-
 }
 
-var initImageRotator = function(){
-    console.log("initImageRotator");
+function initPageNavigation() {
+    console.log("initPageNavigation");
+    $('.nav-left').click(function(){
+        linkLocation = previousPersonLink;
+        $("body").fadeOut(1000, redirectPage);
+    });
+
+    $('.nav-right').click(function(){
+        linkLocation = nextPersonLink;
+        $("body").fadeOut(1000, redirectPage);
+    });
+
+    function redirectPage() {
+        window.location = linkLocation;
+    }
+}
+
+function initBackGroundImageRotator(){
+    console.log("initBackGroundImageRotator");
     var InfiniteRotator = {
         init: function() {
             var initialFadeIn = 1000; //initial fade-in time (in ms)
             var itemInterval = 5000; //interval between items (in ms)
             var fadeTime = 2500; //cross-fade time (in milliseconds)
-            var numberOfItems = $('.rotating-item').length; //count number of items
+            var numberOfItems = images.length; //count number of items
             var currentItem = 0;
 
-            $('.rotating-item').eq(currentItem).fadeIn(initialFadeIn); //show first item
+            $('body').css("background-image", "url(" + images[0] + ")");
 
             var infiniteLoop = setInterval(function(){ //loop through the items
-                $('.rotating-item').eq(currentItem).fadeOut(fadeTime);
-                if(currentItem == numberOfItems -1){
+                if(currentItem == numberOfItems - 1){
                     currentItem = 0;
                 }else {
                     currentItem++;
                 }
-                $('.rotating-item').eq(currentItem).fadeIn(fadeTime);
+                $('body').css("background-image", "url(" + images[currentItem] + ")");
             }, itemInterval);
         }
     };
     InfiniteRotator.init();
-
 }
 
-var initMouseMovementAwareness = function(){
+function initMouseMovementAwareness(){
     var timeout = null;
     $(document).on('mousemove', function() {
         if (timeout !== null) {
-            $('.carousel-control').fadeIn();
+            $('.nav').fadeIn();
             clearTimeout(timeout);
         }
 
         timeout = setTimeout(function() {
-            $('.carousel-control').fadeOut();
+            $('.nav').fadeOut();
         }, 2000);
     });
 }

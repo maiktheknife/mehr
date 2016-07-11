@@ -1,43 +1,39 @@
 
-var main = function(){
+function main(){
     console.log('main')
-    initVideoPlayer();
+    initPageAnimation();
+    initBackGroundImageRotator();
 }
 
-var toggleVideoStatus = function(){
-    $("#bgvid").toggleClass("stopfade");
-    var video = $("#bgvid").get(0);
-    if (video.paused) {
-        console.log('video click -> resume');
-        video.play(); // use pure js object, this instead of jquery object $(this)
-    } else {
-        console.log('video click -> pause');
-        video.pause();
-    }
+function initPageAnimation(){
+    console.log("initPageAnimation");
+    $("body").css("display", "none");
+    $("body").fadeIn(2000);
 }
 
-var navTo = function(target){
-    window.location = target;
-}
+function initBackGroundImageRotator(){
+    console.log("initBackGroundImageRotator");
+    var InfiniteRotator = {
+        init: function() {
+            var initialFadeIn = 1000; //initial fade-in time (in ms)
+            var itemInterval = 5000; //interval between items (in ms)
+            var fadeTime = 2500; //cross-fade time (in milliseconds)
+            var numberOfItems = images.length; //count number of items
+            var currentItem = 0;
 
-// http://www.mutaku.com/wp/index.php/2012/03/accessing-django-template-variables-in-javascript/
-var initVideoPlayer = function(){
-    $("#bgvid").click(function(event){
-        toggleVideoStatus();
-    });
+            $('body').css("background-image", "url(" + images[0] + ")");
 
-    $('#bgvid').on('ended', function() {
-        console.log('video ended')
-        this.pause();
-        $(this).addClass("stopfade");
-        navTo(firstPersonID);
-    });
-
-    $(document).keypress(function(e) {
-        if(e.which == 32) {
-            toggleVideoStatus();
+            var infiniteLoop = setInterval(function(){ //loop through the items
+                if(currentItem == numberOfItems - 1){
+                    currentItem = 0;
+                }else {
+                    currentItem++;
+                }
+                $('body').css("background-image", "url(" + images[currentItem] + ")");
+            }, itemInterval);
         }
-    });
+    };
+    InfiniteRotator.init();
 }
 
 $(document).ready(main);
