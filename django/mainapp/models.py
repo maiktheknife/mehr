@@ -57,6 +57,7 @@ class Chapter(models.Model):
 	start_time = models.FloatField(default=0, editable=False)
 	# the index shouldn't be needed if we demand the chapters to be uploaded in order
 	index = models.IntegerField()  # add uniqueness is combination with the person
+	preview_text = models.CharField(max_length=300)
 	preview_image = models.ImageField()
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
