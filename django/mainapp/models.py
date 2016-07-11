@@ -12,15 +12,23 @@ class Person(models.Model):
 
 	def get_next(self):
 		next_persons = Person.objects.filter(id__gt=self.id)
+
 		if next_persons:
 			return next_persons.first()
-		return False
+		elif Person.objects.count() > 1:
+			return Person.objects.first()
+		else:
+			return False
 
 	def get_previous(self):
 		previous_persons = Person.objects.filter(id__lt=self.id).order_by('-id')
+
 		if previous_persons:
 			return previous_persons.first()
-		return False
+		elif Person.objects.count() > 1:
+			return Person.objects.last()
+		else:
+			return False
 
 	def get_images(self):
 		return self.image_set.all()

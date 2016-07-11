@@ -32,14 +32,14 @@
         <div class="col-md-6">
             {% with previous_chapter=chapter.get_previous %}
             {% if previous_chapter %}
-            Previous: <a href="{% url 'mainapp:chapterPage' person.get_relative_id previous_chapter.get_relative_id %}">Chapter {{ previous_chapter.get_relative_id }}</a>
+            Previous: <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.get_relative_id %}">Chapter {{ previous_chapter.get_relative_id }}</a>
             {% endif %}
             {% endwith %}
         </div>
         <div class="col-md-6">
             {% with next_chapter=chapter.get_next %}
             {% if next_chapter %}
-            Next: <a href="{% url 'mainapp:chapterPage' person.get_relative_id next_chapter.get_relative_id %}">Chapter {{ next_chapter.get_relative_id }}</a>
+            Next: <a href="{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}">Chapter {{ next_chapter.get_relative_id }}</a>
             <script type='text/javascript'>
                 document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
                 function myHandler(e) {
@@ -57,13 +57,13 @@
     <div class="text-center">bonus content of this chapter</div>
     <div class="row">
         <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id add0.index %}">{{ add0.name }}</a>
+            <a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id add0.index %}">{{ add0.name }}</a>
         </div>
         <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id add1.index %}">{{ add1.name }}</a>
+            <a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id add1.index %}">{{ add1.name }}</a>
         </div>
         <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.get_relative_id chapter.get_relative_id add2.index %}">{{ add2.name }}</a>
+            <a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id add2.index %}">{{ add2.name }}</a>
         </div>
     </div>
     {% endwith %}

@@ -7,7 +7,7 @@
 {% block js %}
     <script type='text/javascript'>
         function backToChapter() {
-            document.location.href = "{% url 'mainapp:chapterPage' person.get_relative_id chapter.get_relative_id %}";
+            document.location.href = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id %}";
         }
 
         $(document).ready(function() {

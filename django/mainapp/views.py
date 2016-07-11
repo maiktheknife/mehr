@@ -12,32 +12,32 @@ def index(request):
 	video_path = join(settings.STATIC_URL, 'mainapp', 'video', 'Start.mp4')
 	context = {
 		"people": Person.objects.all(),
-		"firstID": Person.objects.all().first().id,
+		"firstID": Person.objects.first().id,
 		"video_path": video_path
 	}
 	return render(request, "mainapp/index.html", context)
 
 
 def person_view_start(request):
-	return redirect('0/')
+	first_person = Person.objects.first()
+	return redirect("mainapp:personPage", person_id=first_person.id)
 
 
-def person_view(request, relative_person_id):
-	persons = list(Person.objects.all())
-	person = persons[int(relative_person_id)]
-	index = persons.index(person)
+def person_view(request, person_id):
+	persons = Person.objects.all()
+	person = get_object_or_404(Person, pk=person_id)
 
 	context = {
 		"people": persons,
 		"person": person,
-		"index": index,
+		#"index": index,
 	}
 	return render(request, "mainapp/person.html", context)
 
 
-def chapter_view(request, relative_person_id, relative_chapter_id):
-	persons = list(Person.objects.all())
-	person = persons[int(relative_person_id)]
+def chapter_view(request, person_id, relative_chapter_id):
+	persons = Person.objects.all()
+	person = get_object_or_404(Person, pk=person_id)
 	chapters = list(person.chapter_set.all())
 	chapter = chapters[int(relative_chapter_id)]
 
@@ -49,8 +49,8 @@ def chapter_view(request, relative_person_id, relative_chapter_id):
 	return render(request, "mainapp/chapter.html", context)
 
 
-def additional_content_view(request, relative_person_id, relative_chapter_id, relative_additional_content_id):
-	person = list(Person.objects.all())[int(relative_person_id)]
+def additional_content_view(request, person_id, relative_chapter_id, relative_additional_content_id):
+	person = get_object_or_404(Person, pk=person_id)
 	chapter = list(person.chapter_set.all())[int(relative_chapter_id)]
 
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]

@@ -33,9 +33,9 @@
         <!-- FIXME: highlight current artist via {{index}} and a css class -->
         <li><a href="#">{{p.name}}</a>
             <ul class="list-unstyled">
-                <li class="sub-nav"><a href="{% url 'mainapp:personPage' p.get_relative_id %}">Übersicht<span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="{% url 'mainapp:personPage' p.id %}">Übersicht<span class="icon"></span></a></li>
                 {% for c in p.chapter_set.all %}
-                <li class="sub-nav"><a href="{% url 'mainapp:chapterPage' p.get_relative_id c.get_relative_id %}">{{ c.name }}<span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="{% url 'mainapp:chapterPage' p.id c.get_relative_id %}">{{ c.name }}<span class="icon"></span></a></li>
                 {% endfor %}
             </ul>
         </li>
