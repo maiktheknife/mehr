@@ -1,19 +1,20 @@
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.conf import settings
 
+from os import listdir
 from os.path import join
 
 from .models import Person, AdditionalContent
 
 
 def index(request):
-	video_path = join(settings.STATIC_URL, 'mainapp', 'video', 'Start.mp4')
+	path = join(settings.BASE_DIR, 'mainapp', 'static', 'mainapp', 'images', 'index')
+	# i am ugly
+	images = list(map(lambda x: join(settings.STATIC_URL, 'mainapp', 'images', 'index', x).replace('\\', '/'), listdir(path)))
 	context = {
 		"people": Person.objects.all(),
-		"firstID": Person.objects.all().first().id,
-		"video_path": video_path
+		"firstID": 0,
+		"images": images
 	}
 	return render(request, "mainapp/index.html", context)
 

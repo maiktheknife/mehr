@@ -1,23 +1,54 @@
-video#bgvid {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    background: url(polina.jpg) no-repeat;
-    background-size: cover;
-}
-video#bgvid {
-    transition: 1s opacity;
+html, body {
+	width: 100%;
+	height: 100%;
 }
 
-.stopfade {
-	opacity: .5;
+body {
+	font-family: "Butler", serif;
+	color: #ffffff;
+
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+
+	/* stretch to full-screen */
+	-webkit-background-size: cover;
+    -moz-background-size : cover;
+    -o-background-size : cover;
+	background-size : cover;
+
+	/* animate url changes */
+	transition: background 1s linear;
+}
+
+a {
+    text-decoration: none;
+}
+
+.box {
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.title {
+	font-size: 6em;
+}
+
+.mehr {
+	font-size: 3em;
+
+	color: #ffffff;
+	-webkit-transition: color 1s;
+    -moz-background-size : color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+}
+
+.mehr:hover, .mehr:focus {
+	color: red;
+	text-decoration: none;
 }

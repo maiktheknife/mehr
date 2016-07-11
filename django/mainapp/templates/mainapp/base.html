@@ -10,7 +10,6 @@
     <script src='{% static "mainapp/js/libs/jquery.navgoco.min.js" %}'></script>
     <script src='{% static "mainapp/js/menu.js" %}'></script>
     {% block js %} {% endblock %}
-    {% block css %} {% endblock %}
     {# Load bootstrap3 #}
     {% load bootstrap3 %}
     {% bootstrap_css %}
@@ -20,6 +19,7 @@
     {% fontawesome_stylesheet %}
     {# Load custom css #}
     <link href='{% static "mainapp/css/menu.css" %}' rel="stylesheet" type="text/css">
+    {% block css %} {% endblock %}
 </head>
 <body oncontextmenu="return false">
 {# nav #}
@@ -44,7 +44,7 @@
     </ul>
 </nav>
 <a id="nav-expander" class="nav-expander fixed">
-    <img src='{% static "mainapp/images/hamburger.png." %}' />
+    <img src='{% static "mainapp/images/burger.svg." %}' />
 </a>
 {% endif %}
 {% block content %} {% endblock %}

@@ -14,13 +14,15 @@ class Person(models.Model):
 		next_persons = Person.objects.filter(id__gt=self.id)
 		if next_persons:
 			return next_persons.first()
-		return False
+		else:
+			return Person.objects.first()
 
 	def get_previous(self):
 		previous_persons = Person.objects.filter(id__lt=self.id).order_by('-id')
 		if previous_persons:
 			return previous_persons.first()
-		return False
+		else:
+			return Person.objects.last()
 
 	def get_images(self):
 		return self.image_set.all()
@@ -55,6 +57,7 @@ class Chapter(models.Model):
 	start_time = models.FloatField(default=0, editable=False)
 	# the index shouldn't be needed if we demand the chapters to be uploaded in order
 	index = models.IntegerField()  # add uniqueness is combination with the person
+	preview_image = models.ImageField()
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 

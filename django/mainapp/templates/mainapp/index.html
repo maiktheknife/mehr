@@ -2,22 +2,25 @@
 
 {% load staticfiles %}
 {% block title %}
-    awesome video magazine
+    mehr.
 {% endblock %}
 {% block js %}
     <script src='{% static "mainapp/js/index.js" %}'></script>
     <script>
         // http://www.mutaku.com/wp/index.php/2012/03/accessing-django-template-variables-in-javascript/
         var firstPersonID = "{% url 'mainapp:personPage' firstID %}";
+        var images = [{% for i in images %}'{{i}}',{% endfor %}]
     </script>
 {% endblock %}
 {% block css %}
     <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content %}
-    <video id="bgvid" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
-        <source src="{{ video_path }}" type="video/mp4">
-        <source src="{{ video_path }}" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+    <div class="box">
+        <div class="title">
+            Mit uns kriegt ihr mehr.<br/>
+            Kurze Info. bla... bla... bla... bla...
+        </div>
+        <a class="mehr" href="{% url 'mainapp:personPage' firstID %}">mehr.</a>
+    </div>
 {% endblock %}
