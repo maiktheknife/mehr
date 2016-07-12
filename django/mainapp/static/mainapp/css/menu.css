@@ -156,6 +156,6 @@ body.nav-expanded {
 
 .main-menu li > a:hover > span.icon {
   float: left;
-  margin: 0.1em 0.8em -0.1em 0;
+  margin: 0.1em 1.4em -0.1em 0;
   opacity: 1;
 }
