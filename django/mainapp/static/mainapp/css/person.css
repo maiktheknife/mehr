@@ -1,6 +1,7 @@
 html, body {
 	width: 100%;
 	height: 100%;
+	color: #ffffff;
 }
 
 a {
@@ -18,27 +19,52 @@ a:hover, a:focus, a:active {
     color: blue;
 }
 
-.box {
-	height: 100%;
+div {
+    width: 100%;
+    height: 100%;
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div.box {
+    width: 80%;
+}
+
+div.box div {
+    flex-direction: row;
+}
+
+div.box div.cont {
+    flex-direction: column;
+}
+
+.header {
+    padding: 0 15%;
+	font-size: 4em;
+	align-self: flex-start;
 }
 
 .person-name {
 	font-size: 6em;
+    text-align: center;
+    align-self: center;
 }
 
 .person-description {
     font-size: 3em;
     /* display: none; */
     padding: 0 15%;
+    text-align: center;
+    align-self: center;
 }
 
 .mehr {
 	font-size: 3em;
+	align-self: flex-end;
 }
 
 /* Navigation */

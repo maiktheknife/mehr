@@ -13,13 +13,19 @@
     </script>
 {% endblock %}
 {% block css %}
-    <link href='{% static "mainapp/css/index_video.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content %}
     <div class="box">
-        <div class="title">Wir stillen den Durst nach mehr. Wir sind mehr. Wir machen mehr. <br/>Mehr ist mehr.</div>
-        <br/><br/>
-        <a class="mehr" href="{% url 'mainapp:personPage' firstID %}">mehr.</a>
+        <!--empty div to ensure the pretty layout -> flex with 3 boxes -> there is a correct center position -->
+        <div></div>
+        <div>
+            <p class="title">Wir stillen den Durst nach mehr. Wir sind mehr. Wir machen mehr. <br/>Mehr ist mehr.</p>
+        </div>
+        <div>
+            <a class="mehr" href="{% url 'mainapp:personPage' firstID %}">mehr.</a>
+        </div>
     </div>
     <video poster='{% static "mainapp/images/index/yeah.jpg" %}' autoplay loop muted>
         <source src="{{ video_path }}" type="video/mp4">

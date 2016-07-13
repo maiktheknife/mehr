@@ -1,4 +1,4 @@
-{% extends "mainapp/base.html" %}
+{% extends "mainapp/base_without_menu.html" %}
 
 {% load staticfiles %}
 {# Load bootstrap3 #}
@@ -29,33 +29,37 @@
 {% block css %}
     <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css">
     {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
-    <link href='{% static "mainapp/css/person_video.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css">
     {% else %}
-    <link href='{% static "mainapp/css/person_images.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/util_image_fullscreen.css" %}' rel="stylesheet" type="text/css">
     {% endif %}
 {% endblock %}
 {% block content %}
+
     <div class="nav nav-left">
         {% bootstrap_icon "chevron-left" %}
     </div>
     <div class="nav nav-right">
         {% bootstrap_icon "chevron-right" %}
     </div>
+
     <div class="box">
-        <!--hover-box-->
-        <!--<div class="person-content">-->
+        <div>
+            <a class="header" href="#">...</a>
+        </div>
+        <div class="cont">
             <a class="person-name" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
-            <br/>
             <a class="person-description" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.preview_text}}</a>
-        <!--</div>-->
-        <a class="mehr" href="{% url 'mainapp:chapterPage' person.id 0 %}">mehr.</a>
+        </div>
+        <div>
+            <a class="mehr" href="{% url 'mainapp:chapterPage' person.id 0 %}">mehr.</a>
+        </div>
     </div>
 
     {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
     <video poster='{% static "mainapp/images/index/yeah.jpg" %}' autoplay loop muted>
         <source src="{{ person.preview_video.url }}" type="video/mp4">
         <source src="{{ person.preview_video.url }}" type="video/webm">
-        <source src="{{ person.preview_video.url }}" type="video/quicktime">
         Your browser does not support the video tag.
     </video>
     {% endif %}
