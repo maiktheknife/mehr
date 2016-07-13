@@ -9,7 +9,10 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 	list_display = ['chapter', 'index', 'type']
 	ordering = ['chapter', 'index']
 	fieldsets = [
-		(None, {'fields': ['index', 'type', 'chapter']}),
+		(None, {'fields': ['index', 'chapter', ]}),
+		('Preview', {'fields': ['description', 'image', ]}),
+		('Type', {'fields': ['type', ]}),
+
 		('Video', {
 			'fields': ['video'],
 		}),

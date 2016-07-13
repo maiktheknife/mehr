@@ -13,15 +13,15 @@
     </script>
 {% endblock %}
 {% block css %}
-    <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css">
-    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/index.css" %}' rel="stylesheet" type="text/css" />
+    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
     <div class="box">
         <!--empty div to ensure the pretty layout -> flex with 3 boxes -> there is a correct center position -->
         <div></div>
         <div>
-            <p class="title">Wir stillen den Durst nach mehr. Wir sind mehr. Wir machen mehr. <br/>Mehr ist mehr.</p>
+            <p class="header">Wir stillen den Durst nach mehr. Wir sind mehr. Wir machen mehr. <br/>Mehr ist mehr.</p>
         </div>
         <div>
             <a class="mehr" href="{% url 'mainapp:personPage' firstID %}">mehr.</a>

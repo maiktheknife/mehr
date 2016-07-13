@@ -1,4 +1,4 @@
-{% extends "mainapp/base.html" %}
+{% extends "mainapp/base_without_menu.html" %}
 
 {% load staticfiles %}
 {% block title %}
@@ -6,69 +6,49 @@
 {% endblock %}
 {% block js %}
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
+    {% with next_chapter=chapter.get_next %}
+    {% if next_chapter %}
+    <script type='text/javascript'>
+        function myHandler(e) {
+            document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
+        }
+        document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+    </script>
+    {% endif %}
+    {% endwith %}
 {% endblock %}
 {% block css %}
-    <link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css" />
+    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
-
-<h1>{{ person.name }} - {{ chapter.name }}</h1>
-
-<div id="timeline">
+<div class="timeline">
+    <progress value="22" max="100"></progress>
 </div>
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' width="640" height="480" autoplay controls>
-                <source src="{{ chapter.video.url }}" type="video/mp4">
-                <source src="{{ chapter.video.url }}" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+<div class="box">
+    <div>
+        <a class="header" href="#">...</a>
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            {% with previous_chapter=chapter.get_previous %}
-            {% if previous_chapter %}
-            Previous: <a href="{% url 'mainapp:chapterPage' person.id previous_chapter.get_relative_id %}">Chapter {{ previous_chapter.get_relative_id }}</a>
-            {% endif %}
-            {% endwith %}
-        </div>
-        <div class="col-md-6">
-            {% with next_chapter=chapter.get_next %}
-            {% if next_chapter %}
-            Next: <a href="{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}">Chapter {{ next_chapter.get_relative_id }}</a>
-            <script type='text/javascript'>
-                document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
-                function myHandler(e) {
-                    document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
-                }
-            </script>
-            {% endif %}
-            {% endwith %}
-        </div>
+    <div>
+        <a class="mehr" href="#layer-container">mehr.</a>
     </div>
-
-    {% if chapter.get_additional_count >= 3 %}
-    {% with add0=chapter.additionalcontent_set.all.0 add1=chapter.additionalcontent_set.all.1 add2=chapter.additionalcontent_set.all.2 %}
-
-    <div class="text-center">bonus content of this chapter</div>
-    <div class="row">
-        <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id add0.index %}">{{ add0.name }}</a>
-        </div>
-        <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id add1.index %}">{{ add1.name }}</a>
-        </div>
-        <div class="col-md-4">
-            <a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id add2.index %}">{{ add2.name }}</a>
-        </div>
-    </div>
-    {% endwith %}
-    {% endif %}
-
 </div>
+<!--FIXME: remove muted attr -->
+<video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay muted>
+    <source src="{{ chapter.video.url }}" type="video/mp4">
+    <source src="{{ chapter.video.url }}" type="video/webm">
+    Your browser does not support the video tag.
+</video>
+{% if chapter.get_additional_count >= 0 %}
+<div id="layer-container" class="layer-container">
+    {% for layer in chapter.additionalcontent_set.all %}
+    <div class="layer" style="background-image: url('{{ layer.image.url }}');">
+        <div class="layer-title">{{layer.name}}</div>
+        <div class="layer-description">{{layer.description}}</div>
+        <!--<a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id layer.index %}">{{ add2.name }}</a>-->
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 {% endblock %}

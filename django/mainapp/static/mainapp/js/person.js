@@ -72,12 +72,17 @@ function initMouseMovementAwareness(){
     var timeout = null;
     $(document).on('mousemove', function() {
         if (timeout !== null) {
+            $('.box').css('width', '80%');
+            //$('person-description').css('padding', '15%');
             $('.nav').fadeIn();
             clearTimeout(timeout);
         }
 
         timeout = setTimeout(function() {
-            $('.nav').fadeOut();
+            $('.nav').fadeOut(function(){
+                $('.box').css('width', '100%');
+                //$('.person-description').css('padding', '0 26%');
+            });
         }, 2000);
     });
 }

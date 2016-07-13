@@ -27,11 +27,11 @@
     <script src='{% static "mainapp/js/person.js" %}'></script>
 {% endblock %}
 {% block css %}
-    <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css" />
     {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
-    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
     {% else %}
-    <link href='{% static "mainapp/css/util_image_fullscreen.css" %}' rel="stylesheet" type="text/css">
+    <link href='{% static "mainapp/css/util_image_fullscreen.css" %}' rel="stylesheet" type="text/css" />
     {% endif %}
 {% endblock %}
 {% block content %}

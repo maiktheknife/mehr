@@ -1,22 +1,31 @@
+var isLayerVisible = false;
+var video = null;
 
-var main = function(){
-    console.log('main')
+function main() {
     initVideoPlayer();
+    initLayerControl();
+    video = $("#chapterVideo").get(0);
 }
 
-var toggleVideoStatus = function(){
-    $("#chapterVideo").toggleClass("stopfade");
-    var video = $("#chapterVideo").get(0);
+function playVideo(){
+    $("#chapterVideo").removeClass("stopfade");
+    video.play();
+}
+
+function pauseVideo(){
+    $("#chapterVideo").addClass("stopfade");
+    video.pause();
+}
+
+function toggleVideoStatus(){
     if (video.paused) {
-        console.log('video click -> resume');
-        video.play(); // use pure js object, this instead of jquery object $(this)
+        playVideo();
     } else {
-        console.log('video click -> pause');
-        video.pause();
+        pauseVideo();
     }
 }
 
-var initVideoPlayer = function(){
+function initVideoPlayer(){
     $("#chapterVideo").click(function(event){
         toggleVideoStatus();
     });
@@ -26,6 +35,46 @@ var initVideoPlayer = function(){
             toggleVideoStatus();
         }
     });
+}
+
+function showLayers(e){
+    pauseVideo();
+	$('#layer-container').show();
+	$('html, body').animate({
+		scrollTop : $(e.hash).offset().top
+	}, 1000);
+}
+
+function hideLayers(){
+	$('html, body').animate({
+		scrollTop : $('#page').offset().top
+	}, 1000, function() {
+		$('#layer-container').hide();
+		playVideo()
+	});
+}
+
+function initLayerControl(){
+    $('.mehr').on('click', function(event){
+		if (isLayerVisible) {
+			hideLayers()
+		} else {
+			showLayers(this);
+		}
+		isLayerVisible = !isLayerVisible;
+	});
+
+	$(window).scroll(function() {
+	    var pos = $(this).scrollTop();
+	    if (pos == 0) {
+	        hideLayers();
+	        isLayerVisible = false;
+	    }
+	});
+
+	$('.layer').click(function(){
+		alert("redirect to layer");
+	});
 }
 
 $(document).ready(main);
