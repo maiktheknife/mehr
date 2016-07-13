@@ -27,6 +27,7 @@
     <script src='{% static "mainapp/js/person.js" %}'></script>
 {% endblock %}
 {% block css %}
+    <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css">
     {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
     <link href='{% static "mainapp/css/person_video.css" %}' rel="stylesheet" type="text/css">
     {% else %}
@@ -41,7 +42,12 @@
         {% bootstrap_icon "chevron-right" %}
     </div>
     <div class="box">
-        <a class="title" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
+        <!--hover-box-->
+        <!--<div class="person-content">-->
+            <a class="person-name" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
+            <br/>
+            <a class="person-description" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.preview_text}}</a>
+        <!--</div>-->
         <a class="mehr" href="{% url 'mainapp:chapterPage' person.id 0 %}">mehr.</a>
     </div>
 

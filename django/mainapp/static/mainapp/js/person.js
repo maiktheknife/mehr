@@ -11,6 +11,19 @@ function initPageAnimation(){
     console.log("initPageAnimation");
     $("body").css("display", "none");
     $("body").fadeIn(2000);
+
+/*
+    $('.box .person-content').hover(
+      function() {
+        $('.person-name').fadeToggle();
+        $('.person-description').fadeToggle();
+      },
+      function() {
+        $('.person-name').fadeToggle();
+        $('.person-description').fadeToggle();
+      });
+*/
+
 }
 
 function initPageNavigation() {

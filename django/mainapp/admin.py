@@ -56,7 +56,7 @@ class PersonAdmin(admin.ModelAdmin):
 	list_display = ['name', 'twitter_account', 'preview_type', 'get_chapter_count']
 	ordering = ['name', ]
 	fieldsets = [
-		(None, {'fields': ['name', 'twitter_account']}),
+		(None, {'fields': ['name', 'twitter_account', 'preview_text',]}),
 		('Preview', {'fields': ['preview_type']}),
 		('Preview Video', {
 			'fields': ['preview_video'],

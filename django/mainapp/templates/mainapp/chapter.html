@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% block title %}
-    {{ chapter.name }} - awesome video magazine
+    {{ chapter.name }} - mehr.
 {% endblock %}
 {% block js %}
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
@@ -12,7 +12,7 @@
 {% endblock %}
 {% block content %}
 
-<h1>{{ person.name }} - Chapter {{ chapter.get_relative_id }}</h1>
+<h1>{{ person.name }} - {{ chapter.name }}</h1>
 
 <div id="timeline">
 </div>
