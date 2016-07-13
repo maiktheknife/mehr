@@ -1,11 +1,20 @@
 from django.db import models
 from .utils.metadatareader import MetadataReader
+from .utils.pathutil import *
 
 
 class Person(models.Model):
+	PREVIEW_TYPE_VIDEO = 0
+	PREVIEW_TYPE_IMAGES = 1
+
 	name = models.CharField(max_length=100)
-	preview_text = models.TextField(max_length=300)
 	twitter_account = models.URLField(max_length=255)
+	type_choices = (
+		(PREVIEW_TYPE_VIDEO, "Video"), (PREVIEW_TYPE_IMAGES, "Images")
+	)
+	preview_type = models.IntegerField(choices=type_choices)
+	preview_text = models.TextField(max_length=300)
+	preview_video = models.FileField(null=True, blank=True, upload_to=user_preview_video_path)
 
 	def get_relative_id(self):
 		return Person.objects.filter(id__lt=self.id).count()
@@ -51,20 +60,14 @@ class Person(models.Model):
 
 
 class Chapter(models.Model):
-	# What is wrong with you python,
-	# order counts, but without forward declaration
-	def user_video_path(self, file_name):
-		# file will be uploaded to MEDIA_ROOT/video/name/
-		return 'videos/{0}/{1}'.format(self.person.name, file_name)
-
 	name = models.CharField(max_length=100)
-	video = models.FileField(null=True, upload_to=user_video_path)
+	video = models.FileField(null=True, upload_to=user_chapter_path)
 	duration = models.FloatField(default=0, editable=False)
 	start_time = models.FloatField(default=0, editable=False)
 	# the index shouldn't be needed if we demand the chapters to be uploaded in order
 	index = models.IntegerField()  # add uniqueness is combination with the person
 	preview_text = models.CharField(max_length=300)
-	preview_image = models.ImageField()
+	preview_image = models.ImageField(upload_to=user_chapter_path)
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
@@ -118,13 +121,10 @@ class AdditionalContent(models.Model):
 	)
 	type = models.IntegerField(choices=type_choices)
 
-	def user_video_path(self, file_name):
-		return 'videos/{0}/{1}/{2}'.format(self.chapter.person.name, self.chapter.id, file_name)
-
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
 	# Videos
-	video = models.FileField(null=True, upload_to=user_video_path)
+	video = models.FileField(null=True, upload_to=user_chapter_layer_path)
 	# Image and Text
 	pictures_array = models.CharField(max_length=255, blank=True)
 	textblocks_array = models.CharField(max_length=1000, blank=True)
@@ -138,12 +138,7 @@ class AdditionalContent(models.Model):
 
 class Image(models.Model):
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
-
-	def user_image_path(self, file_name):
-		# file will be uploaded to MEDIA_ROOT/images/name/
-		return 'images/{0}/{1}'.format(self.person.name, file_name)
-
-	image = models.ImageField(upload_to=user_image_path)
+	image = models.ImageField(upload_to=user_preview_images_path)
 
 	def __str__(self):
 		return "%s -> %s" % (self.person.name, self.image)

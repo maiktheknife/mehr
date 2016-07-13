@@ -27,7 +27,11 @@
     <script src='{% static "mainapp/js/person.js" %}'></script>
 {% endblock %}
 {% block css %}
-    <link href='{% static "mainapp/css/person.css" %}' rel="stylesheet" type="text/css">
+    {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
+    <link href='{% static "mainapp/css/person_video.css" %}' rel="stylesheet" type="text/css">
+    {% else %}
+    <link href='{% static "mainapp/css/person_images.css" %}' rel="stylesheet" type="text/css">
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div class="nav nav-left">
@@ -40,4 +44,14 @@
         <a class="title" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
         <a class="mehr" href="{% url 'mainapp:chapterPage' person.id 0 %}">mehr.</a>
     </div>
+
+    {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
+    <video poster='{% static "mainapp/images/index/yeah.jpg" %}' autoplay loop muted>
+        <source src="{{ person.preview_video.url }}" type="video/mp4">
+        <source src="{{ person.preview_video.url }}" type="video/webm">
+        <source src="{{ person.preview_video.url }}" type="video/quicktime">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+
 {% endblock %}

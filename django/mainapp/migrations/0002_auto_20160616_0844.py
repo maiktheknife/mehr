@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import mainapp.models
+import mainapp.utils.pathutil
 
 
 class Migration(migrations.Migration):
@@ -18,7 +19,7 @@ class Migration(migrations.Migration):
             name='Image',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to=mainapp.models.Image.user_image_path)),
+                ('image', models.ImageField(upload_to=mainapp.utils.pathutil.user_preview_images_path)),
             ],
         ),
         migrations.AddField(

@@ -20,7 +20,7 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 
 	# https://stackoverflow.com/questions/9330354/django-admin-disable-field-dynamically-based-on-other-selections
 	class Media:
-		js = ("mainapp/js/libs/jquery.js", "admin/js/admin.js", )
+		js = ("mainapp/js/libs/jquery.js", "admin/js/layer_admin.js", )
 
 
 # Chapter
@@ -46,22 +46,27 @@ class ChapterInline(admin.TabularInline):
 
 class ImagesInline(admin.TabularInline):
 	model = Image
-	verbose_name = "Bild auf der Startseite"
-	verbose_name_plural = "Bilder auf der Startseite"
+	verbose_name = "Preview Images"
+	verbose_name_plural = "Preview Images"
 	extra = 3
 
 
 class PersonAdmin(admin.ModelAdmin):
 	list_filter = ['name']
-	list_display = ['name', 'twitter_account', 'get_chapter_count', 'get_images_count']
+	list_display = ['name', 'twitter_account', 'preview_type', 'get_chapter_count']
 	ordering = ['name', ]
 	fieldsets = [
 		(None, {'fields': ['name', 'twitter_account']}),
-		('Text auf der Startseite', {
-			'fields': ['preview_text'],
+		('Preview', {'fields': ['preview_type']}),
+		('Preview Video', {
+			'fields': ['preview_video'],
 		}),
 	]
 	inlines = [ImagesInline, ChapterInline]
+
+	class Media:
+		js = ("mainapp/js/libs/jquery.js", "admin/js/person_admin.js", )
+
 
 
 # Register your models here.

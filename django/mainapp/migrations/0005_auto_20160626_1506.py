@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import mainapp.models
+import mainapp.utils.pathutil
 
 
 class Migration(migrations.Migration):
@@ -16,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='chapter',
             name='video',
-            field=models.FileField(null=True, upload_to=mainapp.models.Chapter.user_video_path),
+            field=models.FileField(null=True, upload_to=mainapp.utils.pathutil.user_chapter_path),
         ),
     ]
