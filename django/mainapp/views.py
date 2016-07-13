@@ -7,13 +7,19 @@ from .models import Person, AdditionalContent
 
 
 def index(request):
-	path = join(settings.BASE_DIR, 'mainapp', 'static', 'mainapp', 'images', 'index')
-	# i am ugly
-	images = list(map(lambda x: join(settings.STATIC_URL, 'mainapp', 'images', 'index', x).replace('\\', '/'), listdir(path)))
+	# images
+	# path = join(settings.BASE_DIR, 'mainapp', 'static', 'mainapp', 'images', 'index')
+	## i am ugly
+	# images = list(map(lambda x: join(settings.STATIC_URL, 'mainapp', 'images', 'index', x).replace('\\', '/'), listdir(path)))
+
+	# video
+	video_path = join(settings.STATIC_URL, 'mainapp', 'video', 'Start.m4v')
+
 	context = {
 		"people": Person.objects.all(),
 		"firstID": Person.objects.first().id,
-		"images": images
+		#"images": images,
+		"video_path" : video_path,
 	}
 	return render(request, "mainapp/index.html", context)
 

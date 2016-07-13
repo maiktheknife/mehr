@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    {# Load jquery and custom javascript #}
+    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
+    {% block js %} {% endblock %}
+    {# Load bootstrap3 #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {# Load fontawesome #}
+    {% load fontawesome %}
+    {% fontawesome_stylesheet %}
+    {# Load custom css #}
+    <style rel="stylesheet" type="text/css">
+        @font-face {
+            font-family: mehrFont;
+            src: url("{% static 'mainapp/font/AvenirNext.ttc' %}");
+        }
+        body {
+            font-family: mehrFont, serif !important;
+        }
+    </style>
+    {% block css %} {% endblock %}
+</head>
+<body oncontextmenu="return false">
+{% block content %} {% endblock %}
+</body>
+</html>

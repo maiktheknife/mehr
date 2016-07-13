@@ -37,7 +37,7 @@
         {% bootstrap_icon "chevron-right" %}
     </div>
     <div class="box">
-        <div class="title">{{person.name}}</div>
+        <a class="title" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
         <a class="mehr" href="{% url 'mainapp:chapterPage' person.id 0 %}">mehr.</a>
     </div>
 {% endblock %}

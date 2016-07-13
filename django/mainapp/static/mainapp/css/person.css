@@ -23,6 +23,17 @@ body {
 
 a {
     text-decoration: none;
+    color: #ffffff;
+
+	-webkit-transition: color 1s;
+    -moz-background-size : color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+}
+
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: blue;
 }
 
 .box {
@@ -40,17 +51,6 @@ a {
 
 .mehr {
 	font-size: 3em;
-
-	color: #ffffff;
-	-webkit-transition: color 1s;
-    -moz-background-size : color 1s;
-    -o-transition: color 1s;
-    transition: color 1s;
-}
-
-.mehr:hover, .mehr:focus {
-	color: red;
-	text-decoration: none;
 }
 
 /* Navigation */

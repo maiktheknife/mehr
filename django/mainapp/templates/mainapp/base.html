@@ -19,6 +19,15 @@
     {% fontawesome_stylesheet %}
     {# Load custom css #}
     <link href='{% static "mainapp/css/menu.css" %}' rel="stylesheet" type="text/css">
+    <style rel="stylesheet" type="text/css">
+        @font-face {
+            font-family: mehrFont;
+            src: url("{% static 'mainapp/font/AvenirNext.ttc' %}");
+        }
+        body {
+            font-family: mehrFont, serif !important;
+        }
+    </style>
     {% block css %} {% endblock %}
 </head>
 <body oncontextmenu="return false">
@@ -44,7 +53,7 @@
     </ul>
 </nav>
 <a id="nav-expander" class="nav-expander fixed">
-    <img src='{% static "mainapp/images/burger.svg" %}' />
+    <img src='{% static "mainapp/images/Menu_weiß.png" %}' />
 </a>
 {% endif %}
 {% block content %} {% endblock %}
