@@ -6,19 +6,14 @@ from .models import Person, Chapter, AdditionalContent, Image
 
 class AdditionalContentAdmin(admin.ModelAdmin):
 	list_filter = ['chapter']
-	list_display = ['chapter', 'index', 'type']
+	list_display = ['chapter', 'name', 'index', 'type']
 	ordering = ['chapter', 'index']
 	fieldsets = [
-		(None, {'fields': ['index', 'chapter', ]}),
+		(None, {'fields': ['index', 'name', 'chapter', ]}),
 		('Preview', {'fields': ['description', 'image', ]}),
-		('Type', {'fields': ['type', ]}),
-
-		('Video', {
-			'fields': ['video'],
-		}),
-		('Image and Text', {
-			'fields': ['pictures_array', 'textblocks_array'],
-		})
+		('Type', {'fields': ['type']}),
+		('Video', {'fields': ['video']}),
+		('Image and Text', {'fields': ['pictures_array', 'textblocks_array']})
 	]
 
 	# https://stackoverflow.com/questions/9330354/django-admin-disable-field-dynamically-based-on-other-selections
