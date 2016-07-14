@@ -12,7 +12,10 @@
         function myHandler(e) {
             document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
         }
-        document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+
+        window.onload = function() {
+            document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+        }
     </script>
     {% endif %}
     {% endwith %}
@@ -33,8 +36,7 @@
         <a class="mehr" href="#layer-container">mehr.</a>
     </div>
 </div>
-<!--FIXME: remove muted attr -->
-<video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay muted>
+<video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
     <source src="{{ chapter.video.url }}" type="video/mp4">
     <source src="{{ chapter.video.url }}" type="video/webm">
     Your browser does not support the video tag.
