@@ -27,12 +27,20 @@ function toggleVideoStatus(){
 
 function initVideoPlayer(){
     $("#chapterVideo").click(function(event){
-        toggleVideoStatus();
+        if (isLayerVisible) {
+            hideLayers();
+        } else {
+            toggleVideoStatus();
+        }
     });
 
     $(document).keypress(function(e) {
         if(e.which == 32) {
-            toggleVideoStatus();
+            if (isLayerVisible) {
+                hideLayers();
+            } else {
+                toggleVideoStatus();
+            }
         }
     });
 }
@@ -73,7 +81,8 @@ function initLayerControl(){
 	});
 
 	$('.layer').click(function(){
-		alert("redirect to layer");
+		var layerlink = $(this).attr('data-layerlink');
+        document.location.href = layerlink;
 	});
 }
 

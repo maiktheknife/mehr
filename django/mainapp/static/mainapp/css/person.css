@@ -43,13 +43,12 @@ div.box div.cont {
 }
 
 .header {
-    padding: 0 15%;
 	font-size: 4em;
 	align-self: flex-start;
 }
 
 .person-name {
-	font-size: 6em;
+	font-size: 7em;
     text-align: center;
     align-self: center;
 }

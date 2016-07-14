@@ -39,13 +39,13 @@
     <source src="{{ chapter.video.url }}" type="video/webm">
     Your browser does not support the video tag.
 </video>
-{% if chapter.get_additional_count >= 0 %}
+{% if chapter.get_additional_count > 0 %}
 <div id="layer-container" class="layer-container">
     {% for layer in chapter.additionalcontent_set.all %}
-    <div class="layer" style="background-image: url('{{ layer.image.url }}');">
+    {# set custom attribute with html5 'data-' prefix #}
+    <div class="layer" style="background-image: url('{{ layer.image.url }}');" data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id layer.index %}">
         <div class="layer-title">{{layer.name}}</div>
         <div class="layer-description">{{layer.description}}</div>
-        <!--<a href="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id layer.index %}">{{ add2.name }}</a>-->
     </div>
     {% endfor %}
 </div>

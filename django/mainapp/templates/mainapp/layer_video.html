@@ -1,35 +1,38 @@
-{% extends "mainapp/base.html" %}
-
+{% extends "mainapp/base_without_menu.html" %}
 {% load staticfiles %}
 {% block title %}
-    {{ person.name }} - awesome video magazine
+    {{ layer.name }} - mehr.
 {% endblock %}
 {% block js %}
     <script type='text/javascript'>
-        function backToChapter() {
-            document.location.href = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id %}";
-        }
-
-        $(document).ready(function() {
-            $('body').click(function(event) {
-                backToChapter();
-            });
-        });
+        var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id %}";
     </script>
+    <script src='{% static "mainapp/js/layer.js" %}'></script>
 {% endblock %}
 {% block css %}
+    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
+    <link href='{% static "mainapp/css/layer.css" %}' rel="stylesheet" type="text/css" />
     <style type="text/css" >
-        #chapterLayerVideo {
-            width: 640px;
-            height: 480px;
-            cursor: url({% static 'mainapp/images/Close.png' %}), crosshair;
-        }
+    body {
+        cursor: url("{% static 'mainapp/images/schließen_blau.png' %}"), crosshair;
+    }
     </style>
 {% endblock %}
 {% block content %}
-    <video id="chapterLayerVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay controls>
-        <source src="{{ video.url }}" type="video/mp4">
-        <source src="{{ video.url }}" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+<div class="timeline">
+    <progress value="22" max="100"></progress>
+</div>
+<div class="box">
+    <div>
+        <a class="header" href="#">...</a>
+    </div>
+    <div>
+        <a class="mehr" href="#">mehr.</a>
+    </div>
+</div>
+<video poster='{% static "mainapp/images/yeah.jpg" %}' autoplay muted>
+    <source src="{{ layer.video.url }}" type="video/mp4">
+    <source src="{{ layer.video.url }}" type="video/webm">
+    Your browser does not support the video tag.
+</video>
 {% endblock %}

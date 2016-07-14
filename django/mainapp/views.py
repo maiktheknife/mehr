@@ -36,7 +36,6 @@ def person_view(request, person_id):
 	context = {
 		"people": persons,
 		"person": person,
-		#"index": index,
 	}
 	return render(request, "mainapp/person.html", context)
 
