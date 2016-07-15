@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="layer_video.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<title>mehr.</title>
+</head>
+<body>
+	<video id="layer_video" autoplay>
+		<source src="{{ chapter.video.url }}" type="video/mp4">
+		<source src="{{ chapter.video.url }}" type="video/webm">
+		Your browser does not support the video tag.
+	</video>
+
+	<!--fixed position at button left -->
+	<img class="video-control" id="videoPlayPauseToggle" src="../res/icon-play.svg" />
+	<img class="video-control" id="videoVolume" src="../res/icon-pause.svg" />
+	<img class="video-control" src="../res/volume-up.svg" />
+	<img class="video-control" src="../res/volume-off.svg" />
+
+</body>
+</html>

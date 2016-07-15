@@ -1,0 +1,53 @@
+<head>
+    <style>
+body {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+}
+
+div {
+    background: red;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div div {
+    flex-direction: row;
+}
+
+div div.cont {
+    background:white;
+}
+
+p.main {
+    background: orange;
+    font-size: 6em;
+    align-self: center;
+}
+
+p.footer {
+    font-size: 3em;
+    background: green;
+    align-self: flex-end;
+}
+    </style>
+</head>
+<body>
+<div class="box">
+    <div></div>
+    <div class="cont">
+        <p class="main">Marlon</p>
+    </div>
+    <div>
+        <p class="footer">mehr.</p>
+    </div>
+</div>
+</body>

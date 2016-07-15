@@ -1,0 +1,46 @@
+<head>
+    <style>
+body {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+}
+
+div {
+    background: red;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div div {
+    flex-direction: row;
+}
+
+p.header {
+    background: yellow;
+    align-self: flex-start;
+}
+
+p.mehr {
+    background: green;
+    align-self: flex-end;
+}
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div>
+        <p class="header">mehr.</p>
+    </div>
+    <div>
+        <p class="mehr">mehr.</p>
+    </div>
+</div>
+</body>

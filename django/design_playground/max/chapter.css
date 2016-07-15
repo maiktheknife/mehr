@@ -1,0 +1,162 @@
+html,body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font-family: "Butler", serif;
+	color: #ffffff;
+	background-image: url("../res/lunatic_2014_MarlonHoffstadt.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	/* stretch to full-screen */
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+a {
+	text-decoration: none;
+}
+
+.flex-container {
+	height: 100%;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.title {
+	flex-grow: 90;
+	flex-shrink: 1;
+	flex-basic: auto;
+	align-self: center;
+	
+	font-size: 6em;
+}
+
+.mehr {
+	flex-grow: 10;
+	flex-shrink: 1;
+	flex-basic: auto;
+	align-self: auto;
+	
+	font-size: 3em;
+		
+	color: #ffffff;	
+	-webkit-transition: color 1s;
+    -moz-background-size : color 1s; 
+    -o-transition: color 1s; 
+    transition: color 1s;   
+}
+
+.mehr:hover, .mehr:focus, .mehr:active {
+	color: red;
+	text-decoration: none;
+}
+
+/* navigation */
+
+.nav {
+	width: 10%;
+	height: 100%;
+	overflow: hidden;
+	cursor: pointer;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	color: #ffffff;
+	opacity : 0.7;	
+}
+
+.nav span {
+	color: #ffffff;
+}
+
+.nav:hover {
+	opacity : 1.0;
+}
+
+.nav.nav-left {
+	float: left;
+}
+
+.nav.nav-right {
+	float: right;
+}
+
+/* layer */
+
+.layer-container {
+	display: none;
+	width: 100%;
+}
+
+.layer {
+	padding: 20px;
+	min-height: 200px;
+	text-align: center;
+	cursor: pointer;	
+	
+	background-repeat: no-repeat;
+	background-position: center center;
+	
+	/* stretch to full-screen */
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	transition: visibility 1s, opacity 0.5s linear;
+}
+
+.layer:nth-of-type(1) {
+	background-image: url("../res/marlon.jpg");	
+}
+
+.layer:nth-of-type(2) {
+	background-image: url("../res/marlon.png");
+}
+
+.layer:nth-of-type(3) {
+	background-image: url("../res/maxresdefault.jpg");
+}
+
+.layer-title {
+	font-weight: 900;
+	font-size: 3em;
+	
+	visibility: visible;
+	opacity: 1.0;
+	transition: visibility 1s, opacity 0.5s linear;
+}
+
+.layer-description {
+	font-size: 2em;
+	padding: 0px 20%;
+	text-align: center;	
+	visibility: hidden;
+	opacity: 0.0;
+  	transition: visibility 1s, opacity 0.5s linear;
+}
+
+.layer:hover {
+	opacity: 0.7;
+}
+
+.layer:hover .layer-title {
+	visibility: hidden;
+	opacity: 0.0;
+}
+
+.layer:hover .layer-description {
+	visibility: visible;
+	opacity: 1.0;
+}
+
