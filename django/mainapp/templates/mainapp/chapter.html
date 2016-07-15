@@ -6,6 +6,10 @@
 {% endblock %}
 {% block js %}
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
+    <script type='text/javascript'>
+        var playIcon = "{% static 'mainapp/images/play_weiß.png' %}";
+        var pauseIcon = "{% static 'mainapp/images/pause_weiß.png' %}";
+    </script>
     {% with next_chapter=chapter.get_next %}
     {% if next_chapter %}
     <script type='text/javascript'>
@@ -26,7 +30,7 @@
 {% endblock %}
 {% block content %}
 <div class="timeline">
-    <progress value="22" max="100"></progress>
+    <progress id="progressbar" value="0" max="100"></progress>
 </div>
 <div class="box">
     <div>
@@ -41,6 +45,10 @@
     <source src="{{ chapter.video.url }}" type="video/webm">
     Your browser does not support the video tag.
 </video>
+<div class="video-controls">
+    <input id="video-toggle" type="image" src="{% static 'mainapp/images/pause_weiß.png' %}" />
+    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_an_weiß.png' %}" />
+</div>
 {% if chapter.get_additional_count > 0 %}
 <div id="layer-container" class="layer-container">
     {% for layer in chapter.additionalcontent_set.all %}
