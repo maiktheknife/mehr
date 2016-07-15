@@ -19,6 +19,16 @@
     <div class="row">
         <div class="col-md-6">.col-md-6</div>
         <div class="col-md-6">.col-md-6</div>
+
+        {% for textblock in layer.additionalcontenttextblock_set.all %}
+            {{ textblock.text }}<br/><br/><br/>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% for additional_content_image in layer.additionalcontentimage_set.all %}
+            <img src="{% static additional_content_image.image.url %}" /><br/><br/>
+        {% endfor %}
     </div>
 </div>
 

@@ -125,10 +125,7 @@ class AdditionalContent(models.Model):
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
 	# Videos
-	video = models.FileField(null=True, upload_to=user_chapter_layer_path)
-	# Image and Text
-	pictures_array = models.CharField(max_length=255, blank=True)
-	textblocks_array = models.CharField(max_length=1000, blank=True)
+	video = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path)
 
 	def get_relative_id(self):
 		return self.chapter.additionalcontent_set.filter(id__lt=self.id).count()
@@ -143,3 +140,16 @@ class Image(models.Model):
 
 	def __str__(self):
 		return "%s -> %s" % (self.person.name, self.image)
+
+
+class AdditionalContentImage(models.Model):
+	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
+	image = models.ImageField(upload_to=user_additional_content_images_path)
+
+	def __str__(self):
+		return "%s -> %s" % (self.additional_content, self.image)
+
+
+class AdditionalContentTextblock(models.Model):
+	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
+	text = models.TextField(max_length=1000)

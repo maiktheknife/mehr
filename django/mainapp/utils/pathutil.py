@@ -12,3 +12,11 @@ def user_chapter_layer_path(layer, file_name):
 
 def user_preview_images_path(image, file_name):
 	return '{0}/preview_images/{1}'.format(image.person.name, file_name)
+
+
+def user_additional_content_images_path(image, file_name):
+	return '{0}/chapter/{1}/additional_content/images/{2}'.format(
+		image.additional_content.chapter.person.name,
+		image.additional_content.chapter.id,
+		file_name
+	)

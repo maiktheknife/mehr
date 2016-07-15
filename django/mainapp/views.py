@@ -70,8 +70,6 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		context["video"] = additional_content.video
 		site = "mainapp/layer_video.html"
 	else:
-		context["pictures_array"] = additional_content.pictures_array
-		context["textblocks_array"] = additional_content.textblocks_array
 		site = "mainapp/layer_images.html"
 
 	return render(request, site, context)
