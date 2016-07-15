@@ -110,7 +110,7 @@ class Chapter(models.Model):
 
 class AdditionalContent(models.Model):
 	TYPE_VIDEO = 0
-	TYPE_IMAGES = 1
+	TYPE_MISC = 1
 
 	index = models.IntegerField()
 	name = models.CharField(max_length=30)
@@ -118,7 +118,7 @@ class AdditionalContent(models.Model):
 	image = models.ImageField(upload_to=user_chapter_layer_path)
 
 	type_choices = (
-		(TYPE_VIDEO, "Video"), (TYPE_IMAGES, "Images and Text")
+		(TYPE_VIDEO, "Video"), (TYPE_MISC, "Stuff")
 	)
 	type = models.IntegerField(choices=type_choices)
 
@@ -134,22 +134,30 @@ class AdditionalContent(models.Model):
 		return "Additional Content {} for {}".format(self.id, self.chapter)
 
 
+class AdditionalContentElement(models.Model):
+	TYPE_VIDEO = 0
+	TYPE_IMAGE = 1
+	TYPE_TEXT = 2
+	TYPE_VIDEO_TEXT = 3
+	TYPE_IMAGE_TEXT = 4
+
+	type_choices = (
+		(TYPE_VIDEO, "Video"), (TYPE_IMAGE, "Image"), (TYPE_TEXT, "Text"),
+		(TYPE_VIDEO_TEXT, "Video and text"), (TYPE_IMAGE_TEXT, "Image and text")
+	)
+
+	type = models.IntegerField(choices=type_choices)
+
+	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
+
+	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
+	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
+	text = models.TextField(max_length=1000, null=True, blank=True)
+
+
 class Image(models.Model):
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 	image = models.ImageField(upload_to=user_preview_images_path)
 
 	def __str__(self):
 		return "%s -> %s" % (self.person.name, self.image)
-
-
-class AdditionalContentImage(models.Model):
-	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-	image = models.ImageField(upload_to=user_additional_content_images_path)
-
-	def __str__(self):
-		return "%s -> %s" % (self.additional_content, self.image)
-
-
-class AdditionalContentTextblock(models.Model):
-	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-	text = models.TextField(max_length=1000)

@@ -1,19 +1,21 @@
 from django.contrib import admin
-from .models import Person, Chapter, AdditionalContent, AdditionalContentImage, AdditionalContentTextblock, Image
+from .models import Person, Chapter, AdditionalContent, AdditionalContentElement, Image
+
+
+class AdditionalContentElementsInline(admin.StackedInline):
+	fieldsets = [
+		('Type', {'fields': ['type']}),
+		('Video', {'fields': ['video']}),
+		('Image', {'fields': ['image']}),
+		('Textblock', {'fields': ['text']}),
+		('Video with text', {'fields': ('video', 'text')}),
+		('Image with text', {'fields': ('image', 'text')}),
+	]
+	model = AdditionalContentElement
+	extra = 5
 
 
 # AdditionalContent
-
-class AdditionalContentImagesInline(admin.TabularInline):
-	model = AdditionalContentImage
-	extra = 2
-
-
-class AdditionalContentTextblocksInline(admin.TabularInline):
-	model = AdditionalContentTextblock
-	extra = 2
-
-
 class AdditionalContentAdmin(admin.ModelAdmin):
 	list_filter = ['chapter']
 	list_display = ['chapter', 'name', 'index', 'type']
@@ -24,7 +26,7 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 		('Type', {'fields': ['type']}),
 		('Video', {'fields': ['video']}),
 	]
-	inlines = [AdditionalContentImagesInline, AdditionalContentTextblocksInline]
+	inlines = [AdditionalContentElementsInline, ]
 
 	# https://stackoverflow.com/questions/9330354/django-admin-disable-field-dynamically-based-on-other-selections
 	class Media:
