@@ -31,8 +31,8 @@ function toggleVideoStatus(){
 }
 
 function updateProgressBar() {
-    var percentage = Math.floor((100 / video.duration) * video.currentTime);
-    console.log(percentage);
+    var percentage = (100.0 / video.duration) * video.currentTime;
+    //console.log(percentage);
     progressbar.value = percentage;
 }
 
@@ -78,6 +78,14 @@ function hideLayers(){
 		$('#layer-container').hide();
 		playVideo()
 	});
+}
+
+function showChapterOverview() {
+	$('div.chapter-overview').show();
+}
+
+function hideChapterOverview() {
+	$('div.chapter-overview').hide(1000);
 }
 
 function initLayerControl(){

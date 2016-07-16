@@ -49,6 +49,10 @@ div.timeline {
     cursor: pointer;
 }
 
+div.chapter-overview {
+	display:none;
+}
+
 div div {
     flex-direction: row;
 }

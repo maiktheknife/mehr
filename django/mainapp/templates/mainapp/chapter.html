@@ -29,8 +29,13 @@
     <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
-<div class="timeline">
+<div class="timeline" onmouseenter="showChapterOverview()" onmouseleave="hideChapterOverview()">
     <progress id="progressbar" value="0" max="100"></progress>
+</div>
+<div class="chapter-overview">
+    {% for chapter in person.chapter_set.all %}
+        {{ chapter.name }};
+    {% endfor %}
 </div>
 <div class="box">
     <div>
