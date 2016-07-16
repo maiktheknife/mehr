@@ -12,7 +12,7 @@ class AdditionalContentElementsInline(admin.StackedInline):
 		('Image with text', {'fields': ('image', 'text')}),
 	]
 	model = AdditionalContentElement
-	extra = 5
+	extra = 1
 
 
 # AdditionalContent
