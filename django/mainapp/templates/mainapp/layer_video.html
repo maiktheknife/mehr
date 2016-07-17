@@ -5,7 +5,7 @@
 {% endblock %}
 {% block js %}
     <script type='text/javascript'>
-        var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id %}";
+        var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id current_time %}";
     </script>
     <script src='{% static "mainapp/js/layer.js" %}'></script>
 {% endblock %}

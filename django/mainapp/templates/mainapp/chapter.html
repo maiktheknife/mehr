@@ -19,6 +19,8 @@
 
         window.onload = function() {
             document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+            if ({{ current_time }} != 0)
+                document.getElementById('chapterVideo').currentTime = {{ current_time }};
         }
     </script>
     {% endif %}

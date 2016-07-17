@@ -5,6 +5,7 @@ var layerProgressbar = null;
 
 function backToChapter(link) {
     document.location.href = link;
+    //window.history.back();
 }
 
 function main(){

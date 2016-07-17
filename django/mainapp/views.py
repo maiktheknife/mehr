@@ -39,7 +39,7 @@ def person_view(request, person_id):
 	return render(request, "mainapp/person.html", context)
 
 
-def chapter_view(request, person_id, relative_chapter_id):
+def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 	persons = Person.objects.all()
 	person = get_object_or_404(Person, pk=person_id)
 	chapters = list(person.chapter_set.all())
@@ -49,6 +49,7 @@ def chapter_view(request, person_id, relative_chapter_id):
 		"people": persons,
 		"person": person,
 		"chapter": chapter,
+		"current_time": chapter_time
 	}
 	return render(request, "mainapp/chapter.html", context)
 
