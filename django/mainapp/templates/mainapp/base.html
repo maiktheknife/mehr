@@ -18,11 +18,17 @@
     {# Load custom css #}
     <style rel="stylesheet" type="text/css">
         @font-face {
-            font-family: mehrFont;
+            font-family: avenir;
             src: url("{% static 'mainapp/font/AvenirNext.ttc' %}");
         }
+
+        @font-face {
+            font-family: caslon;
+            src: url("{% static 'mainapp/font/Adobe-Caslon-Pro_2006.ttf' %}");
+        }
+
         body {
-            font-family: mehrFont, serif !important;
+            font-family: caslon, sans-serif !important;
         }
     </style>
     {% block css %} {% endblock %}

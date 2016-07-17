@@ -7,8 +7,16 @@
 {% block js %}
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
     <script type='text/javascript'>
-        var playIcon = "{% static 'mainapp/images/play_weiß.png' %}";
-        var pauseIcon = "{% static 'mainapp/images/pause_weiß.png' %}";
+        // play-pause
+        var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
+        var playIconBlau = "{% static 'mainapp/images/play_blau.png' %}";
+        var pauseIconWeiß = "{% static 'mainapp/images/pause_weiß.png' %}";
+        var pauseIconBlau = "{% static 'mainapp/images/pause_blau.png' %}";
+        // volume
+        var volumeOnIconWeiß = "{% static 'mainapp/images/ton_an_weiß.png' %}";
+        var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
+        var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
+        var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
     </script>
     {% with next_chapter=chapter.get_next %}
     {% if next_chapter %}
@@ -51,7 +59,7 @@
         <a class="mehr" href="#layer-container">mehr.</a>
     </div>
 </div>
-<video id="chapterVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
+<video id="chapterVideo" autoplay>
     <source src="{{ chapter.video.url }}" type="video/mp4">
     <source src="{{ chapter.video.url }}" type="video/webm">
     Your browser does not support the video tag.

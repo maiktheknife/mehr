@@ -5,28 +5,45 @@ var progressbar = null;
 function main() {
     video = $("#chapterVideo").get(0);
     progressbar = $("#progressbar").get(0);
+    initPageAnimation();
     initVideoPlayer();
     initVideoControls();
     initLayerControl();
 }
 
+function initPageAnimation(){
+    console.log("initPageAnimation");
+    $("body").css("display", "none");
+    $("body").fadeIn(2000);
+}
+
+/* Video */
+
 function playVideo(){
     $("#chapterVideo").removeClass("stopfade");
-    $("#video-toggle").attr('src', pauseIcon);
     video.play();
 }
 
 function pauseVideo(){
     $("#chapterVideo").addClass("stopfade");
-    $("#video-toggle").attr('src', playIcon);
     video.pause();
 }
 
 function toggleVideoStatus(){
     if (video.paused) {
+        $("#video-toggle").attr('src', pauseIconBlau);
         playVideo();
     } else {
+        $("#video-toggle").attr('src', playIconBlau);
         pauseVideo();
+    }
+}
+
+function toggleVideoVolume(){
+    if (video.muted) {
+        video.muted = false;
+    } else {
+        video.muted = true;
     }
 }
 
@@ -40,6 +57,7 @@ function openLayerPage() {
 }
 
 function initVideoPlayer(){
+/*
     $(document).keypress(function(e) {
         if(e.which == 32) {
             if (isLayerVisible) {
@@ -49,6 +67,7 @@ function initVideoPlayer(){
             }
         }
     });
+*/
 
     $("#chapterVideo").on('timeupdate', function(event){
         updateProgressBar();
@@ -60,14 +79,42 @@ function initVideoControls(){
         toggleVideoStatus();
     });
 
-    $("#video-volume").click(function(event){
-        if (video.muted) {
-            video.muted = false;
+    $('#video-toggle').hover(
+    function(){ // mouse-enter
+        if (video.paused) {
+            $(this).attr('src', playIconBlau);
         } else {
-            video.muted = true;
+            $(this).attr('src', pauseIconBlau);
+        }
+    }, function() { // mouse-exit
+        if (video.paused) {
+            $(this).attr('src', playIconWeiß);
+        } else {
+            $(this).attr('src', pauseIconWeiß);
         }
     });
+
+    $("#video-volume").click(function(event){
+        toggleVideoVolume();
+    });
+
+    $('#video-volume').hover(
+        function(){ // mouse-enter
+            if (video.muted) {
+                $(this).attr('src', volumeOnIconBlau);
+            } else {
+                $(this).attr('src', volumeOnIconBlau);
+            }
+        }, function() { // mouse-exit
+            if (video.muted) {
+                $(this).attr('src', volumeOnIconWeiß);
+            } else {
+                $(this).attr('src', volumeOnIconWeiß);
+            }
+        });
 }
+
+/* Layers */
 
 function showLayers(e){
     pauseVideo();

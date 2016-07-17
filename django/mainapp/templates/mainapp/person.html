@@ -33,6 +33,15 @@
     {% else %}
     <link href='{% static "mainapp/css/util_image_fullscreen.css" %}' rel="stylesheet" type="text/css" />
     {% endif %}
+    <style type="text/css">
+    .nav.nav-left {
+        cursor: url({% static "mainapp/images/small/pfeil_links_weiß.png" %}), pointer;
+    }
+
+    .nav.nav-right {
+	    cursor: url('{% static "mainapp/images/small/pfeil_rechts_weiß.png" %}'), pointer;
+    }
+    </style>
 {% endblock %}
 {% block content %}
     <div class="nav nav-left">

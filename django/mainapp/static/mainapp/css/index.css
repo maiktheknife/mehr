@@ -6,6 +6,8 @@ html, body {
 
 a {
     text-decoration: none;
+
+    font-family: avenir, sans-serif;
     color: #ffffff;
 
 	-webkit-transition: color 1s;

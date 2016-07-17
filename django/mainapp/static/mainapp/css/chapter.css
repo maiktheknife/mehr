@@ -8,6 +8,7 @@ html, body {
 
 a {
     text-decoration: none;
+    font-family: avenir, sans-serif;
     color: #ffffff;
 
 	-webkit-transition: color 1s;
@@ -112,11 +113,11 @@ div.video-controls {
     position: fixed;
     bottom: 0px;
     left: 0px;
+    display: block;
 
     width: auto;
     height: auto;
 
-    display: block;
     z-index: 9999;
 }
 

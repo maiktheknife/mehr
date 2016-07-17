@@ -8,6 +8,7 @@ html, body {
 
 a {
     text-decoration: none;
+    font-family: avenir, sans-serif;
     color: blue;
 
 	-webkit-transition: color 1s;
@@ -113,4 +114,25 @@ progress::-moz-progress-bar {
 /* Chrome */
 progress::-webkit-progress-value {
     background: blue;
+}
+
+/*
+ * Video Controls
+ */
+
+div.video-controls {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    z-index: 9999;
+}
+
+input {
+    width: 60px;
+    height: 60px;
 }

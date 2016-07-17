@@ -44,6 +44,8 @@ div.box div.cont {
 
 .header {
 	font-size: 4em;
+	font-family: avenir, sans-serif;
+
 	align-self: flex-start;
 }
 
@@ -63,6 +65,8 @@ div.box div.cont {
 
 .mehr {
 	font-size: 3em;
+	font-family: avenir, sans-serif;
+
 	align-self: flex-end;
 }
 
@@ -72,7 +76,7 @@ div.box div.cont {
 	width: 10%;
 	height: 100%;
 	overflow: hidden;
-	cursor: pointer;
+	/*cursor: pointer;*/
 
 	display: flex;
 	justify-content: center; /* align horizontal */
