@@ -36,7 +36,7 @@ function updateProgressBar() {
 }
 
 function openLayerPage() {
-    window.location.href = 'inDepth/1/' + Math.floor(progressbar.value);
+    window.location.href = 'inDepth/0/' + Math.floor(progressbar.value);
 }
 
 function initVideoPlayer(){

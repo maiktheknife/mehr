@@ -34,7 +34,7 @@ div {
 div.timeline {
     position: absolute;
     width: 100%;
-    height: 1%;
+    height: 5px;;
 }
 
 div div {
@@ -44,8 +44,17 @@ div div {
 div.timeline progress {
     width: 100%;
     height: 100%;
+
     padding: 0;
     margin: 0;
+}
+
+#layerProgressbar {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 5px;
 }
 
 a.header {
@@ -95,13 +104,13 @@ progress::-webkit-progress-bar {
 /* the Progress Bar Value */
 /* IE10 */
 progress {
-    color: #0000ff;
+    color: blue;
 }
 /* Firefox */
 progress::-moz-progress-bar {
-    background: white;
+    background: blue;
 }
 /* Chrome */
 progress::-webkit-progress-value {
-    background: white;
+    background: blue;
 }
