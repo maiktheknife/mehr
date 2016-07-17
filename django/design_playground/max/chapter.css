@@ -1,6 +1,9 @@
-html,body {
+html, body {
 	width: 100%;
 	height: 100%;
+
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -18,77 +21,107 @@ body {
 
 a {
 	text-decoration: none;
-}
+    color: #ffffff;
 
-.flex-container {
-	height: 100%;
-	width: 80%;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-}
-
-.title {
-	flex-grow: 90;
-	flex-shrink: 1;
-	flex-basic: auto;
-	align-self: center;
-	
-	font-size: 6em;
-}
-
-.mehr {
-	flex-grow: 10;
-	flex-shrink: 1;
-	flex-basic: auto;
-	align-self: auto;
-	
-	font-size: 3em;
-		
-	color: #ffffff;	
 	-webkit-transition: color 1s;
-    -moz-background-size : color 1s; 
-    -o-transition: color 1s; 
-    transition: color 1s;   
+    -moz-background-size : color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
 }
 
-.mehr:hover, .mehr:focus, .mehr:active {
-	color: red;
-	text-decoration: none;
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: blue;
 }
 
-/* navigation */
-
-.nav {
-	width: 10%;
-	height: 100%;
-	overflow: hidden;
-	cursor: pointer;
-	
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	
-	color: #ffffff;
-	opacity : 0.7;	
+div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
 }
 
-.nav span {
-	color: #ffffff;
+div div {
+    flex-direction: row;
 }
 
-.nav:hover {
-	opacity : 1.0;
+div.timeline {
+    position: fixed;
+    width: 100%;
+    height: 5px;
+
+    cursor: pointer;
 }
 
-.nav.nav-left {
-	float: left;
+div.chapter-overview {
+    position: fixed;
+    top: 5px;
+
+    width: 100%;
+    height: 5%;
 }
 
-.nav.nav-right {
-	float: right;
+div.chapter-overview .timeline-chapter{
+    display: inline-block;
+
+    width: auto;
+    height: auto;
+}
+
+a.header {
+    font-size: 6em;
+    align-self: flex-start;
+}
+
+a.mehr {
+    font-size: 3em;
+    align-self: flex-end;
+}
+
+/*
+ * Timeline
+ */
+
+progress {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    /* Turns off styling */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    /* gets rid of default border in Firefox and Opera. */
+    border: none;
+}
+
+/* the Progress Bar Background */
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: transparent !important; /* !important is needed by the polyfill */
+}
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+/* the Progress Bar Value */
+/* IE10 */
+progress {
+    color: white;
+}
+/* Firefox */
+progress::-moz-progress-bar {
+    background: white;
+}
+/* Chrome */
+progress::-webkit-progress-value {
+    background: white;
 }
 
 /* layer */
