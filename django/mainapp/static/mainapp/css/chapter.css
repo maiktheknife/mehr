@@ -53,6 +53,10 @@ div.chapter-overview {
 	display:none;
 }
 
+div.chapter-overview>div.active {
+	color:#ff0000;
+}
+
 div div {
     flex-direction: row;
 }

@@ -15,4 +15,9 @@ urlpatterns = [
 		views.additional_content_view,
 		name="additionalContentPage"
 	),
+	url(
+		r'^people/(?P<person_id>[0-9]+)/chapter/(?P<relative_chapter_id>[0-9]+)/inDepth/(?P<relative_additional_content_id>[0-9]+)/(?P<chapter_time>[0-9]+)$',
+		views.additional_content_view,
+		name="additionalContentPage"
+	),
 ]

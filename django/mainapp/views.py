@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
-from os import listdir
 from os.path import join
 
 from .models import Person, AdditionalContent
@@ -54,7 +53,7 @@ def chapter_view(request, person_id, relative_chapter_id):
 	return render(request, "mainapp/chapter.html", context)
 
 
-def additional_content_view(request, person_id, relative_chapter_id, relative_additional_content_id):
+def additional_content_view(request, person_id, relative_chapter_id, relative_additional_content_id, chapter_time=0):
 	person = get_object_or_404(Person, pk=person_id)
 	chapter = list(person.chapter_set.all())[int(relative_chapter_id)]
 
@@ -63,7 +62,8 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 	context = {
 		"person": person,
 		"chapter": chapter,
-		"layer": additional_content
+		"layer": additional_content,
+		"current_time": chapter_time
 	}
 
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:

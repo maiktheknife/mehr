@@ -57,3 +57,51 @@ a.mehr {
 	font-size: 3em;
 	align-self: flex-end;
 }
+
+/*
+ * Timeline
+ */
+progress {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    /* Turns off styling */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    /* gets rid of default border in Firefox and Opera. */
+    border: none;
+}
+
+progress.layer-progressbar {
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+/* the Progress Bar Background */
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: transparent !important; /* !important is needed by the polyfill */
+}
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+/* the Progress Bar Value */
+/* IE10 */
+progress {
+    color: #0000ff;
+}
+/* Firefox */
+progress::-moz-progress-bar {
+    background: white;
+}
+/* Chrome */
+progress::-webkit-progress-value {
+    background: white;
+}

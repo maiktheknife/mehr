@@ -20,7 +20,8 @@
 {% endblock %}
 {% block content %}
 <div class="timeline">
-    <progress value="22" max="100"></progress>
+    <progress id="chapterProgressbar" value="{{ current_time }}" max="100"></progress>
+    <progress id="layerProgressbar" class="layer-progressbar" value="0" max="100"></progress>
 </div>
 <div class="box">
     <div>
@@ -30,7 +31,7 @@
         <a class="mehr" href="#">mehr.</a>
     </div>
 </div>
-<video poster='{% static "mainapp/images/yeah.jpg" %}' autoplay muted>
+<video id="layerVideo" poster='{% static "mainapp/images/yeah.jpg" %}' autoplay>
     <source src="{{ layer.video.url }}" type="video/mp4">
     <source src="{{ layer.video.url }}" type="video/webm">
     Your browser does not support the video tag.

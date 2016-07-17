@@ -36,6 +36,15 @@ function updateProgressBar() {
     progressbar.value = percentage;
 }
 
+function getCurrentTime() {
+    return video.currentTime;
+}
+
+function openLayerPage() {
+    // TODO this only works when adding a breakpoint here and then stepping over it, django seems to screw up the url otherwise :/
+    window.location.href = 'inDepth/1/' + Math.floor(video.currentTime);
+}
+
 function initVideoPlayer(){
     $(document).keypress(function(e) {
         if(e.which == 32) {
