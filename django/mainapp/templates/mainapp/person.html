@@ -35,14 +35,12 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-
     <div class="nav nav-left">
-        {% bootstrap_icon "chevron-left" %}
+        <img src='{% static "mainapp/images/pfeil_links_weiß.png" %}' />
     </div>
     <div class="nav nav-right">
-        {% bootstrap_icon "chevron-right" %}
+        <img src='{% static "mainapp/images/pfeil_rechts_weiß.png" %}' />
     </div>
-
     <div class="box">
         <div>
             <a class="header" href="#">...</a>
@@ -63,5 +61,4 @@
         Your browser does not support the video tag.
     </video>
     {% endif %}
-
 {% endblock %}

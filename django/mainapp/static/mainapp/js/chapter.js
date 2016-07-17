@@ -61,7 +61,11 @@ function initVideoControls(){
     });
 
     $("#video-volume").click(function(event){
-        // todo
+        if (video.muted) {
+            video.muted = false;
+        } else {
+            video.muted = true;
+        }
     });
 }
 

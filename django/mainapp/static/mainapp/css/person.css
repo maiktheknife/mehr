@@ -82,9 +82,9 @@ div.box div.cont {
 	opacity : 0.66;
 }
 
-.nav span {
-	color: #ffffff;
-	font-size: 2em;
+.nav img {
+    width: 80px;
+    height: 80px;
 }
 
 .nav:hover {
