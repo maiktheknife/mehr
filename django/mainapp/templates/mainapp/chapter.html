@@ -35,6 +35,8 @@
     {% endif %}
     {% endwith %}
     var personLink = "{% url 'mainapp:personPage' person.id %}";
+    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
+    var additionalContentsCount = "{{ chapter.get_additional_count }}"
     </script>
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
 {% endblock %}

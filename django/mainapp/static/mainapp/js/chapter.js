@@ -105,9 +105,22 @@ function updateProgressBar() {
     progressbar.value = percentage;
 }
 
+function showAdditionalContentSignal() {
+	if (additionalContentsCount == 0)
+		return;
+
+	if (additionalContentSignalTime < video.currentTime) {
+		// TODO make mehr. flash a few times
+		console.log("signalizing additional content.")
+
+		additionalContentSignalTime = video.duration;
+	}
+}
+
 function initVideoPlayer(){
     $("#chapterVideo").on('timeupdate', function(event){
         updateProgressBar();
+        showAdditionalContentSignal();
     });
 }
 
