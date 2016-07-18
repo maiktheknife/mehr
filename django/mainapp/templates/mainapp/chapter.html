@@ -17,6 +17,11 @@
     var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
     var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
     var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
+
+    var personLink = "{% url 'mainapp:personPage' person.id %}";
+    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
+    var additionalContentsCount = "{{ chapter.get_additional_count }}"
+
     // navigation
     {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
     {% if previous_chapter %}
@@ -28,6 +33,10 @@
         function switchToNextChapterHandler(e) {
             document.location.href = nextChapterLink;
         }
+    {% else %}
+        function backToPersonPage(e) {
+            document.location.href = personLink;
+        }
     {% endif %}
     {% endwith %}
 
@@ -35,13 +44,12 @@
         if (typeof switchToNextChapterHandler != 'undefined')
             document.getElementById('chapterVideo').addEventListener('ended', switchToNextChapterHandler, false);
 
+        if (typeof backToPersonPage != 'undefined')
+            document.getElementById('chapterVideo').addEventListener('ended', backToPersonPage, false);
+
         if ({{ current_time }} != 0)
             document.getElementById('chapterVideo').currentTime = {{ current_time }};
     }
-
-    var personLink = "{% url 'mainapp:personPage' person.id %}";
-    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
-    var additionalContentsCount = "{{ chapter.get_additional_count }}"
     </script>
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
 {% endblock %}
