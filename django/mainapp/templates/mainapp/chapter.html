@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% block title %}
-{{ chapter.name }} - mehr.
+    {{ chapter.name }} - mehr.
 {% endblock %}
 {% block js %}
 
@@ -22,19 +22,23 @@
     {% if previous_chapter %}
         var previousChapterLink = "{% url 'mainapp:chapterPage' person.id previous_chapter.get_relative_id %}";
     {% endif %}
+
     {% if next_chapter %}
         var nextChapterLink = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
-        function myHandler(e) {
+        function switchToNextChapterHandler(e) {
             document.location.href = nextChapterLink;
-        }
-
-    window.onload = function () {
-        document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
-        if ({{
-            current_time
         }
     {% endif %}
     {% endwith %}
+
+    window.onload = function() {
+        if (typeof switchToNextChapterHandler != 'undefined')
+            document.getElementById('chapterVideo').addEventListener('ended', switchToNextChapterHandler, false);
+
+        if ({{ current_time }} != 0)
+            document.getElementById('chapterVideo').currentTime = {{ current_time }};
+    }
+
     var personLink = "{% url 'mainapp:personPage' person.id %}";
     var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
     var additionalContentsCount = "{{ chapter.get_additional_count }}"
