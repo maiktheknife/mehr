@@ -111,6 +111,7 @@ class Chapter(models.Model):
 class AdditionalContent(models.Model):
 	TYPE_VIDEO = 0
 	TYPE_MISC = 1
+	TYPE_GALLERY = 2
 
 	index = models.IntegerField()
 	name = models.CharField(max_length=30)
@@ -118,8 +119,9 @@ class AdditionalContent(models.Model):
 	image = models.ImageField(upload_to=user_chapter_layer_path)
 
 	type_choices = (
-		(TYPE_VIDEO, "Video"), (TYPE_MISC, "Stuff")
+		(TYPE_VIDEO, "Video"), (TYPE_MISC, "Stuff"), (TYPE_GALLERY, "Gallery")
 	)
+
 	type = models.IntegerField(choices=type_choices)
 
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
@@ -143,7 +145,7 @@ class AdditionalContentElement(models.Model):
 
 	type_choices = (
 		(TYPE_VIDEO, "Video"), (TYPE_IMAGE, "Image"), (TYPE_TEXT, "Text"),
-		(TYPE_VIDEO_TEXT, "Video and text"), (TYPE_IMAGE_TEXT, "Image and text")
+		(TYPE_VIDEO_TEXT, "Video and text"), (TYPE_IMAGE_TEXT, "Image and text"),
 	)
 
 	type = models.IntegerField(choices=type_choices)
@@ -161,3 +163,8 @@ class Image(models.Model):
 
 	def __str__(self):
 		return "%s -> %s" % (self.person.name, self.image)
+
+
+class GalleryImage(models.Model):
+	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
+	image = models.ImageField(upload_to=user_additional_content_images_path)

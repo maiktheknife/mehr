@@ -70,7 +70,9 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:
 		context["video"] = additional_content.video
 		site = "mainapp/layer_video.html"
-	else:
+	elif additional_content.type == AdditionalContent.TYPE_MISC:
 		site = "mainapp/layer_images.html"
+	else:
+		site = "mainapp/layer_gallery.html"
 
 	return render(request, site, context)
