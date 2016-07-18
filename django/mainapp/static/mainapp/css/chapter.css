@@ -1,9 +1,9 @@
 html, body {
-   width: 100%;
-   height: 100%;
-   margin: 0;
-   padding: 0;
-   color: #ffffff;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
 }
 
 a {
@@ -11,8 +11,8 @@ a {
     font-family: avenir, sans-serif;
     color: #ffffff;
 
-	-webkit-transition: color 1s;
-    -moz-background-size : color 1s;
+    -webkit-transition: color 1s;
+    -moz-background-size: color 1s;
     -o-transition: color 1s;
     transition: color 1s;
 }
@@ -23,13 +23,13 @@ a:hover, a:focus, a:active {
 }
 
 a.header {
-	font-size: 4em;
-	align-self: flex-start;
+    font-size: 4em;
+    align-self: flex-start;
 }
 
 a.mehr {
-	font-size: 3em;
-	align-self: flex-end;
+    font-size: 3em;
+    align-self: flex-end;
 }
 
 div {
@@ -51,11 +51,11 @@ div.timeline {
 }
 
 div.chapter-overview {
-	display:none;
+    display: none;
 }
 
-div.chapter-overview>div.active {
-	color:#ff0000;
+div.chapter-overview > div.active {
+    color: #ff0000;
 }
 
 div div {
@@ -82,10 +82,11 @@ progress {
 }
 
 /* the Progress Bar Background */
-progress,                          /* Firefox  */
-progress[role][aria-valuenow] {    /* Polyfill */
-   background: transparent !important; /* !important is needed by the polyfill */
+progress, /* Firefox  */
+progress[role][aria-valuenow] { /* Polyfill */
+    background: transparent !important; /* !important is needed by the polyfill */
 }
+
 /* Chrome */
 progress::-webkit-progress-bar {
     background: transparent;
@@ -96,10 +97,12 @@ progress::-webkit-progress-bar {
 progress {
     color: white;
 }
+
 /* Firefox */
 progress::-moz-progress-bar {
     background: white;
 }
+
 /* Chrome */
 progress::-webkit-progress-value {
     background: white;
@@ -131,9 +134,9 @@ input {
  */
 
 div.layer-container {
-	display: none;
-	width: 100%;
-	height: auto;
+    display: none;
+    width: 100%;
+    height: auto;
 }
 
 div.layer-container .layer {
@@ -142,52 +145,118 @@ div.layer-container .layer {
     min-height: 200px;
     width: 100%;
 
-	padding: 20px;
+    padding: 20px;
 
-	text-align: center;
-	cursor: pointer;
+    text-align: center;
+    cursor: pointer;
 
-	background-repeat: no-repeat;
-	background-position: center center;
+    background-repeat: no-repeat;
+    background-position: center center;
 
-	/* stretch to full-screen */
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+    /* stretch to full-screen */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
-	transition: visibility 1s, opacity 0.5s linear;
+    transition: visibility 1s, opacity 0.5s linear;
 }
 
 .layer-title {
-	font-weight: 900;
-	font-size: 3em;
+    font-weight: 900;
+    font-size: 3em;
 
-	visibility: visible;
-	opacity: 1.0;
-	transition: visibility 1s, opacity 0.5s linear;
+    visibility: visible;
+    opacity: 1.0;
+    transition: visibility 1s, opacity 0.5s linear;
 }
 
 .layer-description {
-	font-size: 2em;
-	padding: 0px 20%;
-	text-align: center;
-	visibility: hidden;
-	opacity: 0.0;
-  	transition: visibility 1s, opacity 0.5s linear;
+    font-size: 2em;
+    padding: 0px 20%;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0.0;
+    transition: visibility 1s, opacity 0.5s linear;
 }
 
 .layer:hover {
-	opacity: 0.7;
+    opacity: 0.7;
 }
 
 .layer:hover .layer-title {
-	visibility: hidden;
-	opacity: 0.0;
+    visibility: hidden;
+    opacity: 0.0;
 }
 
 .layer:hover .layer-description {
-	visibility: visible;
-	opacity: 1.0;
+    visibility: visible;
+    opacity: 1.0;
 }
 
+/* Overlay */
+
+.overlay {
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    background-color: rgb(19, 92, 251);
+    background-color: rgba(19, 92, 251, 0.6);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.5s;
+}
+
+
+.overlay-content {
+    position: relative;
+    left: 25%;
+    flex-direction: column;
+}
+
+.overlay-menu {
+    position: relative;
+    top: 35%;
+    right: 25%;
+    flex-direction: row;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #051cf1;
+}
+
+.closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px !important;
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .closebtn {
+        font-size: 40px !important;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+a.cover-content {
+    font-size:75px;
+}
+
+a.cover-menu {
+    font-size:45px;
+}
