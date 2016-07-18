@@ -5,8 +5,8 @@
 {{ chapter.name }} - mehr.
 {% endblock %}
 {% block js %}
-<script src='{% static "mainapp/js/chapter.js" %}'></script>
-<script type='text/javascript'>
+
+    <script type='text/javascript'>
     // play-pause
     var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
     var playIconBlau = "{% static 'mainapp/images/play_blau.png' %}";
@@ -17,39 +17,34 @@
     var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
     var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
     var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
-</script>
-{% with next_chapter=chapter.get_next %}
-{% if next_chapter %}
-<script type='text/javascript'>
-    function myHandler(e) {
-        document.location.href = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
-    }
+    // navigation
+    {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
+    {% if previous_chapter %}
+        var previousChapterLink = "{% url 'mainapp:chapterPage' person.id previous_chapter.get_relative_id %}";
+    {% endif %}
+    {% if next_chapter %}
+        var nextChapterLink = "{% url 'mainapp:chapterPage' person.id next_chapter.get_relative_id %}";
+        function myHandler(e) {
+            document.location.href = nextChapterLink;
+        }
 
     window.onload = function () {
         document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
         if ({{
             current_time
         }
-    } !=
-        0
-        )
-        document.getElementById('chapterVideo').currentTime = {
-        {
-            current_time
-        }
-    }
-        ;
-    }
-</script>
-{% endif %}
-{% endwith %}
+    {% endif %}
+    {% endwith %}
+    var personLink = "{% url 'mainapp:personPage' person.id %}";
+    </script>
+    <script src='{% static "mainapp/js/chapter.js" %}'></script>
 {% endblock %}
 {% block css %}
 <link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css"/>
 <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css"/>
 {% endblock %}
 {% block content %}
-<div class="timeline" onmouseenter="showChapterOverview()" onmouseleave="hideChapterOverview()">
+<div class="timeline">
     <progress id="progressbar" value="0" max="100"></progress>
 </div>
 <div class="chapter-overview">
@@ -103,7 +98,7 @@
 <div id="layer-container" class="layer-container">
     {% for layer in chapter.additionalcontent_set.all %}
     {# set custom attribute with html5 'data-' prefix #}
-    <div class="layer" style="background-image: url('{{ layer.image.url }}');" onclick="openLayerPage()">
+    <div class="layer" style="background-image: url('{{ layer.image.url }}');" data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id layer.index %}">
         <div class="layer-title">{{layer.name}}</div>
         <div class="layer-description">{{layer.description}}</div>
     </div>

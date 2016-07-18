@@ -1,6 +1,5 @@
 
 function main(){
-    console.log('main');
     initPageAnimation();
     initPageNavigation();
     initMouseMovementAwareness();
@@ -27,7 +26,29 @@ function initPageAnimation(){
 }
 
 function initPageNavigation() {
-    console.log("initPageNavigation");
+    $(document).keydown(function(e) {
+         switch(e.which) {
+            case 37: // left
+                linkLocation = previousPersonLink;
+                $("body").fadeOut(1000, redirectPage);
+                break;
+            case 38: // up
+                linkLocation = homeLink;
+                $("body").fadeOut(1000, redirectPage);
+                break;
+            case 39: // right
+                linkLocation = nextPersonLink;
+                $("body").fadeOut(1000, redirectPage);
+                break;
+            case 40: // down
+                linkLocation = chapterLink;
+                $("body").fadeOut(1000, redirectPage);
+                break;
+            default:
+                break;
+            }
+    });
+
     $('.nav-left').click(function(){
         linkLocation = previousPersonLink;
         $("body").fadeOut(1000, redirectPage);
@@ -41,6 +62,7 @@ function initPageNavigation() {
     function redirectPage() {
         window.location = linkLocation;
     }
+
 }
 
 function initBackGroundImageRotator(){

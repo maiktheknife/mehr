@@ -1,0 +1,18 @@
+{% extends "mainapp/base.html" %}
+
+{% load staticfiles %}
+{% block title %}
+    {{ person.name }} - awesome video magazine
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% for image in layer.galleryimage_set.all %}
+        <img src="{% static image.image.url %}" /><br/><br/>
+    {% endfor %}
+</div>
+
+{% endblock %}

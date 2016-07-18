@@ -17,12 +17,18 @@
      ];
     {% with next_person=person.get_next previous_person=person.get_previous %}
     {% if previous_person %}
-    var previousPersonLink = "{% url 'mainapp:personPage' previous_person.id %}";
+        var previousPersonLink = "{% url 'mainapp:personPage' previous_person.id %}";
+    {% else %}
+        var previousPersonLink = "#";
     {% endif %}
     {% if next_person %}
-    var nextPersonLink = "{% url 'mainapp:personPage' next_person.id %}";
+        var nextPersonLink = "{% url 'mainapp:personPage' next_person.id %}";
+    {% else %}
+        var nextPersonLink = "#";
     {% endif %}
     {% endwith %}
+    var chapterLink = "{% url 'mainapp:chapterPage' person.id 0 %}";
+    var homeLink = "{% url 'mainapp:index' %}";
     </script>
     <script src='{% static "mainapp/js/person.js" %}'></script>
 {% endblock %}
