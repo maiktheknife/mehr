@@ -2,9 +2,10 @@
 
 {% load staticfiles %}
 {% block title %}
-    {{ chapter.name }} - mehr.
+{{ chapter.name }} - mehr.
 {% endblock %}
 {% block js %}
+
     <script type='text/javascript'>
     // play-pause
     var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
@@ -27,10 +28,10 @@
             document.location.href = nextChapterLink;
         }
 
-        window.onload = function() {
-            document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
-            if ({{ current_time }} != 0)
-                document.getElementById('chapterVideo').currentTime = {{ current_time }};
+    window.onload = function () {
+        document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+        if ({{
+            current_time
         }
     {% endif %}
     {% endwith %}
@@ -41,8 +42,8 @@
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
 {% endblock %}
 {% block css %}
-    <link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css" />
-    <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
+<link href='{% static "mainapp/css/chapter.css" %}' rel="stylesheet" type="text/css"/>
+<link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css"/>
 {% endblock %}
 {% block content %}
 <div class="timeline">
@@ -50,17 +51,38 @@
 </div>
 <div class="chapter-overview">
     {% for c in person.chapter_set.all %}
-        {% if c.get_relative_id == chapter.get_relative_id %}
-            <div class="active">{{ c.name }};</div>
-        {% else %}
-            <div class="inactive">{{ c.name }};</div>
-        {% endif %}
+    {% if c.get_relative_id == chapter.get_relative_id %}
+    <div class="active">{{ c.name }};</div>
+    {% else %}
+    <div class="inactive">{{ c.name }};</div>
+    {% endif %}
     {% endfor %}
 </div>
 <div class="box">
+
     <div>
-        <a class="header" href="#">...</a>
+        <a class="header" style="cursor:pointer" onclick="openNav()">...</a>
     </div>
+
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <div class="overlay-content">
+            <a href="#" class="cover-content">Name 1</a>
+            <a href="#" class="cover-content">Name 2</a>
+            <a href="#" class="cover-content">Name 3</a>
+            <a href="#" class="cover-content">Name 4</a>
+        </div>
+
+        <div class="overlay-menu">
+            <a href="#" class="cover-menu">Home</a>
+            <a href="#" class="cover-menu">About</a>
+            <a href="#" class="cover-menu">People</a>
+            <a href="#" class="cover-menu">Contact</a>
+        </div>
+
+    </div>
+
+
     <div>
         <a class="mehr" href="#layer-container">mehr.</a>
     </div>
@@ -71,8 +93,8 @@
     Your browser does not support the video tag.
 </video>
 <div class="video-controls">
-    <input id="video-toggle" type="image" src="{% static 'mainapp/images/pause_weiß.png' %}" />
-    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_an_weiß.png' %}" />
+    <input id="video-toggle" type="image" src="{% static 'mainapp/images/pause_weiß.png' %}"/>
+    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_an_weiß.png' %}"/>
 </div>
 {% if chapter.get_additional_count > 0 %}
 <div id="layer-container" class="layer-container">

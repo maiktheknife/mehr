@@ -18,6 +18,18 @@ function initPageAnimation() {
     $("body").fadeIn(2000);
 }
 
+/* Overlay */
+
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+    pauseVideo();
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+    playVideo();
+}
+
 function initPageNavigation() {
     $(document).keydown(function(e) {
          switch(e.which) {
