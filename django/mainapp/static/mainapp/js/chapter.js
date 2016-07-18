@@ -6,15 +6,68 @@ function main() {
     video = $("#chapterVideo").get(0);
     progressbar = $("#progressbar").get(0);
     initPageAnimation();
+    initPageNavigation();
+    initTimeline();
     initVideoPlayer();
     initVideoControls();
     initLayerControl();
 }
 
-function initPageAnimation(){
-    console.log("initPageAnimation");
+function initPageAnimation() {
     $("body").css("display", "none");
     $("body").fadeIn(2000);
+}
+
+function initPageNavigation() {
+    $(document).keydown(function(e) {
+         switch(e.which) {
+    /*
+            case 32: // space
+                if (isLayerVisible) {
+                    hideLayers();
+                } else {
+                    toggleVideoStatus();
+                }
+                break;
+    */
+            case 37: // left
+                if (typeof previousChapterLink !== 'undefined') {
+                    linkLocation = previousChapterLink;
+                    $("body").fadeOut(1000, redirectPage);
+                }
+                break;
+            case 38: // up
+                linkLocation = personLink;
+                $("body").fadeOut(1000, redirectPage);
+                break;
+            case 39: // right
+                if (typeof nextChapterLink !== 'undefined') {
+                    linkLocation = nextChapterLink;
+                    $("body").fadeOut(1000, redirectPage);
+                }
+                break;
+            case 40: // down
+                showLayers();
+                break;
+            default:
+                break;
+            }
+    });
+
+    function redirectPage() {
+        window.location = linkLocation;
+    }
+}
+
+/* Timeline */
+
+function initTimeline(){
+    $('.timeline').hover(
+        function() { // mouse-enter
+            showChapterOverview();
+        }, function() { // mouse-exit
+           hideChapterOverview();
+    });
 }
 
 /* Video */
@@ -52,23 +105,7 @@ function updateProgressBar() {
     progressbar.value = percentage;
 }
 
-function openLayerPage() {
-    window.location.href = 'inDepth/0/' + Math.floor(progressbar.value);
-}
-
 function initVideoPlayer(){
-/*
-    $(document).keypress(function(e) {
-        if(e.which == 32) {
-            if (isLayerVisible) {
-                hideLayers();
-            } else {
-                toggleVideoStatus();
-            }
-        }
-    });
-*/
-
     $("#chapterVideo").on('timeupdate', function(event){
         updateProgressBar();
     });
@@ -118,10 +155,10 @@ function initVideoControls(){
 
 function showLayers(e){
     pauseVideo();
-        $('#layer-container').show();
-        $('html, body').animate({
-                scrollTop : $(e.hash).offset().top
-        }, 1000);
+    $('#layer-container').show();
+    $('html, body').animate({
+            scrollTop : $('#layer-container').offset().top
+    }, 1000);
 }
 
 function hideLayers(){
@@ -150,6 +187,12 @@ function initLayerControl() {
 		}
 		isLayerVisible = !isLayerVisible;
 	});
+
+	$('.layer').click(function(event){
+        var layerLink = $(this).attr("data-layerlink");
+        var completeLink = layerLink + Math.floor(progressbar.value);
+        window.location.href = completeLink;
+    });
 
 	$(window).scroll(function() {
 		var pos = $(this).scrollTop();
