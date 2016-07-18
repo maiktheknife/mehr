@@ -28,16 +28,16 @@
             document.location.href = nextChapterLink;
         }
 
-    window.onload = function () {
-        document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
-        if ({{
-            current_time
+        window.onload = function () {
+            document.getElementById('chapterVideo').addEventListener('ended', myHandler, false);
+            if ({{ current_time }} != 0)
+                document.getElementById('chapterVideo').currentTime = {{ current_time }};
         }
     {% endif %}
     {% endwith %}
     var personLink = "{% url 'mainapp:personPage' person.id %}";
-    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
-    var additionalContentsCount = "{{ chapter.get_additional_count }}"
+    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}";
+    var additionalContentsCount = "{{ chapter.get_additional_count }}";
     </script>
     <script src='{% static "mainapp/js/chapter.js" %}'></script>
 {% endblock %}
@@ -79,7 +79,6 @@
             <a href="#" class="cover-menu">People</a>
             <a href="#" class="cover-menu">Contact</a>
         </div>
-
     </div>
 
 
