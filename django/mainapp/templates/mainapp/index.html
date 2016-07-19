@@ -8,8 +8,9 @@
     <script src='{% static "mainapp/js/index.js" %}'></script>
     <script>
         // http://www.mutaku.com/wp/index.php/2012/03/accessing-django-template-variables-in-javascript/
-        var firstPersonID = "{% url 'mainapp:personPage' firstID %}";
+        // var firstPersonID = "{% url 'mainapp:personPage' firstID %}";
         // var images = [{% for i in images %}'{{i}}',{% endfor %}]
+        var firstPersonLink = "{% url 'mainapp:personPage' firstID %}";
     </script>
 {% endblock %}
 {% block css %}

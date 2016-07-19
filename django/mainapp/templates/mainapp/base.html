@@ -7,6 +7,7 @@
     <title>{% block title %}{% endblock %}</title>
     {# Load jquery and custom javascript #}
     <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/base.js" %}'></script>
     {% block js %} {% endblock %}
     {# Load bootstrap3 #}
     {% load bootstrap3 %}
@@ -31,9 +32,24 @@
             font-family: caslon, sans-serif !important;
         }
     </style>
+    <link href='{% static "mainapp/css/base.css" %}' rel="stylesheet" type="text/css"/>
     {% block css %} {% endblock %}
 </head>
 <body id="page" oncontextmenu="return false">
+<div id="myNav" class="overlay">
+    <a href="#" class="closebtn" onclick="closeNav()">×</a>
+    <ul class="overlay-content text-center">
+        {% for p in people %}
+        <li><a href="#" class="cover-content">{{ p.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <ul class="overlay-menu text-center">
+        <li><a href="#" class="cover-menu">Home</a></li>
+        <li><a href="#" class="cover-menu">About</a></li>
+        <li><a href="#" class="cover-menu">People</a></li>
+        <li><a href="#" class="cover-menu">Contact</a></li>
+    </ul>
+</div>
 {% block content %} {% endblock %}
 </body>
 </html>

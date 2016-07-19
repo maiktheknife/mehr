@@ -73,29 +73,9 @@
     {% endfor %}
 </div>
 <div class="box">
-
     <div>
-        <a class="header" style="cursor:pointer" onclick="openNav()">...</a>
+        <a class="header" onclick="openNav()">...</a>
     </div>
-
-    <div id="myNav" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <ul class="overlay-content">
-            <li><a href="#" class="cover-content">Name 1</a></li>
-            <li><a href="#" class="cover-content">Name 2</a></li>
-            <li><a href="#" class="cover-content">Name 3</a></li>
-            <li><a href="#" class="cover-content">Name 4</a></li>
-        </ul>
-
-        <ul class="overlay-menu">
-            <li><a href="#" class="cover-menu">Home</a></li>
-            <li><a href="#" class="cover-menu">About</a></li>
-            <li><a href="#" class="cover-menu">People</a></li>
-            <li><a href="#" class="cover-menu">Contact</a></li>
-        </ul>
-    </div>
-
-
     <div>
         <a class="mehr" href="#layer-container">mehr.</a>
     </div>
@@ -107,7 +87,7 @@
 </video>
 <div class="video-controls">
     <input id="video-toggle" type="image" src="{% static 'mainapp/images/pause_weiß.png' %}"/>
-    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_an_weiß.png' %}"/>
+    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_aus_weiß.png' %}"/>
 </div>
 {% if chapter.get_additional_count > 0 %}
 <div id="layer-container" class="layer-container">
