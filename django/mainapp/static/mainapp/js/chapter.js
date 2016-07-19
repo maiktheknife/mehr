@@ -118,13 +118,29 @@ function updateProgressBar() {
 }
 
 function showAdditionalContentSignal() {
-	if (additionalContentsCount == 0)
+	if (additionalContentsCount == 0) {
 		return;
+    }
+
+    function setMehrColor(when, color){
+        setTimeout(function(){
+            // console.log("setColor at " + when + " to " + color);
+            $(".mehr").css("color", color);
+        }, when);
+    }
 
 	if (additionalContentSignalTime < video.currentTime) {
-		// TODO make mehr. flash a few times
-		console.log("signalizing additional content.")
-
+        var color = 0;
+        var pauseBetween = 300;
+        for (i = 0; i < 7; i++) {
+            if (color == 0){
+                setMehrColor(i * pauseBetween, "white");
+                color = 1;
+            } else {
+                setMehrColor(i * pauseBetween, "blue");
+                color = 0;
+            }
+        }
 		additionalContentSignalTime = video.duration;
 	}
 }

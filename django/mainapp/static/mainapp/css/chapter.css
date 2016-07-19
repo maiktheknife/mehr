@@ -23,12 +23,12 @@ a:hover, a:focus, a:active {
 }
 
 a.header {
-    font-size: 4em;
+    font-size: 3.5em;
     align-self: flex-start;
 }
 
 a.mehr {
-    font-size: 3em;
+    font-size: 3.5em;
     align-self: flex-end;
 }
 

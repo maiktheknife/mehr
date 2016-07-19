@@ -6,6 +6,7 @@ html, body {
 
 a {
     text-decoration: none;
+    font-family: avenir, sans-serif;
     color: #ffffff;
 
 	-webkit-transition: color 1s;
@@ -43,9 +44,7 @@ div.box div.cont {
 }
 
 .header {
-	font-size: 4em;
-	font-family: avenir, sans-serif;
-
+	font-size: 3.5em;
 	align-self: flex-start;
 }
 
@@ -64,9 +63,7 @@ div.box div.cont {
 }
 
 .mehr {
-	font-size: 3em;
-	font-family: avenir, sans-serif;
-
+	font-size: 3.5em;
 	align-self: flex-end;
 }
 
