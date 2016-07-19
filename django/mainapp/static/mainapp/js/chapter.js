@@ -18,18 +18,6 @@ function initPageAnimation() {
     $("body").fadeIn(2000);
 }
 
-/* Overlay */
-
-function openNav() {
-    document.getElementById("myNav").style.width = "100%";
-    pauseVideo();
-}
-
-function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-    playVideo();
-}
-
 function initPageNavigation() {
     $(document).keydown(function(e) {
          switch(e.which) {
@@ -106,8 +94,10 @@ function toggleVideoStatus(){
 
 function toggleVideoVolume(){
     if (video.muted) {
+        $("#video-volume").attr('src', volumeOffIconBlau);
         video.muted = false;
     } else {
+        $("#video-volume").attr('src', volumeOnIconBlau);
         video.muted = true;
     }
 }
@@ -181,13 +171,13 @@ function initVideoControls(){
             if (video.muted) {
                 $(this).attr('src', volumeOnIconBlau);
             } else {
-                $(this).attr('src', volumeOnIconBlau);
+                $(this).attr('src', volumeOffIconBlau);
             }
         }, function() { // mouse-exit
             if (video.muted) {
                 $(this).attr('src', volumeOnIconWeiß);
             } else {
-                $(this).attr('src', volumeOnIconWeiß);
+                $(this).attr('src', volumeOffIconWeiß);
             }
         });
 }

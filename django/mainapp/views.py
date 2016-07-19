@@ -56,12 +56,14 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 
 
 def additional_content_view(request, person_id, relative_chapter_id, relative_additional_content_id, chapter_time=0):
+	persons = Person.objects.all()
 	person = get_object_or_404(Person, pk=person_id)
 	chapter = list(person.chapter_set.all())[int(relative_chapter_id)]
 
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]
 
 	context = {
+		"people": persons,
 		"person": person,
 		"chapter": chapter,
 		"layer": additional_content,

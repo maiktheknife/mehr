@@ -23,6 +23,8 @@ a:hover, a:focus, a:active {
 }
 
 a.header {
+    cursor: pointer;
+
     font-size: 3.5em;
     align-self: flex-start;
 }
