@@ -124,11 +124,10 @@ class AdditionalContent(models.Model):
 	)
 
 	type = models.IntegerField(choices=type_choices)
-
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
-	# Videos
 	video = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path)
+	ambient_music = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path, default=None)
 
 	def get_relative_id(self):
 		return self.chapter.additionalcontent_set.filter(id__lt=self.id).count()

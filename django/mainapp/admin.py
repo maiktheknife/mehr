@@ -30,6 +30,7 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 		('Preview', {'fields': ['description', 'image', ]}),
 		('Type', {'fields': ['type']}),
 		('Video', {'fields': ['video']}),
+		('Ambient Music', {'fields': ['ambient_music']}),
 	]
 	inlines = [AdditionalContentElementsInline, AdditionalContentGalleryInline]
 

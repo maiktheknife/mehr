@@ -10,6 +10,14 @@
 
 {% block content %}
 <div class="container-fluid">
+    {% if layer.ambient_music %}
+    <audio autoplay>
+        <source src="{{ layer.ambient_music.url }}" type="audio/ogg">
+        <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+    {% endif %}
+
     {% for image in layer.galleryimage_set.all %}
         <img src="{% static image.image.url %}" /><br/><br/>
     {% endfor %}
