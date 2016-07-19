@@ -113,7 +113,7 @@ function toggleVideoVolume(){
 }
 
 function updateProgressBar() {
-    var percentage = (100.0 / video.duration) * video.currentTime;
+    var percentage = 100.0 * (videoGlobalStartTime + video.currentTime) / allChaptersDuration;
     progressbar.value = percentage;
 }
 

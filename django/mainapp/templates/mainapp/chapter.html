@@ -19,6 +19,8 @@
     var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
 
     var personLink = "{% url 'mainapp:personPage' person.id %}";
+    var videoGlobalStartTime = {{ chapter.start_time }};
+    var allChaptersDuration = {{ all_chapters_duration }};
     var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
     var additionalContentsCount = "{{ chapter.get_additional_count }}"
 

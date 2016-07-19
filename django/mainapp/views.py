@@ -49,7 +49,8 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 		"people": persons,
 		"person": person,
 		"chapter": chapter,
-		"current_time": chapter_time
+		"current_time": chapter_time,
+		"all_chapters_duration": sum(map(lambda x: x.duration, chapters))
 	}
 	return render(request, "mainapp/chapter.html", context)
 
