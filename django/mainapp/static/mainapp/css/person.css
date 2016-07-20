@@ -31,10 +31,6 @@ div {
     justify-content: center;
 }
 
-div.box {
-    width: 80%;
-}
-
 div.box div {
     flex-direction: row;
 }
@@ -65,37 +61,4 @@ div.box div.cont {
 .mehr {
 	font-size: 3.5em;
 	align-self: flex-end;
-}
-
-/* Navigation */
-
-.nav {
-	width: 10%;
-	height: 100%;
-	overflow: hidden;
-	/*cursor: pointer;*/
-
-	display: flex;
-	justify-content: center; /* align horizontal */
-	align-items: center; /* align vertical */
-
-	color: #ffffff;
-	opacity : 0.66;
-}
-
-.nav img {
-    width: 80px;
-    height: 80px;
-}
-
-.nav:hover {
-	opacity : 1.0;
-}
-
-.nav.nav-left {
-	float: left;
-}
-
-.nav.nav-right {
-	float: right;
 }

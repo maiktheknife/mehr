@@ -8,6 +8,11 @@
     {# Load jquery and custom javascript #}
     <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
     <script src='{% static "mainapp/js/base.js" %}'></script>
+    <script>
+        // nav mouse cursor
+        var arrowLeft = "{% static "mainapp/images/small/pfeil_links_weiß.png" %}";
+        var arrowRight = "{% static "mainapp/images/small/pfeil_rechts_weiß.png" %}";
+    </script>
     {% block js %} {% endblock %}
     {# Load bootstrap3 #}
     {% load bootstrap3 %}
@@ -37,7 +42,7 @@
 </head>
 <body id="page" oncontextmenu="return false">
 <div id="myNav" class="overlay">
-    <a href="#" class="closebtn" onclick="closeNav()">×</a>
+    <a href="#" class="closebtn">×</a>
     <ul class="overlay-content text-center">
         {% for p in people %}
         <li><a href="#" class="cover-content">{{ p.name }}</a></li>

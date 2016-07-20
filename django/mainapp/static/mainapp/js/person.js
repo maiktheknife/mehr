@@ -1,28 +1,8 @@
 
 function main(){
-    initPageAnimation();
     initPageNavigation();
     initMouseMovementAwareness();
     initBackGroundImageRotator();
-}
-
-function initPageAnimation(){
-    console.log("initPageAnimation");
-    $("body").css("display", "none");
-    $("body").fadeIn(2000);
-
-/*
-    $('.box .person-content').hover(
-      function() {
-        $('.person-name').fadeToggle();
-        $('.person-description').fadeToggle();
-      },
-      function() {
-        $('.person-name').fadeToggle();
-        $('.person-description').fadeToggle();
-      });
-*/
-
 }
 
 function initPageNavigation() {
@@ -49,14 +29,17 @@ function initPageNavigation() {
             }
     });
 
-    $('.nav-left').click(function(){
-        linkLocation = previousPersonLink;
-        $("body").fadeOut(1000, redirectPage);
-    });
-
-    $('.nav-right').click(function(){
-        linkLocation = nextPersonLink;
-        $("body").fadeOut(1000, redirectPage);
+    $('body').click(function(){
+        if (!isOverLayVisible()) {
+            var maxX = $(window).width();
+            if (event.pageX < 1/3*maxX) {
+                linkLocation = previousPersonLink;
+                $("body").fadeOut(1000, redirectPage);
+            } else if (event.pageX > 2/3*maxX) {
+                linkLocation = nextPersonLink;
+                $("body").fadeOut(1000, redirectPage);
+            }
+        }
     });
 
     function redirectPage() {
@@ -91,21 +74,17 @@ function initBackGroundImageRotator(){
 }
 
 function initMouseMovementAwareness(){
-    var timeout = null;
     $(document).on('mousemove', function() {
-        if (timeout !== null) {
-            $('.box').css('width', '80%');
-            //$('person-description').css('padding', '15%');
-            $('.nav').fadeIn();
-            clearTimeout(timeout);
+        if (!isOverLayVisible()) {
+            var maxX = $(window).width();
+            if (event.pageX < 1/3*maxX) {
+                $('body').css('cursor', "url("+ arrowLeft + "), pointer");
+            }else if (event.pageX > 2/3*maxX) {
+                $('body').css('cursor', "url("+ arrowRight + "), pointer");
+            }else {
+                $('body').css('cursor', "default");
+            }
         }
-
-        timeout = setTimeout(function() {
-            $('.nav').fadeOut(function(){
-                $('.box').css('width', '100%');
-                //$('.person-description').css('padding', '0 26%');
-            });
-        }, 2000);
     });
 }
 

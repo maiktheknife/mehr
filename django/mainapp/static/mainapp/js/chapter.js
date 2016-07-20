@@ -5,17 +5,12 @@ var progressbar = null;
 function main() {
     video = $("#chapterVideo").get(0);
     progressbar = $("#progressbar").get(0);
-    initPageAnimation();
     initPageNavigation();
+    initMouseMovementAwareness();
     initTimeline();
     initVideoPlayer();
     initVideoControls();
     initLayerControl();
-}
-
-function initPageAnimation() {
-    $("body").css("display", "none");
-    $("body").fadeIn(2000);
 }
 
 function initPageNavigation() {
@@ -54,9 +49,38 @@ function initPageNavigation() {
             }
     });
 
+    $('body').click(function(){
+        if (!isOverLayVisible()) {
+            console.log("click");
+            var maxX = $(window).width();
+            if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {
+                linkLocation = previousChapterLink;
+                $("body").fadeOut(1000, redirectPage);
+            } else if (event.pageX > 2/3*maxX && typeof nextChapterLink != 'undefined') {
+                linkLocation = nextChapterLink;
+                $("body").fadeOut(1000, redirectPage);
+            }
+        }
+    });
+
     function redirectPage() {
         window.location = linkLocation;
     }
+}
+
+function initMouseMovementAwareness(){
+    $(document).on('mousemove', function() {
+        if (!isOverLayVisible()) {
+            var maxX = $(window).width();
+            if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {
+                $('body').css('cursor', "url("+ arrowLeft + "), pointer");
+            }else if (event.pageX > 2/3*maxX && typeof nextChapterLink != 'undefined') {
+                $('body').css('cursor', "url("+ arrowRight + "), pointer");
+            }else {
+                $('body').css('cursor', "default");
+            }
+        }
+    });
 }
 
 /* Timeline */
@@ -68,6 +92,14 @@ function initTimeline(){
         }, function() { // mouse-exit
            hideChapterOverview();
     });
+}
+
+function showChapterOverview() {
+    $('div.chapter-overview').show();
+}
+
+function hideChapterOverview() {
+    $('div.chapter-overview').hide(1000);
 }
 
 /* Video */
@@ -199,14 +231,6 @@ function hideLayers(){
         $('#layer-container').hide();
         playVideo()
     });
-}
-
-function showChapterOverview() {
-    $('div.chapter-overview').show();
-}
-
-function hideChapterOverview() {
-    $('div.chapter-overview').hide(1000);
 }
 
 function initLayerControl() {

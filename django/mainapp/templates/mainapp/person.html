@@ -29,6 +29,7 @@
     {% endwith %}
     var chapterLink = "{% url 'mainapp:chapterPage' person.id 0 %}";
     var homeLink = "{% url 'mainapp:index' %}";
+
     </script>
     <script src='{% static "mainapp/js/person.js" %}'></script>
 {% endblock %}
@@ -39,26 +40,11 @@
     {% else %}
     <link href='{% static "mainapp/css/util_image_fullscreen.css" %}' rel="stylesheet" type="text/css" />
     {% endif %}
-    <style type="text/css">
-    .nav.nav-left {
-        cursor: url({% static "mainapp/images/small/pfeil_links_weiß.png" %}), pointer;
-    }
-
-    .nav.nav-right {
-	    cursor: url('{% static "mainapp/images/small/pfeil_rechts_weiß.png" %}'), pointer;
-    }
-    </style>
 {% endblock %}
 {% block content %}
-    <div class="nav nav-left">
-        <img src='{% static "mainapp/images/pfeil_links_weiß.png" %}' />
-    </div>
-    <div class="nav nav-right">
-        <img src='{% static "mainapp/images/pfeil_rechts_weiß.png" %}' />
-    </div>
     <div class="box">
         <div>
-            <a class="header" href="#" onclick="openNav()">...</a>
+            <a class="header" href="#">...</a>
         </div>
         <div class="cont">
             <a class="person-name" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
