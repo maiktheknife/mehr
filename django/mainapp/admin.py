@@ -1,18 +1,11 @@
 from django.contrib import admin
 from .models import Person, Chapter, AdditionalContent, AdditionalContentElement, Image, GalleryImage
 
+# AdditionalContent
 
 class AdditionalContentElementsInline(admin.StackedInline):
-	fieldsets = [
-		('Type', {'fields': ['type']}),
-		('Video', {'fields': ['video']}),
-		('Image', {'fields': ['image']}),
-		('Textblock', {'fields': ['text']}),
-		('Video with text', {'fields': ('video', 'text')}),
-		('Image with text', {'fields': ('image', 'text')}),
-	]
 	model = AdditionalContentElement
-	extra = 1
+	extra = 3
 
 
 class AdditionalContentGalleryInline(admin.StackedInline):
@@ -20,10 +13,9 @@ class AdditionalContentGalleryInline(admin.StackedInline):
 	extra = 3
 
 
-# AdditionalContent
 class AdditionalContentAdmin(admin.ModelAdmin):
 	list_filter = ['chapter']
-	list_display = ['chapter', 'name', 'index', 'type']
+	list_display = ['name', 'chapter', 'index', 'type']
 	ordering = ['chapter', 'index']
 	fieldsets = [
 		(None, {'fields': ['index', 'name', 'chapter', ]}),
@@ -84,11 +76,6 @@ class PersonAdmin(admin.ModelAdmin):
 		js = ("mainapp/js/libs/jquery.js", "admin/js/person_admin.js", )
 
 
-
-# Register your models here.
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Chapter, ChapterAdmin)
 admin.site.register(AdditionalContent, AdditionalContentAdmin)
-
-# Maybe
-# https://github.com/s-block/django-nested-inline
