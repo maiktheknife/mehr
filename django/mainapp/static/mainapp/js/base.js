@@ -23,12 +23,12 @@ function isOverLayVisible(){
 }
 
 function openNav(e) {
-    document.getElementById("myNav").style.width = "100%";
+    document.getElementById("myNav").style.height = "100%";
     e.stopPropagation();
 }
 
 function closeNav(e) {
-    document.getElementById("myNav").style.width = "0%";
+    document.getElementById("myNav").style.height = "0%";
     $('body').css('cursor', "default");
     e.stopPropagation();
 }

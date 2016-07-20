@@ -8,8 +8,8 @@ html, body {
 /* Overlay */
 
 .overlay {
-    height: 100%;
-    width: 0%;
+    height: 0%;
+    width: 100%;
     position: fixed;
     z-index: 999999;
     top: 0;
@@ -38,7 +38,7 @@ html, body {
     list-style: none;
     position: relative;
     top: 30%;
-    right: 11%;
+    right: 20%;
     flex-direction: row;
     display: inherit;
 }
@@ -77,5 +77,10 @@ a.cover-content {
 }
 
 a.cover-menu {
-    font-size:45px;
+    font-size:25px;
+}
+
+.menu-item {
+    margin-left: 15%;
+    margin-right: 15%;
 }
