@@ -1,13 +1,15 @@
+* { box-sizing: border-box; }
+
 html, body {
 	width: 100%;
 	height: 100%;
-	color: #ffffff;
+	color: blue;
 }
-
+/*
 a {
     text-decoration: none;
     font-family: avenir, sans-serif;
-    color: #ffffff;
+   	color: blue;
 
 	-webkit-transition: color 1s;
     -moz-background-size : color 1s;
@@ -44,19 +46,23 @@ div.box div.cont {
 	align-self: flex-start;
 }
 
-.person-name {
-    font-family: caslon, sans-serif;
-	font-size: 7em;
-    text-align: center;
-    align-self: center;
+.content {
+
 }
 
-.person-description {
-    font-family: caslon, sans-serif;
-    font-size: 3em;
-    margin: 0 15%;
-    text-align: center;
-    align-self: center;
+.content .gallery {
+    width: 80%;
+    height: 80%;
+}
+*/
+
+.carousel {
+  background: #EEE;
+}
+
+.carousel img {
+  display: block;
+  height: 400px;
 }
 
 .mehr {

@@ -1,4 +1,4 @@
-{% extends "mainapp/base.html" %}
+{% extends "mainapp/base/base_layer.html" %}
 {% load staticfiles %}
 {% block title %}
     {{ layer.name }} - mehr.
@@ -21,10 +21,10 @@
 {% endblock %}
 {% block css %}
     <link href='{% static "mainapp/css/util_video_fullscreen.css" %}' rel="stylesheet" type="text/css" />
-    <link href='{% static "mainapp/css/layer.css" %}' rel="stylesheet" type="text/css" />
+    <link href='{% static "mainapp/css/layer_video.css" %}' rel="stylesheet" type="text/css" />
     <style type="text/css" >
     body {
-        cursor: url("{% static 'mainapp/images/small/schließen_blau.png' %}"), crosshair;
+        cursor: url("{% static 'mainapp/images/x.png' %}"), crosshair;
     }
     </style>
 {% endblock %}
@@ -48,6 +48,6 @@
 </video>
 <div class="video-controls">
     <input id="video-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
-    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_an_blau.png' %}" />
+    <input id="video-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
 </div>
 {% endblock %}

@@ -5,27 +5,22 @@ var layerProgressbar = null;
 
 function backToChapter(link) {
     document.location.href = link;
-    //window.history.back();
 }
 
 function main(){
-    $('div').click(function(event) {
-        backToChapter(chapterLink);
-    });
-
     video = $("#layerVideo").get(0);
     chapterProgressbar = $("#chapterProgressbar").get(0);
     layerProgressbar = $("#layerProgressbar").get(0);
 
-    initPageAnimation();
     initVideoPlayer();
     initVideoControls();
+
+    $('div').click(function(event) {
+        backToChapter(chapterLink);
+    });
 }
 
-function initPageAnimation(){
-    $("body").css("display", "none");
-    $("body").fadeIn(2000);
-}
+/* Progress */
 
 function updateProgressBar() {
     var percentage = (100.0 / video.duration) * video.currentTime;
@@ -50,18 +45,20 @@ function pauseVideo(){
 
 function toggleVideoStatus(){
     if (video.paused) {
-        $("#video-toggle").attr('src', pauseIconBlau);
+        $("#video-toggle").attr('src', pauseIconWeiß);
         playVideo();
     } else {
-        $("#video-toggle").attr('src', playIconBlau);
+        $("#video-toggle").attr('src', playIconWeiß);
         pauseVideo();
     }
 }
 
 function toggleVideoVolume(){
     if (video.muted) {
+        $("#video-volume").attr('src', volumeOffIconWeiß);
         video.muted = false;
     } else {
+        $("#video-volume").attr('src', volumeOnIconWeiß);
         video.muted = true;
     }
 }
@@ -75,12 +72,13 @@ function initVideoPlayer(){
 function initVideoControls(){
     $("#video-toggle").click(function(event){
         toggleVideoStatus();
+        event.stopPropagation();
     });
 
     $('#video-toggle').hover(
     function(){ // mouse-enter
         if (video.paused) {
-            $(this).attr('src', playIconBlau);
+            $(this).attr('src', playIconWeiß);
         } else {
             $(this).attr('src', pauseIconWeiß);
         }
@@ -94,20 +92,21 @@ function initVideoControls(){
 
     $("#video-volume").click(function(event){
         toggleVideoVolume();
+        event.stopPropagation();
     });
 
     $('#video-volume').hover(
         function(){ // mouse-enter
             if (video.muted) {
-                $(this).attr('src', volumeOnIconBlau);
+                $(this).attr('src', volumeOnIconWeiß);
             } else {
-                $(this).attr('src', volumeOnIconBlau);
+                $(this).attr('src', volumeOffIconWeiß);
             }
         }, function() { // mouse-exit
             if (video.muted) {
-                $(this).attr('src', volumeOnIconWeiß);
+                $(this).attr('src', volumeOnIconBlau);
             } else {
-                $(this).attr('src', volumeOnIconWeiß);
+                $(this).attr('src', volumeOffIconBlau);
             }
         });
 }

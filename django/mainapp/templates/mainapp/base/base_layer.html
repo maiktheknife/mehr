@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {# Load jquery and custom javascript #}
+    <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
+    <script src='{% static "mainapp/js/base.js" %}'></script>
+    <script>
+        // nav mouse cursor
+        var arrowLeft = "{% static "mainapp/images/small/pfeil_links_weiß.png" %}";
+        var arrowRight = "{% static "mainapp/images/small/pfeil_rechts_weiß.png" %}";
+    </script>
+    {% block js %} {% endblock %}
+    {# Load bootstrap3 #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {# Load fontawesome #}
+    {% load fontawesome %}
+    {% fontawesome_stylesheet %}
+    {# Load custom css #}
+    <style rel="stylesheet" type="text/css">
+        @font-face {
+            font-family: avenir;
+            src: url("{% static 'mainapp/font/AvenirNext.ttc' %}");
+        }
+
+        @font-face {
+            font-family: caslon;
+            src: url("{% static 'mainapp/font/Adobe-Caslon-Pro_2006.ttf' %}");
+        }
+
+        body {
+            font-family: caslon, sans-serif !important;
+        }
+    </style>
+    <link href='{% static "mainapp/css/base.css" %}' rel="stylesheet" type="text/css"/>
+    {% block css %} {% endblock %}
+</head>
+<body id="page" oncontextmenu="return false">
+<div id="myNav" class="overlay">
+    <a href="#" class="closebtn">×</a>
+    <ul class="overlay-content text-center">
+        {% for p in people %}
+        <li><a href="#" class="cover-content">{{ p.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <ul class="overlay-menu text-center">
+        <li class="menu-item"><a href="#" class="cover-menu">Home</a></li>
+        <li class="menu-item"><a href="#" class="cover-menu">About</a></li>
+        <li class="menu-item"><a href="#" class="cover-menu">Impressum</a></li>
+    </ul>
+</div>
+{% block content %} {% endblock %}
+</body>
+</html>

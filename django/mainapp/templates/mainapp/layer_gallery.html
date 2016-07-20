@@ -1,26 +1,42 @@
-{% extends "mainapp/base.html" %}
-
+{% extends "mainapp/base/base_layer.html" %}
 {% load staticfiles %}
 {% block title %}
-    {{ person.name }} - awesome video magazine
+    {{ person.name }} - mehr.
+{% endblock %}
+{% block css %}
+<link href='{% static "mainapp/css/flickity.min.css" %}' rel="stylesheet" type="text/css" />
+<link href='{% static "mainapp/css/layer_gallery.css" %}' rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block js %}
-
+<script src='{% static "mainapp/js/flickity.pkgd.min.js" %}'></script>
 {% endblock %}
-
 {% block content %}
-<div class="container-fluid">
-    {% if layer.ambient_music %}
-    <audio autoplay>
-        <source src="{{ layer.ambient_music.url }}" type="audio/ogg">
-        <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
-    {% endif %}
-
-    {% for image in layer.galleryimage_set.all %}
-        <img src="{% static image.image.url %}" /><br/><br/>
-    {% endfor %}
-</div>
-
+{% if layer.ambient_music %}
+<audio autoplay>
+    <source src="{{ layer.ambient_music.url }}" type="audio/ogg">
+    <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
+    Your browser does not support the audio tag.
+</audio>
+{% endif %}
+<!--<div class="box">-->
+    <!--<div>-->
+        <!--<a class="header" href="#">...</a>-->
+    <!--</div>-->
+    <!--<div class="content">-->
+        <div class="carousel" data-flickity='{"wrapAround": false, draggable: true, "imagesLoaded": true, "percentPosition": false }' >
+        {% for image in layer.galleryimage_set.all %}
+            <img src="{% static image.image.url %}"/>
+        {% endfor %}
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree" />
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/submerged.jpg" alt="submerged" />
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/look-out.jpg" alt="look-out" />
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade" />
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle" />
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/cat-nose.jpg" alt="cat nose" />
+        </div>
+    <!--</div>-->
+    <!--<div>-->
+        <!--<a class="mehr" href="#">mehr.</a>-->
+    <!--</div>-->
+<!--</div>-->
 {% endblock %}
