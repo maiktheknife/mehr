@@ -32,8 +32,12 @@ function initPageNavigation() {
                 }
                 break;
             case 38: // up
-                linkLocation = personLink;
-                $("body").fadeOut(1000, redirectPage);
+                if (isLayerVisible) {
+                    hideLayers();
+                } else {
+                    linkLocation = personLink;
+                    $("body").fadeOut(1000, redirectPage);
+                }
                 break;
             case 39: // right
                 if (typeof nextChapterLink !== 'undefined') {
@@ -215,7 +219,7 @@ function initVideoControls(){
 
 /* Layers */
 
-function showLayers(e){
+function showLayers(){
     pauseVideo();
     $('#layer-container').show();
     $('html, body').animate({
@@ -237,7 +241,7 @@ function initLayerControl() {
 		if (isLayerVisible) {
 			hideLayers()
 		} else {
-			showLayers(this);
+			showLayers();
 		}
 		isLayerVisible = !isLayerVisible;
 	});

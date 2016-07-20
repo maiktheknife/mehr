@@ -45,11 +45,11 @@
     <a href="#" class="closebtn">×</a>
     <ul class="overlay-content text-center">
         {% for p in people %}
-        <li><a href="#" class="cover-content">{{ p.name }}</a></li>
+        <li><a href="{% url 'mainapp:personPage' p.id %}" class="cover-content">{{ p.name }}</a></li>
         {% endfor %}
     </ul>
     <ul class="overlay-menu text-center">
-        <li class="menu-item"><a href="#" class="cover-menu">Home</a></li>
+        <li class="menu-item"><a href="{% url 'mainapp:index' %}" class="cover-menu">Home</a></li>
         <li class="menu-item"><a href="#" class="cover-menu">About</a></li>
         <li class="menu-item"><a href="#" class="cover-menu">Impressum</a></li>
     </ul>
