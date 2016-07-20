@@ -1,5 +1,11 @@
 from django.contrib import admin
 from .models import Person, Chapter, AdditionalContent, AdditionalContentElement, Image, GalleryImage
+from .models import SocialMediaPlatform, SocialMediaLink
+
+
+class AdditionalContentElementSocialMediaInline(admin.TabularInline):
+	model = SocialMediaLink
+	extra = 1
 
 
 class AdditionalContentElementsInline(admin.StackedInline):
@@ -89,6 +95,8 @@ class PersonAdmin(admin.ModelAdmin):
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Chapter, ChapterAdmin)
 admin.site.register(AdditionalContent, AdditionalContentAdmin)
+admin.site.register(SocialMediaPlatform)
+admin.site.register(SocialMediaLink)
 
 # Maybe
 # https://github.com/s-block/django-nested-inline

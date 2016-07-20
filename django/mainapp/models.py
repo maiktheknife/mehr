@@ -3,6 +3,14 @@ from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
 
 
+class SocialMediaPlatform(models.Model):
+	icon = models.ImageField(upload_to=icons_path)
+	url = models.CharField(max_length=255, unique=True)
+
+	def __str__(self):
+		return self.url
+
+
 class Person(models.Model):
 	PREVIEW_TYPE_VIDEO = 0
 	PREVIEW_TYPE_IMAGES = 1
@@ -104,7 +112,7 @@ class Chapter(models.Model):
 		return self.additionalcontent_set.count()
 
 	def __str__(self):
-		return "Chapter {} of {}; start: {}; duration: {}".format(self.index, self.person, self.start_time, self.duration)
+		return "{}; Chapter {}: {}".format(self.person, 0, self.name)
 
 	get_additional_count.short_description = 'Ebenen'
 
@@ -133,7 +141,8 @@ class AdditionalContent(models.Model):
 		return self.chapter.additionalcontent_set.filter(id__lt=self.id).count()
 
 	def __str__(self):
-		return "Additional Content {} for {}".format(self.id, self.chapter)
+		type_string = self.type_choices[int(self.type)][1]
+		return "{}; Layer {} ({})".format(self.chapter, self.get_relative_id(), type_string)
 
 
 class AdditionalContentElement(models.Model):
@@ -155,6 +164,16 @@ class AdditionalContentElement(models.Model):
 	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
+
+	def __str__(self):
+		type_string = self.type_choices[int(self.type)][1]
+		return "{}; Element {} ({})".format(self.additional_content, self.id, type_string)
+
+
+class SocialMediaLink(models.Model):
+	platform = models.ForeignKey(SocialMediaPlatform)
+	additional_content_element = models.ForeignKey(AdditionalContentElement, on_delete=models.CASCADE)
+	link = models.CharField(max_length=255)
 
 
 class Image(models.Model):

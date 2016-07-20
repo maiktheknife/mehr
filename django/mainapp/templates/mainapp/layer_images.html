@@ -51,6 +51,14 @@
                 <img src="{% static additional_content_element.image.url %}" /><br/>
                 {{ additional_content_element.text }}
             {% endif %}
+
+            {% for social_media_link in additional_content_element.socialmedialink_set.all %}
+                <br/>
+                <a href="{{ social_media_link.link }}">
+                    <img src="{% static social_media_link.platform.icon.url %}">
+                </a>
+            {% endfor %}
+
             <br/><br/>
         {% endfor %}
     </div>
