@@ -128,7 +128,9 @@ class AdditionalContent(models.Model):
 	image = models.ImageField(upload_to=user_chapter_layer_path)
 
 	type_choices = (
-		(TYPE_VIDEO, "Video"), (TYPE_MISC, "Stuff"), (TYPE_GALLERY, "Gallery")
+		(TYPE_VIDEO, "Video"),  # eingabe des video attr
+		(TYPE_MISC, "Stuff"),  # eingabe des ambient_music attr und AdditionalContentElementsInline
+		(TYPE_GALLERY, "Gallery")  # eingabe der AdditionalContentGalleryInline
 	)
 
 	type = models.IntegerField(choices=type_choices)
