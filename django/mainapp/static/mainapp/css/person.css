@@ -45,14 +45,15 @@ div.box div.cont {
 }
 
 .person-name {
+    font-family: caslon, sans-serif;
 	font-size: 7em;
     text-align: center;
     align-self: center;
 }
 
 .person-description {
+    font-family: caslon, sans-serif;
     font-size: 3em;
-    /* display: none; */
     padding: 0 15%;
     text-align: center;
     align-self: center;
