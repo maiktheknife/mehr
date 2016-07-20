@@ -146,7 +146,6 @@ function showAdditionalContentSignal() {
 
     function setMehrColor(when, color){
         setTimeout(function(){
-            // console.log("setColor at " + when + " to " + color);
             $(".mehr").css("color", color);
         }, when);
     }

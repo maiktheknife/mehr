@@ -4,7 +4,6 @@ function main(){
 }
 
 function initPageAnimation(){
-    console.log("initPageAnimation");
     $("body").css("display", "none");
     $("body").fadeIn(2000);
 }
@@ -19,7 +18,9 @@ function initMenu(){
 }
 
 function isOverLayVisible(){
-    return $('#myNav').width() != 0;
+    var h = $('#myNav').height();
+    // console.log("isOverLayVisible: " + h);
+    return h != 0;
 }
 
 function openNav(e) {

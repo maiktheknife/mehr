@@ -6,18 +6,15 @@ function main(){
 }
 
 function initPageAnimation(){
-    $("body").css("display", "none");
-    $("body").fadeIn(2000);
-
     $("a").click(function(event){
         event.preventDefault();
         linkLocation = this.href;
         $("body").fadeOut(1000, redirectPage);
     });
+}
 
-    function redirectPage() {
-        window.location = linkLocation;
-    }
+function redirectPage() {
+    window.location = linkLocation;
 }
 
 function initPageNavigation() {
@@ -31,10 +28,6 @@ function initPageNavigation() {
                 break;
             }
     });
-
-    function redirectPage() {
-        window.location = linkLocation;
-    }
 }
 
 function initBackGroundImageRotator(){
