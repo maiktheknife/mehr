@@ -3,6 +3,7 @@ from django.conf import settings
 from os.path import join
 
 from .models import Person, AdditionalContent
+from .utils import chapterutils
 
 
 def index(request):
@@ -50,7 +51,7 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 		"person": person,
 		"chapter": chapter,
 		"current_time": chapter_time,
-		"all_chapters_duration": sum(map(lambda x: x.duration, chapters))
+		"all_chapters_duration": chapterutils.get_all_chapters_duration(chapters)
 	}
 	return render(request, "mainapp/chapter.html", context)
 
@@ -58,7 +59,8 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 def additional_content_view(request, person_id, relative_chapter_id, relative_additional_content_id, chapter_time=0):
 	persons = Person.objects.all()
 	person = get_object_or_404(Person, pk=person_id)
-	chapter = list(person.chapter_set.all())[int(relative_chapter_id)]
+	chapters = list(person.chapter_set.all())
+	chapter = chapters[int(relative_chapter_id)]
 
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]
 
@@ -67,7 +69,8 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		"person": person,
 		"chapter": chapter,
 		"layer": additional_content,
-		"current_time": chapter_time
+		"current_time": chapter_time,
+		"chapter_progress": chapterutils.get_global_chapter_progress(chapter, chapters, int(chapter_time)),
 	}
 
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:

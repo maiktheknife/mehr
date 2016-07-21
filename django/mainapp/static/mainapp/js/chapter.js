@@ -248,7 +248,7 @@ function initLayerControl() {
 
 	$('.layer').click(function(event){
         var layerLink = $(this).attr("data-layerlink");
-        var completeLink = layerLink + Math.floor(progressbar.value);
+        var completeLink = layerLink + Math.floor(video.currentTime);
         window.location.href = completeLink;
     });
 
