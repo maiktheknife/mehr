@@ -17,6 +17,23 @@
         var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
         var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
         var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
+
+        {% with next_layer=layer.get_next %}
+        {% if next_layer %}
+            var nextLayerLink = "{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id next_layer.get_relative_id current_time %}";
+            function videoEndedHandler(e) {
+                document.location.href = nextLayerLink;
+            }
+        {% else %}
+            function videoEndedHandler(e) {
+                document.location.href = chapterLink;
+            }
+        {% endif %}
+        {% endwith %}
+
+        window.onload = function() {
+            document.getElementById('layerVideo').addEventListener('ended', videoEndedHandler, false);
+        }
     </script>
 {% endblock %}
 {% block css %}

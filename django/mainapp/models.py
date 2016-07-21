@@ -142,6 +142,18 @@ class AdditionalContent(models.Model):
 	def get_relative_id(self):
 		return self.chapter.additionalcontent_set.filter(id__lt=self.id).count()
 
+	def get_next(self):
+		next_layers = self.chapter.additionalcontent_set.filter(id__gt=self.id)
+		if next_layers:
+			return next_layers.first()
+		return False
+
+	def get_previous(self):
+		previous_layers = self.chapter.additionalcontent_set.filter(id__lt=self.id).order_by('-id')
+		if previous_layers:
+			return previous_layers.first()
+		return False
+
 	def __str__(self):
 		type_string = self.type_choices[int(self.type)][1]
 		return "{}; Layer {} ({})".format(self.chapter, self.get_relative_id(), type_string)
