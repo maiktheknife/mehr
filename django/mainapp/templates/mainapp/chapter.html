@@ -4,7 +4,6 @@
     {{ chapter.name }} - mehr.
 {% endblock %}
 {% block js %}
-
     <script type='text/javascript'>
     // play-pause
     var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
@@ -61,51 +60,15 @@
 {% block content %}
 <div class="timeline">
     <progress id="progressbar" value="0" max="100"></progress>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 1</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 2</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 3</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 4</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 5</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 6</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 7</a>
-</div>
-
-<div class="transbox">
-    <a href="#">Chapter 8</a>
-</div>
-
-
-
-
-<div class="chapter-overview">
-    {% for c in person.chapter_set.all %}
-    {% if c.get_relative_id == chapter.get_relative_id %}
-    <div class="active">{{ c.name }};</div>
-    {% else %}
-    <div class="inactive">{{ c.name }};</div>
-    {% endif %}
-    {% endfor %}
+    <div class="chapter-overview">
+        {% for c in person.chapter_set.all %}
+        {% if c.get_relative_id == chapter.get_relative_id %}
+            <div class="transbox active"><a href="#">{{ c.name }}</a></div>
+        {% else %}
+            <div class="transbox inactive"><a href="#">{{ c.name }}</a></div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
 <div class="box">
     <div>

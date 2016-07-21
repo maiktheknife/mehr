@@ -7,7 +7,6 @@ function main() {
     progressbar = $("#progressbar").get(0);
     initPageNavigation();
     initMouseMovementAwareness();
-    initTimeline();
     initVideoPlayer();
     initVideoControls();
     initLayerControl();
@@ -88,43 +87,24 @@ function initMouseMovementAwareness(){
     });
 }
 
-/* Timeline */
-
-function initTimeline(){
-    $('.timeline').hover(
-        function() { // mouse-enter
-            showChapterOverview();
-        }, function() { // mouse-exit
-           hideChapterOverview();
-    });
-}
-
-function showChapterOverview() {
-    $('div.chapter-overview').show();
-}
-
-function hideChapterOverview() {
-    $('div.chapter-overview').hide(1000);
-}
-
 /* Video */
 
 function playVideo(){
     $("#chapterVideo").removeClass("stopfade");
-    $("#video-toggle").attr('src', pauseIconBlau);
     video.play();
 }
 
 function pauseVideo(){
     $("#chapterVideo").addClass("stopfade");
-    $("#video-toggle").attr('src', playIconBlau);
     video.pause();
 }
 
 function toggleVideoStatus(){
     if (video.paused) {
+        $("#video-toggle").attr('src', pauseIconBlau);
         playVideo();
     } else {
+        $("#video-toggle").attr('src', playIconBlau);
         pauseVideo();
     }
 }

@@ -19,13 +19,13 @@ function initMenu(){
 
 function isOverLayVisible(){
     var h = $('#myNav').height();
-    // console.log("isOverLayVisible: " + h);
     return h != 0;
 }
 
-function switchlayer(Layer_Name)
-{
-    {document.getElementById(Layer_Name).style.display= (document.getElementById(Layer_Name).style.display=='block') ? 'none' : 'block';}
+function switchPerson(personName) {
+    $('.sub-elements').css('display', 'none');
+    var x = document.getElementById(personName);
+    x.style.display = (x.style.display=='block') ? 'none' : 'block';
 }
 
 function openNav(e) {
