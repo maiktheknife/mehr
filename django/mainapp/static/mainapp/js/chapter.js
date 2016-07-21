@@ -47,6 +47,7 @@ function initPageNavigation() {
                 break;
             case 40: // down
                 showLayers();
+                pauseVideo();
                 break;
             default:
                 break;
@@ -110,20 +111,20 @@ function hideChapterOverview() {
 
 function playVideo(){
     $("#chapterVideo").removeClass("stopfade");
+    $("#video-toggle").attr('src', pauseIconBlau);
     video.play();
 }
 
 function pauseVideo(){
     $("#chapterVideo").addClass("stopfade");
+    $("#video-toggle").attr('src', playIconBlau);
     video.pause();
 }
 
 function toggleVideoStatus(){
     if (video.paused) {
-        $("#video-toggle").attr('src', pauseIconBlau);
         playVideo();
     } else {
-        $("#video-toggle").attr('src', playIconBlau);
         pauseVideo();
     }
 }
@@ -180,6 +181,7 @@ function initVideoPlayer(){
 function initVideoControls(){
     $("#video-toggle").click(function(event){
         toggleVideoStatus();
+        event.stopPropagation();
     });
 
     $('#video-toggle').hover(
@@ -199,6 +201,7 @@ function initVideoControls(){
 
     $("#video-volume").click(function(event){
         toggleVideoVolume();
+        event.stopPropagation();
     });
 
     $('#video-volume').hover(
