@@ -34,6 +34,10 @@ html, body {
     flex-direction: column;
 }
 
+.sub-elements {
+    list-style: none;
+}
+
 .overlay-menu {
     list-style: none;
     position: relative;
