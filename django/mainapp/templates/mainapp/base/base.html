@@ -46,9 +46,12 @@
 
     <ul class="overlay-content text-center">
         {% for p in people %}
-        <li><a onclick="switchlayer('CHAPTERNAME');return false;" href="{% url 'mainapp:personPage' p.id %}" class="cover-content">{{ p.name }}</a></li>
-        <ul class="sub-elements" id="CHAPTERNAME" style="display:none;">
-            <li>ELEMENTE</li>
+        <li><a onclick="switchPerson('{{p.id}}'); return false;" class="cover-content" href="#">{{ p.name }}</a></li>
+        <ul class="sub-elements" id="{{p.id}}" style="display:none;">
+            <li><a href="{% url 'mainapp:personPage' p.id %}">Übersicht</a></li>
+            {% for c in p.chapter_set.all %}
+                <li><a href="{% url 'mainapp:chapterPage' p.id c.get_relative_id %}">{{ c.name }}</a></li>
+            {% endfor %}
         </ul>
         {% endfor %}
     </ul>
