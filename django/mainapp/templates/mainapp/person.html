@@ -1,9 +1,5 @@
 {% extends "mainapp/base/base.html" %}
 {% load staticfiles %}
-{# Load bootstrap3 #}
-{% load bootstrap3 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 {% block title %}
     {{ person.name }} - mehr.
 {% endblock %}
@@ -28,7 +24,6 @@
     {% endwith %}
     var chapterLink = "{% url 'mainapp:chapterPage' person.id 0 %}";
     var homeLink = "{% url 'mainapp:index' %}";
-
     </script>
     <script src='{% static "mainapp/js/person.js" %}'></script>
 {% endblock %}
@@ -45,15 +40,18 @@
         <div>
             <a class="header" href="#">...</a>
         </div>
-        <div class="cont">
-            <a class="person-name" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.name}}</a>
-            <a class="person-description" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{person.preview_text}}</a>
+        <div class="content">
+            <div class="child1">
+                <p class="title">{{ person.name }}</p>
+            </div>
+            <div class="child2">
+                <a class="description" href="{% url 'mainapp:chapterPage' person.id 0 %}">{{ person.preview_text }}</a>
+            </div>
         </div>
         <div>
             <a class="mehr" href="{% url 'mainapp:chapterPage' person.id 0 %}">mehr.</a>
         </div>
     </div>
-
     {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
     <video poster='{% static "mainapp/images/yeah.jpg" %}' autoplay loop muted>
         <source src="{{ person.preview_video.url }}" type="video/mp4">

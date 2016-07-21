@@ -39,21 +39,51 @@ div.box div.cont {
     flex-direction: column;
 }
 
+div.content {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div.content:hover .child1 {
+    display: none;
+}
+
+div.content:hover .child2 {
+    display: flex;
+}
+
+.child1, .child2 {
+    position: relative;
+}
+
+.child1 {
+    display: flex;
+}
+
+.child2 {
+    display: none;
+}
+
 .header {
 	font-size: 3.5em;
 	align-self: flex-start;
 }
 
-.person-name {
+.title {
     font-family: caslon, sans-serif;
 	font-size: 7em;
     text-align: center;
     align-self: center;
 }
 
-.person-description {
+.description {
     font-family: caslon, sans-serif;
-    font-size: 3em;
+    font-size: 3.5em;
     margin: 0 15%;
     text-align: center;
     align-self: center;

@@ -1,0 +1,98 @@
+<head>
+    <style>
+body {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+}
+
+div {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div div {
+    flex-direction: row;
+}
+
+div.content {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+div.content:hover .child1 {
+    display: none;
+}
+
+div.content:hover .child2 {
+    display: flex;
+}
+
+.child1, .child2 {
+    position: relative;
+}
+
+.child1 {
+    display: flex;
+}
+
+.child2 {
+    display: none;
+}
+
+.header {
+    align-self: flex-start;
+    font-size: 4em;
+}
+
+.title {
+    align-self: center;
+    font-size: 7em;
+}
+
+.description {
+    align-self: center;
+    padding: 0 15%;
+    font-size: 3em;
+}
+
+.footer {
+    align-self: flex-end;
+    font-size: 3em;
+}
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div>
+        <a class="header">...</a>
+    </div>
+    <div class="content">
+        <div class="child1">
+            <p class="title">Marlon</p>
+        </div>
+        <div class="child2">
+            <p class="description">Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon
+                Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon
+                Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon Marlon </p>
+        </div>
+    </div>
+
+    <div>
+        <a class="footer">mehr.</a>
+    </div>
+</div>
+</body>
