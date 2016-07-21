@@ -1,6 +1,6 @@
 html, body {
     width: 100%;
-    height: 98%;
+    height: 100%;
     margin: 0;
     padding: 0;
     color: #ffffff;
@@ -31,7 +31,7 @@ a.header {
 
 a.mehr {
     font-size: 3.5em;
-    margin: 408px 0px 0px 9px;
+    align-self: flex-end;
 }
 
 div {
@@ -45,24 +45,63 @@ div {
     justify-content: center;
 }
 
+div div {
+    flex-direction: row;
+}
+
+/* Chapter Overview */
+
 div.timeline {
     position: fixed;
     width: 100%;
-    height: 5px;
+    height: 3%;
 
     cursor: pointer;
 }
 
-div.chapter-overview {
-    display: none;
+div.timeline:hover .chapter-overview {
+    opacity: 1.0;
+    visibility: visible;
 }
 
-div.chapter-overview > div.active {
-    color: #ff0000;
+.chapter-overview {
+    opacity: 0.0;
+    visibility: hidden;
+
+    transition: visibility 1s, opacity 0.5s linear;
 }
 
-div div {
-    flex-direction: row;
+.chapter-overview .transbox {
+    background-color: #f2f2f2;
+    opacity: 0.5;
+    border-right: 1px dotted black;
+    border-left: 1px dotted black;
+}
+
+.chapter-overview .transbox:first-of-type {
+    border-right: 0;
+    border-left: 0;
+}
+
+.chapter-overview .transbox:last-of-type {
+    border-right: 0;
+    border-left: 0;
+}
+
+.chapter-overview .active {
+    color: blue;
+}
+
+.chapter-overview .transbox:hover {
+    padding-bottom: 4px;
+}
+
+.chapter-overview .transbox a {
+    color: black;
+}
+
+.chapter-overview .active a {
+    color: blue;
 }
 
 /*
@@ -71,7 +110,7 @@ div div {
 
 progress {
     width: 100%;
-    height: 100%;
+    height: 5px;
     padding: 0;
     margin: 0;
 
@@ -191,31 +230,7 @@ div.layer-container {
     display: none;
 
     font-size: 3em;
+    line-height: 0.9;
     padding: 0px 20%;
     text-align: center;
-}
-
-/* Timeline */
-
-div.transbox {
-    width: 7%;
-    height: 3%;
-    margin: 5px 0 1px 1px;
-    background-color: #f2f2f2;
-    opacity: 0.5;
-    float: left;
-}
-
-div.transbox a {
-    color: #000000;
-    text-align: center;
-    transition: 0.1s;
-    border-right: 1px dotted #ffffff;
-    border-left: 1px dotted #ffffff;
-}
-
-div.transbox a:hover {
-    border-right: 1px dotted;
-    border-left: 1px dotted;
-    padding-bottom: 4px;
 }
