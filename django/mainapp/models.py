@@ -73,8 +73,6 @@ class Chapter(models.Model):
 	duration = models.FloatField(default=0, editable=False)
 	start_time = models.FloatField(default=0, editable=False)
 	additional_content_signal_time = models.FloatField(default=0)
-	# the index shouldn't be needed if we demand the chapters to be uploaded in order
-	index = models.IntegerField()  # add uniqueness is combination with the person
 
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
@@ -122,7 +120,6 @@ class AdditionalContent(models.Model):
 	TYPE_MISC = 1
 	TYPE_GALLERY = 2
 
-	index = models.IntegerField()
 	name = models.CharField(max_length=30)
 	description = models.CharField(max_length=300)
 	image = models.ImageField(upload_to=user_chapter_layer_path)
