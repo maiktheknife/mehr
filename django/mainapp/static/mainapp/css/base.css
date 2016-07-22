@@ -68,6 +68,10 @@ html, body {
     color: #051cf1;
 }
 
+.overlay .sub-elements {
+    line-height: 0.9;
+}
+
 .closebtn {
     position: absolute;
     top: 20px;

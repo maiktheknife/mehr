@@ -47,7 +47,7 @@
         {% for p in people %}
         <li><a onclick="switchPerson('{{p.id}}'); return false;" class="cover-content" href="#">{{ p.name }}</a></li>
         <ul class="sub-elements" id="{{p.id}}" style="display:none;">
-            <li><a href="{% url 'mainapp:personPage' p.id %}">Übersicht</a></li>
+            <!--<li><a href="{% url 'mainapp:personPage' p.id %}">Übersicht</a></li>-->
             {% for c in p.chapter_set.all %}
                 <li><a href="{% url 'mainapp:chapterPage' p.id c.get_relative_id %}">{{ c.name }}</a></li>
             {% endfor %}
