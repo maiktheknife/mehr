@@ -56,6 +56,14 @@ html, body {
     transition: 0.3s;
 }
 
+.overlay .overlay-content a {
+    font-family: caslon;
+}
+
+.overlay .overlay-menu a {
+    font-family: avenir;
+}
+
 .overlay a:hover, .overlay a:focus {
     color: #051cf1;
 }

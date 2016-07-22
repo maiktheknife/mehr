@@ -43,7 +43,6 @@
 <body id="page" oncontextmenu="return false">
 <div id="myNav" class="overlay">
     <a href="#" class="closebtn">×</a>
-
     <ul class="overlay-content text-center">
         {% for p in people %}
         <li><a onclick="switchPerson('{{p.id}}'); return false;" class="cover-content" href="#">{{ p.name }}</a></li>
