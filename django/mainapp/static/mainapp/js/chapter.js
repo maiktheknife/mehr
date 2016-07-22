@@ -6,6 +6,7 @@ function main() {
     video = $("#chapterVideo").get(0);
     progressbar = $("#progressbar").get(0);
     initPageNavigation();
+    initTimeline();
     initMouseMovementAwareness();
     initVideoPlayer();
     initVideoControls();
@@ -65,6 +66,19 @@ function initPageNavigation() {
                 $("body").fadeOut(1000, redirectPage);
             }
         }
+    });
+
+    function redirectPage() {
+        window.location = linkLocation;
+    }
+}
+
+function initTimeline(){
+    $('.transbox').click(function(event){
+        var chapterLink = $(this).attr("data-chapterlink");
+        linkLocation = chapterLink;
+        $("body").fadeOut(1000, redirectPage);
+        event.stopPropagation();
     });
 
     function redirectPage() {

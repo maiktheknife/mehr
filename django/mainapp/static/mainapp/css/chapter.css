@@ -96,11 +96,11 @@ div.timeline:hover .chapter-overview {
     padding-bottom: 4px;
 }
 
-.chapter-overview .transbox a {
+.chapter-overview .transbox  {
     color: black;
 }
 
-.chapter-overview .active a {
+.chapter-overview .transbox.active {
     color: blue;
 }
 
