@@ -21,10 +21,10 @@ class AdditionalContentGalleryInline(admin.StackedInline):
 
 class AdditionalContentAdmin(admin.ModelAdmin):
 	list_filter = ['chapter']
-	list_display = ['name', 'chapter', 'index', 'type']
-	ordering = ['chapter', 'index']
+	list_display = ['name', 'chapter', 'type']
+	ordering = ['chapter']
 	fieldsets = [
-		(None, {'fields': ['index', 'name', 'chapter', ]}),
+		(None, {'fields': ['name', 'chapter', ]}),
 		('Preview', {'fields': ['description', 'image', ]}),
 		('Type', {'fields': ['type']}),
 		('Video', {'fields': ['video']}),
@@ -46,8 +46,8 @@ class AdditionalContentInline(admin.TabularInline):
 
 class ChapterAdmin(admin.ModelAdmin):
 	list_filter = ['person']
-	list_display = ['person', 'index', 'name', 'video', 'start_time', 'get_additional_count']
-	ordering = ['person', 'index']
+	list_display = ['person', 'name', 'video', 'start_time', 'get_additional_count']
+	ordering = ['person']
 	inlines = [AdditionalContentInline, ]
 
 
