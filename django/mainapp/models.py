@@ -11,6 +11,11 @@ class SocialMediaPlatform(models.Model):
 		return self.url
 
 
+class Intro(models.Model):
+	video = models.FileField()
+	text = models.TextField(max_length=100)
+
+
 class Person(models.Model):
 	PREVIEW_TYPE_VIDEO = 0
 	PREVIEW_TYPE_IMAGES = 1

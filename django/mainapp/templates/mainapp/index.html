@@ -22,15 +22,15 @@
         <!--empty div to ensure the pretty layout -> flex with 3 boxes -> there is a correct center position -->
         <div></div>
         <div>
-            <p class="header">Wir stillen den Durst nach mehr. Wir sind mehr. Wir machen mehr. <br/>Mehr ist mehr.</p>
+            <p class="header">{{ intro.text|linebreaksbr }}</p>
         </div>
         <div>
             <a class="mehr" href="{% url 'mainapp:personPage' firstID %}">mehr.</a>
         </div>
     </div>
     <video autoplay loop muted>
-        <source src="{{ video_path }}" type="video/mp4">
-        <source src="{{ video_path }}" type="video/webm">
+        <source src="{{ intro.video.url }}" type="video/mp4">
+        <source src="{{ intro.video.url }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
 {% endblock %}

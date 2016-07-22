@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from os.path import join
 
-from .models import Person, AdditionalContent
+from .models import Person, AdditionalContent, Intro
 from .utils import chapterutils
 
 
@@ -12,14 +12,12 @@ def index(request):
 	## i am ugly
 	# images = list(map(lambda x: join(settings.STATIC_URL, 'mainapp', 'images', 'index', x).replace('\\', '/'), listdir(path)))
 
-	# video
-	video_path = join(settings.STATIC_URL, 'mainapp', 'video', 'Start.m4v')
+	intro = Intro.objects.first()
 
 	context = {
+		"intro": intro,
 		"people": Person.objects.all(),
 		"firstID": Person.objects.first().id,
-		#"images": images,
-		"video_path" : video_path,
 	}
 	return render(request, "mainapp/index.html", context)
 
