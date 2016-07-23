@@ -68,20 +68,20 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://npmcdn.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
     <script>
-function main() {
-    $('.carousel').flickity({
-      draggable: false,
-      imagesLoaded: true,
-      percentPosition: false,
-      arrowShape: {
-          x0: 10,
-          x1: 50, y1: 35,
-          x2: 45, y2: 5,
-          x3: 85
+        function main() {
+            $('.carousel').flickity({
+              draggable: true,
+              imagesLoaded: true,
+              percentPosition: false,
+              arrowShape: {
+                  x0: 10,
+                  x1: 50, y1: 35,
+                  x2: 45, y2: 5,
+                  x3: 85
+                }
+            });
         }
-    });
-}
-$(document).ready(main);
+        $(document).ready(main);
     </script>
 </head>
 <body>

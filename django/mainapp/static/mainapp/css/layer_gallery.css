@@ -1,15 +1,8 @@
-* { box-sizing: border-box; }
-
-html, body {
-	width: 100%;
-	height: 100%;
-	color: blue;
-}
-/*
 a {
     text-decoration: none;
+
     font-family: avenir, sans-serif;
-   	color: blue;
+    color: blue;
 
 	-webkit-transition: color 1s;
     -moz-background-size : color 1s;
@@ -19,7 +12,6 @@ a {
 
 a:hover, a:focus, a:active {
     text-decoration: none;
-    color: blue;
 }
 
 div {
@@ -33,6 +25,12 @@ div {
     justify-content: center;
 }
 
+div.timeline {
+    position: absolute;
+    width: 100%;
+    height: 5px;;
+}
+
 div.box div {
     flex-direction: row;
 }
@@ -41,31 +39,91 @@ div.box div.cont {
     flex-direction: column;
 }
 
+div.timeline progress {
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+    margin: 0;
+}
+
 .header {
-	font-size: 3.5em;
-	align-self: flex-start;
+    font-size: 3.5em;
+    align-self: flex-start;
 }
 
-.content {
-
+.mehr {
+    font-size: 3.5em;
+    align-self: flex-end;
 }
-
-.content .gallery {
-    width: 80%;
-    height: 80%;
-}
-*/
 
 .carousel {
-  background: #EEE;
+  width: 100%;
+  height: 70%;
 }
 
 .carousel img {
   display: block;
-  height: 400px;
+  padding: 20px;
+  max-height: 800px;
 }
 
-.mehr {
-	font-size: 3.5em;
-	align-self: flex-end;
+/*
+ * Timeline
+ */
+progress {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    /* Turns off styling */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    /* gets rid of default border in Firefox and Opera. */
+    border: none;
+}
+
+progress.layer-progressbar {
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+/* the Progress Bar Background */
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: transparent !important; /* !important is needed by the polyfill */
+}
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+/* the Progress Bar Value */
+/* IE10 */
+progress {
+    color: blue;
+}
+/* Firefox */
+progress::-moz-progress-bar {
+    background: blue;
+}
+/* Chrome */
+progress::-webkit-progress-value {
+    background: blue;
+}
+
+/*
+ * Customize flickity
+ */
+
+.flickity-prev-next-button {
+   background: transparent;
+}
+
+.flickity-page-dots {
+  display: none;
 }
