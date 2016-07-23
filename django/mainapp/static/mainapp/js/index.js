@@ -1,11 +1,11 @@
 
 function main(){
-    initPageAnimation();
+    initPageAnimation2();
     initPageNavigation();
     initBackGroundImageRotator();
 }
 
-function initPageAnimation(){
+function initPageAnimation2(){
     $("a").click(function(event){
         event.preventDefault();
         linkLocation = this.href;

@@ -12,6 +12,7 @@ function initMenu(){
     $('a.header').click(function(e){
         openNav(e);
     });
+
     $('.closebtn').click(function(e){
         closeNav(e);
     });
