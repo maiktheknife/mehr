@@ -211,8 +211,8 @@ div.layer-container {
 .layer .layer-description {
     display: none;
 
-    font-size: 3em;
-    line-height: 0.9;
+    font-size: 2.5em;
+    line-height: 0.95;
     padding: 0px 20%;
     text-align: center;
 }

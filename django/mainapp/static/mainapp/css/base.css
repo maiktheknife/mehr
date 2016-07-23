@@ -74,6 +74,8 @@ html, body {
 
 .closebtn {
     position: absolute;
+    width: 80px;
+    height: 80px;
     top: 20px;
     right: 45px;
     font-size: 60px !important;

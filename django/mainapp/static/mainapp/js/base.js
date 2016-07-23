@@ -15,6 +15,13 @@ function initMenu(){
     $('.closebtn').click(function(e){
         closeNav(e);
     });
+
+    $('.closebtn').hover(
+    function(e){
+        $(this).attr("src", closeBlue);
+    }, function(e){
+       $(this).attr("src", closeWhite);
+    });
 }
 
 function isOverLayVisible(){

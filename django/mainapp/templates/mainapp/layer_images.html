@@ -31,7 +31,7 @@
     <div class="row">
         {% for additional_content_element in layer.additionalcontentelement_set.all %}
             {% if additional_content_element.type == 0 %}
-                <video autoplay>
+                <video autoplay loop>
                     <source src="{{ additional_content_element.video.url }}" type="video/mp4">
                     <source src="{{ additional_content_element.video.url }}" type="video/webm">
                     Your browser does not support the video tag.
@@ -41,7 +41,7 @@
             {% elif additional_content_element.type == 2 %}
                 {{ additional_content_element.text }}
             {% elif additional_content_element.type == 3 %}
-                <video>
+                <video loop>
                     <source src="{{ additional_content_element.video.url }}" type="video/mp4">
                     <source src="{{ additional_content_element.video.url }}" type="video/webm">
                     Your browser does not support the video tag.

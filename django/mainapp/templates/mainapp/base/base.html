@@ -12,6 +12,9 @@
         // nav mouse cursor
         var arrowLeft = "{% static "mainapp/images/small/pfeil_links_weiß.png" %}";
         var arrowRight = "{% static "mainapp/images/small/pfeil_rechts_weiß.png" %}";
+
+        var closeWhite = "{% static "mainapp/images/schließen_weiß.png" %}";
+        var closeBlue = "{% static "mainapp/images/schließen_blau.png" %}";
     </script>
     {% block js %} {% endblock %}
     {# Load bootstrap3 #}
@@ -42,7 +45,7 @@
 </head>
 <body id="page" oncontextmenu="return false">
 <div id="myNav" class="overlay">
-    <a href="#" class="closebtn">×</a>
+    <img class="closebtn" src="{% static 'mainapp/images/schließen_weiß.png' %}">
     <ul class="overlay-content text-center">
         {% for p in people %}
         <li><a onclick="switchPerson('{{p.id}}'); return false;" class="cover-content" href="#">{{ p.name }}</a></li>
