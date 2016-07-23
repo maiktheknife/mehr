@@ -2,7 +2,7 @@
 function main(){
     initPageAnimation2();
     initPageNavigation();
-    initBackGroundImageRotator();
+    // initBackGroundImageRotator();
 }
 
 function initPageAnimation2(){

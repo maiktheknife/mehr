@@ -29,6 +29,12 @@ function initPageNavigation() {
             }
     });
 
+    $(".mehr").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+    });
+
     $('body').click(function(){
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
