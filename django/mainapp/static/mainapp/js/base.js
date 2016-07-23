@@ -5,7 +5,7 @@ function main(){
 
 function initPageAnimation(){
     $("body").css("display", "none");
-    $("body").fadeIn(2000);
+    $("body").fadeIn(1000);
 }
 
 function initMenu(){

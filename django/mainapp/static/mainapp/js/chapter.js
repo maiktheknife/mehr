@@ -103,11 +103,13 @@ function initMouseMovementAwareness(){
 /* Video */
 
 function playVideo(){
+    console.log("playVideo");
     $("#chapterVideo").removeClass("stopfade");
     video.play();
 }
 
 function pauseVideo(){
+    console.log("pauseVideo");
     $("#chapterVideo").addClass("stopfade");
     video.pause();
 }
@@ -149,6 +151,7 @@ function showAdditionalContentSignal() {
     }
 
 	if (additionalContentSignalTime < video.currentTime) {
+        console.log("showAdditionalContentSignal");
         var color = 0;
         var pauseBetween = 300;
         for (i = 0; i < 7; i++) {
@@ -173,6 +176,7 @@ function initVideoPlayer(){
 
 function initVideoControls(){
     $("#video-toggle").click(function(event){
+        console.log("video-toggle click");
         toggleVideoStatus();
         event.stopPropagation();
     });
@@ -193,6 +197,7 @@ function initVideoControls(){
     });
 
     $("#video-volume").click(function(event){
+        console.log("video-volume click");
         toggleVideoVolume();
         event.stopPropagation();
     });
@@ -216,6 +221,7 @@ function initVideoControls(){
 /* Layers */
 
 function showLayers(){
+    console.log("showLayers");
     pauseVideo();
     $('#layer-container').show();
     isLayerVisible = true;
@@ -225,6 +231,7 @@ function showLayers(){
 }
 
 function hideLayers(){
+    console.log("hideLayers");
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
@@ -236,6 +243,7 @@ function hideLayers(){
 
 function initLayerControl() {
 	$('.mehr').on('click', function(event) {
+        console.log("mehr. click");
 		if (isLayerVisible) {
 			hideLayers()
 		} else {
@@ -244,18 +252,12 @@ function initLayerControl() {
 	});
 
 	$('.layer').click(function(event){
+	    console.log("layer click");
         var layerLink = $(this).attr("data-layerlink");
         var completeLink = layerLink + Math.floor(video.currentTime);
         window.location.href = completeLink;
     });
 
-	$(window).scroll(function() {
-		var pos = $(this).scrollTop();
-		if (pos == 0) {
-			hideLayers();
-			isLayerVisible = false;
-		}
-	});
 }
 
 $(document).ready(main);
