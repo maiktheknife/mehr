@@ -56,7 +56,6 @@ function initPageNavigation() {
 
     $('body').click(function(){
         if (!isOverLayVisible()) {
-            console.log("click");
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {
                 linkLocation = previousChapterLink;
@@ -219,6 +218,7 @@ function initVideoControls(){
 function showLayers(){
     pauseVideo();
     $('#layer-container').show();
+    isLayerVisible = true;
     $('html, body').animate({
             scrollTop : $('#layer-container').offset().top
     }, 1000);
@@ -229,6 +229,7 @@ function hideLayers(){
         scrollTop : $('#page').offset().top
     }, 1000, function() {
         $('#layer-container').hide();
+        isLayerVisible = false;
         playVideo()
     });
 }
@@ -240,7 +241,6 @@ function initLayerControl() {
 		} else {
 			showLayers();
 		}
-		isLayerVisible = !isLayerVisible;
 	});
 
 	$('.layer').click(function(event){
