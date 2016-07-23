@@ -258,6 +258,14 @@ function initLayerControl() {
         window.location.href = completeLink;
     });
 
+     $(window).bind('wheel', function(e) {
+        if(e.originalEvent.wheelDelta > 0) { // up
+            hideLayers();
+        } else { // down
+            showLayers();
+        }
+    });
+
 }
 
 $(document).ready(main);
