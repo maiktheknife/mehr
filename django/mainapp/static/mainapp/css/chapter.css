@@ -72,15 +72,14 @@ div.timeline:hover .chapter-overview {
 }
 
 .chapter-overview .transbox {
-    background-color: #f2f2f2;
-    opacity: 0.5;
+    color: white;
+    background-color: rgba(242, 242, 242, 0.5);
+
     border-right: 1px dotted black;
-    border-left: 1px dotted black;
 }
 
-.chapter-overview .transbox:first-of-type {
-    border-right: 0;
-    border-left: 0;
+.chapter-overview .transbox.active {
+    color: blue;
 }
 
 .chapter-overview .transbox:last-of-type {
@@ -88,20 +87,8 @@ div.timeline:hover .chapter-overview {
     border-left: 0;
 }
 
-.chapter-overview .active {
-    color: blue;
-}
-
 .chapter-overview .transbox:hover {
     padding-bottom: 4px;
-}
-
-.chapter-overview .transbox  {
-    color: black;
-}
-
-.chapter-overview .transbox.active {
-    color: blue;
 }
 
 /*
@@ -169,6 +156,7 @@ div.video-controls {
 input {
     width: 60px;
     height: 60px;
+    outline: none;
 }
 
 /*
@@ -195,8 +183,6 @@ div.layer-container {
     min-height: 250px;
     width: 100%;
 
-    opacity: 0.8;
-
     text-align: center;
     cursor: pointer;
 
@@ -205,10 +191,6 @@ div.layer-container {
     background-size: cover;
 
     transition: visibility 1s, opacity 0.5s linear;
-}
-
-.layer:hover {
-    opacity: 1.0;
 }
 
 .layer:hover .layer-title {
@@ -223,7 +205,7 @@ div.layer-container {
     display: flex;
 
     text-align: center;
-	font-size: 7em;
+	font-size: 6em;
 }
 
 .layer .layer-description {
