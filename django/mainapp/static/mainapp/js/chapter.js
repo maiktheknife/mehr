@@ -54,7 +54,7 @@ function initPageNavigation() {
             }
     });
 
-    $('body').click(function(){
+    $('body').click(function(event){
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {
@@ -86,7 +86,7 @@ function initTimeline(){
 }
 
 function initMouseMovementAwareness(){
-    $(document).on('mousemove', function() {
+    $(document).on('mousemove', function(event) {
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {

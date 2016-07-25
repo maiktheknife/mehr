@@ -35,7 +35,7 @@ function initPageNavigation() {
         $("body").fadeOut(1000, redirectPage);
     });
 
-    $('body').click(function(){
+    $('body').click(function(event){
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX) {
@@ -80,7 +80,7 @@ function initBackGroundImageRotator(){
 }
 
 function initMouseMovementAwareness(){
-    $(document).on('mousemove', function() {
+    $(document).on('mousemove', function(event) {
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX) {
