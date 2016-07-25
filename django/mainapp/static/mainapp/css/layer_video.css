@@ -32,7 +32,7 @@ div {
 div.timeline {
     position: absolute;
     width: 100%;
-    height: 5px;;
+    height: 5px;
 }
 
 div div {
@@ -132,4 +132,63 @@ div.video-controls {
 input {
     width: 60px;
     height: 60px;
+    outline: none;
+}
+
+/*
+ * Layer
+ */
+
+div.layer-container {
+    display: none;
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.layer {
+    position: relative;
+
+    height: auto;
+    min-height: 250px;
+    width: 100%;
+
+    text-align: center;
+    cursor: pointer;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    transition: visibility 1s, opacity 0.5s linear;
+}
+
+.layer:hover .layer-title {
+    display: none;
+}
+
+.layer:hover .layer-description {
+    display: flex;
+}
+
+.layer .layer-title {
+    display: flex;
+
+    text-align: center;
+	font-size: 6em;
+}
+
+.layer .layer-description {
+    display: none;
+
+    font-size: 2.5em;
+    line-height: 0.95;
+    padding: 0px 20%;
+    text-align: center;
 }
