@@ -178,6 +178,7 @@ function initLayerControl() {
         var layerLink = $(this).attr("data-layerlink");
         var completeLink = layerLink + Math.floor(video.currentTime);
         window.location.href = completeLink;
+        event.stopPropagation();
     });
 
      $(window).bind('wheel', function(e) {

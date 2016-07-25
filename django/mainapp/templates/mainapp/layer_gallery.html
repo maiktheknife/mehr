@@ -42,12 +42,13 @@
 </div>
 {% if chapter.get_additional_count > 0 %}
 <div id="layer-container" class="layer-container">
-    {% for layer in chapter.additionalcontent_set.all %}
-    {# set custom attribute with html5 'data-' prefix #}
-    <div class="layer" style="background-image: url('{{ layer.image.url }}');" data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id layer.get_relative_id %}">
-        <div class="layer-title">{{layer.name}}</div>
-        <div class="layer-description">{{layer.description}}</div>
+    {% for l in chapter.additionalcontent_set.all %}
+    {% if layer.id != l.id %}
+    <div class="layer" style="background-image: url('{{ l.image.url }}');" data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
+        <div class="layer-title">{{l.name}}</div>
+        <div class="layer-description">{{l.description}}</div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endif %}
