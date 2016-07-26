@@ -3,8 +3,28 @@
 {% block title %}
     {{ person.name }} - mehr.
 {% endblock %}
+{% block css %}
+    <link href='{% static "mainapp/css/layer_mix.css" %}' rel="stylesheet" type="text/css"/>
+{% endblock %}
 {% block js %}
+    <script type='text/javascript'>
+        var positions = [];
+        {% for element in layer.additionalcontentelement_set.all %}
+            var position = ["{{ element.frontend_id }}", {{ element.position_x }}, {{ element.position_y }}];
+            positions.push(position);
+        {% endfor %}
 
+        function placeElement(element, index, array) {
+            htmlElement = document.getElementByClassName(element[0]);   // the parent needs to be selected and moved though!
+            htmlElement.style.left=element[1] + "px";
+            htmlElement.style.top=element[2] + "px";
+            //set width and height too
+        }
+
+        window.onload = function() {
+            positions.forEach(placeElement);
+        }
+    </script>
 {% endblock %}
 {% block content %}
 <div class="container-fluid">
@@ -31,25 +51,39 @@
     <div class="row">
         {% for additional_content_element in layer.additionalcontentelement_set.all %}
             {% if additional_content_element.type == 0 %}
-                <video autoplay loop>
-                    <source src="{{ additional_content_element.video.url }}" type="video/mp4">
-                    <source src="{{ additional_content_element.video.url }}" type="video/webm">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-element {{ additional_content_element.frontend_id }}">
+                    <video autoplay loop>
+                        <source src="{{ additional_content_element.video.url }}" type="video/mp4">
+                        <source src="{{ additional_content_element.video.url }}" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             {% elif additional_content_element.type == 1 %}
-                <img src="{% static additional_content_element.image.url %}" />
+                <div class="image-element {{ additional_content_element.frontend_id }}">
+                    <img src="{% static additional_content_element.image.url %}" />
+                </div>
             {% elif additional_content_element.type == 2 %}
-                {{ additional_content_element.text }}
+                <div class="text-element {{ additional_content_element.frontend_id }}">
+                    {{ additional_content_element.text }}
+                </div>
             {% elif additional_content_element.type == 3 %}
-                <video loop>
-                    <source src="{{ additional_content_element.video.url }}" type="video/mp4">
-                    <source src="{{ additional_content_element.video.url }}" type="video/webm">
-                    Your browser does not support the video tag.
-                </video><br/>
-                {{ additional_content_element.text }}
+                <div class="video-text-element {{ additional_content_element.frontend_id }}">
+                    <video loop>
+                        <source src="{{ additional_content_element.video.url }}" type="video/mp4">
+                        <source src="{{ additional_content_element.video.url }}" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video><br/>
+                    <div class="text">
+                        {{ additional_content_element.text }}
+                    </div>
+                </div>
             {% elif additional_content_element.type == 4 %}
-                <img src="{% static additional_content_element.image.url %}" /><br/>
-                {{ additional_content_element.text }}
+                <div class="image-text-element {{ additional_content_element.frontend_id }}">
+                    <img src="{% static additional_content_element.image.url %}" /><br/>
+                    <div class="text">
+                        {{ additional_content_element.text }}
+                    </div>
+                </div>
             {% endif %}
 
             {% for social_media_link in additional_content_element.socialmedialink_set.all %}
@@ -58,7 +92,6 @@
                     <img src="{% static social_media_link.platform.icon.url %}">
                 </a>
             {% endfor %}
-
             <br/><br/>
         {% endfor %}
     </div>

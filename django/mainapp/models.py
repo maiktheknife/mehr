@@ -1,6 +1,8 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
+from .utils.screen import Screen, Widget
 
 
 class SocialMediaPlatform(models.Model):
@@ -65,7 +67,7 @@ class Person(models.Model):
 		return self.chapter_set.first()
 
 	def __str__(self):
-		return self.name
+		return "{} ({})".format(self.name, self.id)
 
 	# Admin Page Anpassungen
 	get_images_count.short_description = 'Bilder'
@@ -115,7 +117,7 @@ class Chapter(models.Model):
 		return self.additionalcontent_set.count()
 
 	def __str__(self):
-		return "{}; Chapter {}: {}".format(self.person, 0, self.name)
+		return "{}; Chapter {}: {}".format(self.person, self.get_relative_id(), self.name)
 
 	get_additional_count.short_description = 'Ebenen'
 
@@ -175,11 +177,34 @@ class AdditionalContentElement(models.Model):
 
 	type = models.IntegerField(choices=type_choices)
 
+	position_x = 0
+	position_y = 0
+	width = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+	height = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
+	frontend_id = models.CharField(max_length=30, default="", editable=False)
+
 	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
 
 	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
+
+	def get_position(self):
+		return self.position_x, self.position_y
+
+	def get_size(self):
+		return self.width, self.height
+
+	def save(self, *args, **kwargs):
+		elements = self.additional_content.additionalcontentelement_set.all()
+		screen = Screen()
+		for element in elements:
+			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
+
+		(self.position_x, self.position_y) = screen.get_valid_position(self.width, self.height)
+		self.frontend_id = "layer-mix-element-" + str(len(elements))
+
+		super(AdditionalContentElement, self).save(*args, **kwargs)
 
 	def __str__(self):
 		type_string = self.type_choices[int(self.type)][1]
