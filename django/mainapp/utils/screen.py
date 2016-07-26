@@ -30,7 +30,7 @@ class Screen:
 
 		widget = Widget(width, height)
 		while not valid_position_found:
-			widget.position = (random() * 100 - width, random() * 100 - height)
+			widget.position = (random() * (100 - width), random() * (100 - height))
 
 			if self.test_position(widget):
 				valid_position_found = True

@@ -177,8 +177,8 @@ class AdditionalContentElement(models.Model):
 
 	type = models.IntegerField(choices=type_choices)
 
-	position_x = 0
-	position_y = 0
+	position_x = models.FloatField(default=0, editable=False)
+	position_y = models.FloatField(default=0, editable=False)
 	width = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
 	height = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
 	frontend_id = models.CharField(max_length=30, default="", editable=False)
