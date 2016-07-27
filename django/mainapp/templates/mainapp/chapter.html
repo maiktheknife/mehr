@@ -19,8 +19,8 @@
     var personLink = "{% url 'mainapp:personPage' person.id %}";
     var videoGlobalStartTime = {{ chapter.start_time }};
     var allChaptersDuration = {{ all_chapters_duration }};
-    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}"
-    var additionalContentsCount = "{{ chapter.get_additional_count }}"
+    var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}";
+    var additionalContentsCount = "{{ chapter.get_additional_count }}";
 
     // navigation
     {% with next_chapter=chapter.get_next previous_chapter=chapter.get_previous %}
