@@ -1,14 +1,22 @@
 from random import random
 
-def widgets_separated(widget1, widget2):
-	elem1_pos_x = widget1.position[0]
-	elem1_pos_y = widget1.position[1]
-	elem2_pos_x = widget2.position[0]
-	elem2_pos_y = widget2.position[1]
 
-	# TODO implement collision detection
+def possible_collision_on_axis(widget1, widget2, axis_id):
+	if widget1.position[axis_id] < widget2.position[axis_id]:
+		first_widget = widget1
+		second_widget = widget2
+	else:
+		first_widget = widget2
+		second_widget = widget1
 
-	return True
+	if axis_id == 0:
+		return first_widget.position[axis_id] + first_widget.width >= second_widget.position[axis_id]
+	else:
+		return first_widget.position[axis_id] + first_widget.height >= second_widget.position[axis_id]
+
+
+def detect_widget_collision(widget1, widget2):
+	return possible_collision_on_axis(widget1, widget2, 0) and possible_collision_on_axis(widget1, widget2, 1)
 
 
 class Widget:
@@ -38,4 +46,4 @@ class Screen:
 		return widget.position
 
 	def test_position(self, widget):
-		return False not in map(lambda x: widgets_separated(widget, x), self.widgets)
+		return True not in map(lambda x: detect_widget_collision(widget, x), self.widgets)
