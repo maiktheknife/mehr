@@ -13,6 +13,7 @@ function main(){
     initPageNavigation();
     initAudioControls();
     initLayerControl();
+    startFirstVideo();
 }
 
 function initPageNavigation() {
@@ -153,7 +154,14 @@ function initLayerControl() {
             showLayers();
         }
     });
+}
 
+function startFirstVideo() {
+	if (first_video_class != null) {
+		var video = $(first_video_class).get(0);
+		video.play();
+		//$("." + first_video_class).get(0).play()
+	}
 }
 
 $(document).ready(main);

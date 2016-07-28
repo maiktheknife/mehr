@@ -182,6 +182,7 @@ class AdditionalContentElement(models.Model):
 	width = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
 	height = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
 	frontend_id = models.CharField(max_length=30, default="", editable=False)
+	first_video_flag = models.BooleanField(default=False, editable=False)
 
 	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
 
@@ -195,8 +196,17 @@ class AdditionalContentElement(models.Model):
 	def get_size(self):
 		return self.width, self.height
 
+	def get_autoplay(self):
+		if self.first_video_flag:
+			return "autoplay"
+		else:
+			return ""
+
 	def save(self, *args, **kwargs):
 		elements = self.additional_content.additionalcontentelement_set.all()
+		if self.type == 0 or self.type == 3:
+			self.first_video_flag = True not in map(lambda x: x.first_video_flag, elements)
+
 		screen = Screen()
 		for element in elements:
 			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))

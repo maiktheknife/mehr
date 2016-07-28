@@ -17,6 +17,13 @@
         var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
         var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
         var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
+
+        var first_video_class = null;
+        {% for ace in layer.additionalcontentelement_set.all %}
+            {% if ace.first_video_flag %}
+                first_video_class = ".{{ ace.frontend_id }}>video";
+            {% endif %}
+        {% endfor %}
     </script>
 {% endblock %}
 {% block css %}
@@ -46,10 +53,10 @@
         {% for ace in layer.additionalcontentelement_set.all %}
         {% if ace.type == 0 %}
         <div class="video-element {{ ace.frontend_id }}" >
-            <video autoplay loop muted style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
+            <video loop muted style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
-                Your browser does not support the video tag.
+                {{ ace.first_video_flag }} Your browser does not support the video tag.
             </video>
         </div>
         {% elif ace.type == 1 %}
@@ -62,10 +69,10 @@
         </div>
         {% elif ace.type == 3 %}
         <div class="video-text-element {{ ace.frontend_id }}">
-            <video loop style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
+            <video loop muted style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
-                Your browser does not support the video tag.
+                {{ ace.first_video_flag }} Your browser does not support the video tag.
             </video><br/>
             <div class="text">
                 {{ ace.text }}
