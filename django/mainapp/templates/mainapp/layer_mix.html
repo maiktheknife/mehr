@@ -46,7 +46,7 @@
         {% for ace in layer.additionalcontentelement_set.all %}
         {% if ace.type == 0 %}
         <div class="video-element {{ ace.frontend_id }}" >
-            <video autoplay loop muted style="width:{{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
+            <video autoplay loop muted style="width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
@@ -54,15 +54,15 @@
         </div>
         {% elif ace.type == 1 %}
         <div class="image-element {{ ace.frontend_id }}">
-            <img src="{% static ace.image.url %}" style="width:{{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;"/>
+            <img src="{% static ace.image.url %}" style="width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;"/>
         </div>
         {% elif ace.type == 2 %}
-        <div class="text-element {{ ace.frontend_id }}" style=" width:{{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
+        <div class="text-element {{ ace.frontend_id }}" style=" width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
             {{ ace.text }}
         </div>
         {% elif ace.type == 3 %}
         <div class="video-text-element {{ ace.frontend_id }}">
-            <video loop style="width:{{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
+            <video loop style="width: calc({{ ace.width }}%; height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%*2); margin-left: {{ace.position_y}}%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
@@ -73,7 +73,7 @@
         </div>
         {% elif ace.type == 4 %}
         <div class="image-text-element {{ ace.frontend_id }}" >
-            <img src="{% static ace.image.url %}" style="width:{{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;"/>
+            <img src="{% static ace.image.url %}" style="width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;"/>
             <div class="text">
                 {{ ace.text }}
             </div>
