@@ -83,7 +83,7 @@
         {% elif ace.type == 4 %}
         <div class="layer-element image-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: calc({{ ace.height }}%;">
             <img src="{% static ace.image.url %}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;"/>
-            <div class="text" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+            <div class="text" style="width: {{ ace.width }}%; height: {{ ace.height }}%; overflow: hidden;">
                 {{ ace.text }}
             </div>
         </div>
