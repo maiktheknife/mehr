@@ -92,6 +92,13 @@
         </p>
     </div>
     {% endif %}
+    <div class="social-media">
+        {% for social_media_link in ace.socialmedialink_set.all %}
+        <a class="social-media-link" href="{{ social_media_link.link }}">
+            <img src="{% static social_media_link.platform.icon.url %}">
+        </a>
+        {% endfor %}
+    </div>
     {% if forloop.last %}
         </div> <!-- end row last-->
     {% endif %}
