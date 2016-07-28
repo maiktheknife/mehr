@@ -158,7 +158,7 @@ function initLayerControl() {
 
 function initLayerElements() {
 	if (debug)
-		$(".layer-element").css("border", "1px solid red");
+		$(".layer-element-plus-social-media").css("border", "1px solid red");
 
 	startFirstVideo();
 }

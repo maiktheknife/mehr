@@ -198,6 +198,11 @@ div.layer-container {
     text-align: center;
 }
 
-/*.layer-element {
-    border: 1px solid red;
-}*/
+.layer-element {
+    padding-bottom: 40px;
+}
+
+.social-media {
+    position: absolute; bottom: 0; left: 0; height: 40px;
+    border: 1px solid blue;
+}
