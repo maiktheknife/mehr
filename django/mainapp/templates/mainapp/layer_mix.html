@@ -54,36 +54,36 @@
     <div class="content">
         {% for ace in layer.additionalcontentelement_set.all %}
         {% if ace.type == 0 %}
-        <div class="layer-element video-element {{ ace.frontend_id }}" style="width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
-            <video loop muted>
+        <div class="layer-element video-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+            <video loop muted style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
         </div>
         {% elif ace.type == 1 %}
-        <div class="layer-element image-element {{ ace.frontend_id }}" style="width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
-            <img src="{% static ace.image.url %}" />
+        <div class="layer-element image-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: calc({{ ace.height }}%;">
+            <img src="{% static ace.image.url %}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;"/>
         </div>
         {% elif ace.type == 2 %}
-        <div class="layer-element text-element {{ ace.frontend_id }}" style=" width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
+        <div class="layer-element text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: calc({{ ace.height }}%;">
             {{ ace.text }}
         </div>
         {% elif ace.type == 3 %}
-        <div class="layer-element video-text-element {{ ace.frontend_id }}" style="width: calc({{ ace.width }}%; height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%*2); margin-left: {{ace.position_y}}%;">
-            <video loop muted>
+        <div class="layer-element video-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: calc({{ ace.height }}%;">
+            <video loop muted style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
             </video><br/>
-            <div class="text">
+            <div class="text" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
                 {{ ace.text }}
             </div>
         </div>
         {% elif ace.type == 4 %}
-        <div class="layer-element image-text-element {{ ace.frontend_id }}" style="width: calc({{ ace.width }}%*2); height: calc({{ ace.height }}%*2); margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
-            <img src="{% static ace.image.url %}" />
-            <div class="text">
+        <div class="layer-element image-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: calc({{ ace.height }}%;">
+            <img src="{% static ace.image.url %}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;"/>
+            <div class="text" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
                 {{ ace.text }}
             </div>
         </div>
