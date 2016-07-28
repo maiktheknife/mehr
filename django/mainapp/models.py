@@ -15,7 +15,7 @@ class SocialMediaPlatform(models.Model):
 
 class Intro(models.Model):
 	video = models.FileField()
-	text = models.TextField(max_length=100)
+	text = models.TextField(max_length=100, blank=True)
 
 
 class Person(models.Model):
