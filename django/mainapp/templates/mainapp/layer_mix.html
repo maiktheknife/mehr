@@ -71,7 +71,7 @@
         </div>
         {% elif ace.type == 3 %}
         <div class="layer-element video-text-element {{ ace.frontend_id }}" style="position: fixed; width: {{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
-            <video loop muted style="width: 50%; height: 50%;">
+            <video loop muted style="width: 50%; height: 100%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
