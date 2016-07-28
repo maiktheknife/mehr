@@ -13,7 +13,7 @@ function main(){
     initPageNavigation();
     initAudioControls();
     initLayerControl();
-    startFirstVideo();
+    initLayerElements();
 }
 
 function initPageNavigation() {
@@ -154,6 +154,13 @@ function initLayerControl() {
             showLayers();
         }
     });
+}
+
+function initLayerElements() {
+	if (debug)
+		$(".layer-element").css("border", "1px solid red");
+
+	startFirstVideo();
 }
 
 function startFirstVideo() {

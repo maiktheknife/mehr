@@ -62,6 +62,11 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]
 
+	if settings.DEBUG:
+		debug_mode = "true"
+	else:
+		debug_mode = "false"
+
 	context = {
 		"people": persons,
 		"person": person,
@@ -69,6 +74,7 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		"layer": additional_content,
 		"current_time": chapter_time,
 		"chapter_progress": chapterutils.get_global_chapter_progress(chapter, chapters, int(chapter_time)),
+		"debug_mode": debug_mode,
 	}
 
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:

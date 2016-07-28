@@ -18,6 +18,8 @@
         var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
         var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
 
+        var debug = {{ debug_mode }};
+
         var first_video_class = null;
         {% for ace in layer.additionalcontentelement_set.all %}
             {% if ace.first_video_flag %}
