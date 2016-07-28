@@ -75,13 +75,14 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		"current_time": chapter_time,
 		"chapter_progress": chapterutils.get_global_chapter_progress(chapter, chapters, int(chapter_time)),
 		"debug_mode": debug_mode,
+		"css_classes": ["float-left", "float-normal", "float-right", ]
 	}
 
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:
 		context["video"] = additional_content.video
 		site = "mainapp/layer_video.html"
 	elif additional_content.type == AdditionalContent.TYPE_MISC:
-		site = "mainapp/layer_mix.html"
+		site = "mainapp/layer_mix2.html"
 	else:
 		site = "mainapp/layer_gallery.html"
 

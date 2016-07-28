@@ -1,0 +1,82 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+.overlay {
+    height: 0%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(19, 92, 251, 0.6);
+
+    overflow: hidden;
+    transition: 0.5s;
+    z-index: 999999;
+}
+
+.overlay-content {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.overlay-menu {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay ul {
+    display: block;
+    list-style: none;
+    list-style-type: none;
+    white-space: nowrap;
+}
+
+.overlay-menu ul li {
+     display: inline;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #051cf1;
+}
+
+.overlay-content a {
+    font-size:75px;
+}
+
+.overlay-menu a {
+    font-size:45px;
+}
+
+.closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px !important;
+}
