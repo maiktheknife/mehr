@@ -1,4 +1,8 @@
+var counter = 0;
+
 function main() {
+    // get existing layer count :)
+    counter = Number($("#id_additionalcontentelement_set-TOTAL_FORMS").val());
 
     /* set listeners */
 
@@ -6,52 +10,52 @@ function main() {
         updateFields($(this).val());
     });
 
-    $("#id_additionalcontentelement_set-0-type").change(function(){
-        console.log("0");
-        updateInlineFields($(this).val(),
-            "#id_additionalcontentelement_set-0-video",
-            "#id_additionalcontentelement_set-0-image",
-            "#id_additionalcontentelement_set-0-text");
+    $('#additionalcontentelement_set-group .add-row a').click(function(){
+//        console.log(counter);
+        createInlineUpdateListener(counter);
+        executeInlineUpdate(counter);
+        counter = counter + 1;
     });
 
-    $("#id_additionalcontentelement_set-1-type").change(function(){
-        console.log("1");
-        updateInlineFields($(this).val(),
-            "#id_additionalcontentelement_set-1-video",
-            "#id_additionalcontentelement_set-1-image",
-            "#id_additionalcontentelement_set-1-text");
-    });
-
-    $("#id_additionalcontentelement_set-2-type").change(function(){
-        console.log("2");
-        updateInlineFields($(this).val(),
-            "#id_additionalcontentelement_set-2-video",
-            "#id_additionalcontentelement_set-2-image",
-            "#id_additionalcontentelement_set-2-text");
-    });
+    for(var i = 0; i <= 10; i++){
+       $('#id_additionalcontentelement_set-' + i + "-type").click( createInlineUpdateListener( i ) );
+    }
 
     /* set field values at startup */
 
     updateFields($('#id_type').val());
 
-    updateInlineFields(
-        $("#id_additionalcontentelement_set-0-type").val(),
-        "#id_additionalcontentelement_set-0-video",
-        "#id_additionalcontentelement_set-0-image",
-        "#id_additionalcontentelement_set-0-text");
+    for(var i = 0; i <= 10; i++){
+       executeInlineUpdate(i);
+    }
 
-     updateInlineFields(
-        $("#id_additionalcontentelement_set-1-type").val(),
-        "#id_additionalcontentelement_set-1-video",
-        "#id_additionalcontentelement_set-1-image",
-        "#id_additionalcontentelement_set-1-text");
-
-    updateInlineFields(
-        $("#id_additionalcontentelement_set-2-type").val(),
-        "#id_additionalcontentelement_set-2-video",
-        "#id_additionalcontentelement_set-2-image",
-        "#id_additionalcontentelement_set-2-text");
 }
+
+function createInlineUpdateListener(j) {
+    // console.log("createInlineUpdateListener: " + j);
+    var x = "#id_additionalcontentelement_set-" + j;
+    $(x+"-type").change(function(){
+        updateInlineFields(
+            $(this).val(),
+            x+"-video",
+            x+"-image",
+            x+"-text"
+        );
+    });
+}
+
+function executeInlineUpdate(n){
+    // console.log("executeInlineUpdate: " + n);
+    var x = "#id_additionalcontentelement_set-" + n;
+     updateInlineFields(
+        $(x+"-type").val(),
+        x+"-video",
+        x+"-image",
+        x+"-text"
+    );
+}
+
+/* show & hide type specific field */
 
 function updateFields(selectedValue) {
     /*
@@ -65,7 +69,6 @@ function updateFields(selectedValue) {
         (TYPE_VIDEO, "Video"), (TYPE_MISC, "Stuff"), (TYPE_GALLERY, "Gallery")
     )
     */
-//    console.log("updateFields: '" + selectedValue + "'");
 
     if (!selectedValue || selectedValue == "") { // no selection
         $("#id_video").closest("fieldset").hide();
@@ -84,7 +87,6 @@ function updateFields(selectedValue) {
         $("#id_ambient_music").closest("fieldset").show();
         $("#galleryimage_set-group").hide();
         $("h2:contains('Additional content elements')").parent().show();
-        // FixMe hides the video upload in the additional content groups too
 
     } else if (selectedValue == 2) { // gallery
          $("#id_video").closest("fieldset").hide();
@@ -93,7 +95,7 @@ function updateFields(selectedValue) {
          $("#additionalcontentelement_set-group").hide();
 
     } else {
-        alert("ein neuer unbekannter wert, passe die layer_admin.js an, Usibility und so ;D");
+        alert("ein neuer unbekannter wert, passe die layer_admin.js an, usability und so ;D");
     }
 }
 
@@ -131,7 +133,7 @@ function updateInlineFields(selectedValue, selVideo, selImage, selText){
         $(selText).closest(".form-row").show();
 
     } else {
-        alert("ein neuer unbekannter wert, passe die layer_admin.js an, Usibility und so ;D");
+        alert("ein neuer unbekannter wert, passe die layer_admin.js an, usability und so ;D");
     }
 }
 
