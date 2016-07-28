@@ -20,7 +20,7 @@ class AdditionalContentElementSocialMediaInline(admin.TabularInline):
 
 class AdditionalContentElementsInline(admin.StackedInline):
 	model = AdditionalContentElement
-	extra = 3
+	extra = 1
 
 
 class AdditionalContentGalleryInline(admin.StackedInline):
@@ -50,13 +50,14 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 
 class AdditionalContentInline(admin.TabularInline):
 	model = AdditionalContent
+	fields = ['name', 'description', 'image', ]
 	extra = 3
 
 
 class ChapterAdmin(admin.ModelAdmin):
 	list_filter = ['person']
-	list_display = ['person', 'name', 'video', 'start_time', 'get_additional_count']
-	ordering = ['person']
+	list_display = ['person', 'name', 'video', 'start_time', 'duration', 'get_additional_count']
+	ordering = ['id']
 	inlines = [AdditionalContentInline, ]
 
 

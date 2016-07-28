@@ -70,8 +70,8 @@ class Person(models.Model):
 		return "{} ({})".format(self.name, self.id)
 
 	# Admin Page Anpassungen
-	get_images_count.short_description = 'Bilder'
-	get_chapter_count.short_description = 'Chapter'
+	get_images_count.short_description = '#Bilder'
+	get_chapter_count.short_description = '#Chapter'
 
 
 class Chapter(models.Model):

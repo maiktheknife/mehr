@@ -53,7 +53,7 @@
         </div>
     </div>
     {% if person.preview_type = person.PREVIEW_TYPE_VIDEO %}
-    <video poster='{% static "mainapp/images/yeah.jpg" %}' autoplay loop muted>
+    <video autoplay loop muted>
         <source src="{{ person.preview_video.url }}" type="video/mp4">
         <source src="{{ person.preview_video.url }}" type="video/webm">
         Your browser does not support the video tag.

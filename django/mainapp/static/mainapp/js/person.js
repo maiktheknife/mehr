@@ -55,7 +55,6 @@ function initPageNavigation() {
 }
 
 function initBackGroundImageRotator(){
-    console.log("initBackGroundImageRotator");
     var InfiniteRotator = {
         init: function() {
             var initialFadeIn = 1000; //initial fade-in time (in ms)
