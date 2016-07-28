@@ -1,100 +1,110 @@
 {% extends "mainapp/base/base.html" %}
 {% load staticfiles %}
 {% block title %}
-    {{ person.name }} - mehr.
+    {{ layer.name }} - mehr.
+{% endblock %}
+{% block js %}
+    <script src='{% static "mainapp/js/layer_mix.js" %}'></script>
+    <script type='text/javascript'>
+        var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id current_time %}";
+        // play-pause
+        var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
+        var playIconBlau = "{% static 'mainapp/images/play_blau.png' %}";
+        var pauseIconWeiß = "{% static 'mainapp/images/pause_weiß.png' %}";
+        var pauseIconBlau = "{% static 'mainapp/images/pause_blau.png' %}";
+        // volume
+        var volumeOnIconWeiß = "{% static 'mainapp/images/ton_an_weiß.png' %}";
+        var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
+        var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
+        var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
+    </script>
 {% endblock %}
 {% block css %}
     <link href='{% static "mainapp/css/layer_mix.css" %}' rel="stylesheet" type="text/css"/>
-{% endblock %}
-{% block js %}
-    <script type='text/javascript'>
-        var positions = [];
-        {% for element in layer.additionalcontentelement_set.all %}
-            var position = ["{{ element.frontend_id }}", {{ element.position_x }}, {{ element.position_y }}];
-            positions.push(position);
-        {% endfor %}
-
-        function placeElement(element, index, array) {
-            htmlElement = document.getElementByClassName(element[0]);   // the parent needs to be selected and moved though!
-            htmlElement.style.left=element[1] + "px";
-            htmlElement.style.top=element[2] + "px";
-            //set width and height too
-        }
-
-        window.onload = function() {
-            positions.forEach(placeElement);
-        }
-    </script>
+    <style type="text/css" >
+    body {
+        cursor: url("{% static 'mainapp/images/x.png' %}"), crosshair;
+    }
+    </style>
 {% endblock %}
 {% block content %}
-<div class="container-fluid">
-
-    {% if layer.ambient_music %}
-        <audio autoplay>
-            <source src="{{ layer.ambient_music.url }}" type="audio/ogg">
-            <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
-            Your browser does not support the audio tag.
-        </audio>
-    {% endif %}
-
-    <div class="row">
-        <div class="col-md-12">
-            .col-md-12
+<div class="timeline">
+    <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
+</div>
+{% if layer.ambient_music %}
+<audio id="ambient_music" autoplay>
+    <source src="{{ layer.ambient_music.url }}" type="audio/ogg">
+    <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
+    Your browser does not support the audio tag.
+</audio>
+{% endif %}
+<div class="box">
+    <div>
+        <a class="header" href="#">...</a>
+    </div>
+    <div class="content">
+        {% for ace in layer.additionalcontentelement_set.all %}
+        {% if ace.type == 0 %}
+        <div class="video-element {{ ace.frontend_id }}" >
+            <video autoplay loop muted style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
+                <source src="{{ ace.video.url }}" type="video/mp4">
+                <source src="{{ ace.video.url }}" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">.col-md-6</div>
-        <div class="col-md-6">.col-md-6</div>
-    </div>
-
-    <div class="row">
-        {% for additional_content_element in layer.additionalcontentelement_set.all %}
-            {% if additional_content_element.type == 0 %}
-                <div class="video-element {{ additional_content_element.frontend_id }}">
-                    <video autoplay loop>
-                        <source src="{{ additional_content_element.video.url }}" type="video/mp4">
-                        <source src="{{ additional_content_element.video.url }}" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            {% elif additional_content_element.type == 1 %}
-                <div class="image-element {{ additional_content_element.frontend_id }}">
-                    <img src="{% static additional_content_element.image.url %}" />
-                </div>
-            {% elif additional_content_element.type == 2 %}
-                <div class="text-element {{ additional_content_element.frontend_id }}">
-                    {{ additional_content_element.text }}
-                </div>
-            {% elif additional_content_element.type == 3 %}
-                <div class="video-text-element {{ additional_content_element.frontend_id }}">
-                    <video loop>
-                        <source src="{{ additional_content_element.video.url }}" type="video/mp4">
-                        <source src="{{ additional_content_element.video.url }}" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video><br/>
-                    <div class="text">
-                        {{ additional_content_element.text }}
-                    </div>
-                </div>
-            {% elif additional_content_element.type == 4 %}
-                <div class="image-text-element {{ additional_content_element.frontend_id }}">
-                    <img src="{% static additional_content_element.image.url %}" /><br/>
-                    <div class="text">
-                        {{ additional_content_element.text }}
-                    </div>
-                </div>
-            {% endif %}
-
-            {% for social_media_link in additional_content_element.socialmedialink_set.all %}
-                <br/>
-                <a href="{{ social_media_link.link }}">
-                    <img src="{% static social_media_link.platform.icon.url %}">
-                </a>
-            {% endfor %}
-            <br/><br/>
+        {% elif ace.type == 1 %}
+        <div class="image-element {{ ace.frontend_id }}">
+            <img src="{% static ace.image.url %}" style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;"/>
+        </div>
+        {% elif ace.type == 2 %}
+        <div class="text-element {{ ace.frontend_id }}" style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
+            {{ ace.text }}
+        </div>
+        {% elif ace.type == 3 %}
+        <div class="video-text-element {{ ace.frontend_id }}">
+            <video loop style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
+                <source src="{{ ace.video.url }}" type="video/mp4">
+                <source src="{{ ace.video.url }}" type="video/webm">
+                Your browser does not support the video tag.
+            </video><br/>
+            <div class="text">
+                {{ ace.text }}
+            </div>
+        </div>
+        {% elif ace.type == 4 %}
+        <div class="image-text-element {{ ace.frontend_id }}" >
+            <img src="{% static ace.image.url %}" style="position: absolute; width:{{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;"/>
+            <div class="text">
+                {{ ace.text }}
+            </div>
+        </div>
+        {% endif %}
+        <!--{% for social_media_link in ace.socialmedialink_set.all %}-->
+        <!--<br/>-->
+        <!--<a href="{{ social_media_link.link }}">-->
+            <!--<img src="{% static social_media_link.platform.icon.url %}">-->
+        <!--</a>-->
+        <!--{% endfor %}-->
         {% endfor %}
     </div>
+    <div>
+        <a class="mehr" href="#">mehr.</a>
+    </div>
 </div>
-
+<div class="audio-controls">
+    <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
+    <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
+</div>
+{% if chapter.get_additional_count > 0 %}
+<div id="layer-container" class="layer-container">
+    {% for l in chapter.additionalcontent_set.all %}
+    {% if layer.id != l.id %}
+    <div class="layer" style="background-image: url('{{ l.image.url }}');" data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
+        <div class="layer-title">{{l.name}}</div>
+        <div class="layer-description">{{l.description}}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

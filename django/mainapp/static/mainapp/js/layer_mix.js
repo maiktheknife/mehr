@@ -1,5 +1,11 @@
 var audio = null;
+var chapterProgressbar = null;
+var layerProgressbar = null;
 var isLayerVisible = false;
+
+function backToChapter(link) {
+    document.location.href = link;
+}
 
 function main(){
     audio = $("#ambient_music").get(0);
@@ -7,7 +13,6 @@ function main(){
     initPageNavigation();
     initAudioControls();
     initLayerControl();
-    initGallery();
 }
 
 function initPageNavigation() {
@@ -23,7 +28,6 @@ function initPageNavigation() {
                 break;
             case 40: // down
                 showLayers();
-
                 break;
             default:
                 break;
@@ -33,26 +37,30 @@ function initPageNavigation() {
     function redirectPage() {
         window.location = linkLocation;
     }
+
+    $('body').click(function(event) {
+        backToChapter(chapterLink);
+    });
 }
 
 /* Audio Control */
 
 function toggleAudioStatus(){
     if (audio.paused) {
-        $("#audio-toggle").attr('src', pauseIconWeiß);
+        $("#video-toggle").attr('src', pauseIconWeiß);
         audio.play();
     } else {
-        $("#audio-toggle").attr('src', playIconWeiß);
+        $("#video-toggle").attr('src', playIconWeiß);
         audio.pause();
     }
 }
 
 function toggleAudioVolume(){
     if (audio.muted) {
-        $("#audio-volume").attr('src', volumeOffIconWeiß);
+        $("#video-volume").attr('src', volumeOffIconWeiß);
         audio.muted = false;
     } else {
-        $("#audio-volume").attr('src', volumeOnIconWeiß);
+        $("#video-volume").attr('src', volumeOnIconWeiß);
         audio.muted = true;
     }
 }
@@ -128,7 +136,7 @@ function initLayerControl() {
 		} else {
 			showLayers();
 		}
-		event.stopPropagation();
+        event.stopPropagation();
 	});
 
 	$('.layer').click(function(event){
@@ -138,26 +146,14 @@ function initLayerControl() {
         event.stopPropagation();
     });
 
-}
-
-/* Gallery */
-
-function initGallery(){
-    $('.carousel').flickity({
-      draggable: true,
-      imagesLoaded: true,
-      percentPosition: false,
-      arrowShape: {
-          x0: 10,
-          x1: 50, y1: 35,
-          x2: 45, y2: 5,
-          x3: 85
+     $(window).bind('wheel', function(e) {
+        if(e.originalEvent.wheelDelta > 0) { // up
+            hideLayers();
+        } else { // down
+            showLayers();
         }
     });
-}
 
-function backToChapter(link) {
-    document.location.href = link;
 }
 
 $(document).ready(main);

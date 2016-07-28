@@ -16,11 +16,6 @@ function main(){
     initLayerControl();
     initVideoPlayer();
     initVideoControls();
-
-    $('body').click(function(event) {
-        backToChapter(chapterLink);
-    });
-
 }
 
 function initPageNavigation() {
@@ -46,6 +41,10 @@ function initPageNavigation() {
     function redirectPage() {
         window.location = linkLocation;
     }
+
+    $('body').click(function(event) {
+        backToChapter(chapterLink);
+    });
 }
 
 /* Progress */

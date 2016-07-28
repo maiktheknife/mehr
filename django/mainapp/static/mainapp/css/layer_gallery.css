@@ -74,6 +74,28 @@ div.timeline progress {
 }
 
 /*
+ * Audio Controls
+ */
+
+div.audio-controls {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    z-index: 9999;
+}
+
+input {
+    width: 60px;
+    height: 60px;
+    outline: none;
+}
+
+/*
  * Timeline
  */
 progress {

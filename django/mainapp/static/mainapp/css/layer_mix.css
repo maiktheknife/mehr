@@ -4,6 +4,7 @@ body {
 
 a {
     text-decoration: none;
+
     font-family: avenir, sans-serif;
     color: blue;
 
@@ -35,8 +36,12 @@ div.timeline {
     height: 5px;
 }
 
-div div {
+div.box div {
     flex-direction: row;
+}
+
+div.box div.cont {
+    flex-direction: column;
 }
 
 div.timeline progress {
@@ -56,13 +61,35 @@ div.timeline progress {
 }
 
 .header {
-	font-size: 4em;
-	align-self: flex-start;
+    font-size: 3.5em;
+    align-self: flex-start;
 }
 
 .mehr {
-	font-size: 3em;
-	align-self: flex-end;
+    font-size: 3.5em;
+    align-self: flex-end;
+}
+
+/*
+ * Audio Controls
+ */
+
+div.audio-controls {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    z-index: 9999;
+}
+
+input {
+    width: 60px;
+    height: 60px;
+    outline: none;
 }
 
 /*
@@ -111,28 +138,6 @@ progress::-moz-progress-bar {
 /* Chrome */
 progress::-webkit-progress-value {
     background: blue;
-}
-
-/*
- * Video Controls
- */
-
-div.video-controls {
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    z-index: 9999;
-}
-
-input {
-    width: 60px;
-    height: 60px;
-    outline: none;
 }
 
 /*
