@@ -1,0 +1,120 @@
+{% extends "mainapp/base/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    {{ layer.name }} - mehr.
+{% endblock %}
+{% block js %}
+    <script src='{% static "mainapp/js/layer_mix2.js" %}'></script>
+    <script type='text/javascript'>
+    var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id current_time %}";
+    // play-pause
+    var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
+    var playIconBlau = "{% static 'mainapp/images/play_blau.png' %}";
+    var pauseIconWeiß = "{% static 'mainapp/images/pause_weiß.png' %}";
+    var pauseIconBlau = "{% static 'mainapp/images/pause_blau.png' %}";
+    // volume
+    var volumeOnIconWeiß = "{% static 'mainapp/images/ton_an_weiß.png' %}";
+    var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
+    var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
+    var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
+
+    var debug = {{ debug_mode }};
+
+    var first_video_class = null;
+    {% for ace in layer.additionalcontentelement_set.all %}
+        {% if ace.first_video_flag %}
+            first_video_class = ".{{ ace.frontend_id }}>video";
+        {% endif %}
+    {% endfor %}
+    </script>
+{% endblock %}
+{% block css %}
+<link href='{% static "mainapp/css/layer_mix2.css" %}' rel="stylesheet" type="text/css"/>
+<style type="text/css">
+    body {
+        cursor: url("{% static 'mainapp/images/x.png' %}"), crosshair;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="timeline">
+    <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
+</div>
+{% if layer.ambient_music %}
+<audio id="ambient_music" autoplay>
+    <source src="{{ layer.ambient_music.url }}" type="audio/ogg">
+    <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
+    Your browser does not support the audio tag.
+</audio>
+{% endif %}
+<div class="header">
+    <a href="#">...</a>
+</div>
+<div class="container-fluid">
+    {% for ace in layer.additionalcontentelement_set.all %}
+    {% if forloop.counter0 != 0 and forloop.counter0|divisibleby:3 %}
+        </div> <!-- end row-->
+    {% endif %}
+    {% if forloop.counter0 == 0 or forloop.counter0|divisibleby:3 %}
+        <div class="row"> <!-- start row-->
+    {% endif %}
+    {% if ace.type == 0 %}
+    <div class="col-md-4 pos {{ ace.frontend_id }} {{ css_classes|random }}">
+        <video loop muted>
+            <source src="{{ ace.video.url }}" type="video/mp4">
+            <source src="{{ ace.video.url }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    {% elif ace.type == 1 %}
+    <div class="col-md-4 pos {{ css_classes|random }}">
+        <img src="{% static ace.image.url %}"/>
+    </div>
+    {% elif ace.type == 2 %}
+    <div class="col-md-4 pos {{ css_classes|random }}">
+        <p>{{ ace.text }}</p>
+    </div>
+    {% elif ace.type == 3 %}
+    <div class="col-md-4 pos {{ ace.frontend_id }} {{ css_classes|random }}">
+        <video loop muted>
+            <source src="{{ ace.video.url }}" type="video/mp4">
+            <source src="{{ ace.video.url }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <br/>
+        <p class="text">{{ ace.text }} </p>
+    </div>
+    {% elif ace.type == 4 %}
+    <div class="col-md-4 pos {{ css_classes|random }}">
+        <img src="{% static ace.image.url %}"/>
+        <p class="text">
+            {{ ace.text }}
+        </p>
+    </div>
+    {% endif %}
+    {% if forloop.last %}
+        </div> <!-- end row last-->
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="mehr">
+    <a href="#">mehr.</a>
+</div>
+<div class="audio-controls">
+    <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}"/>
+    <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}"/>
+</div>
+{% if chapter.get_additional_count > 0 %}
+<div id="layer-container" class="layer-container">
+    {% for l in chapter.additionalcontent_set.all %}
+    {% if layer.id != l.id %}
+    <div class="layer" style="background-image: url('{{ l.image.url }}');"
+         data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
+        <div class="layer-title">{{l.name}}</div>
+        <div class="layer-description">{{l.description}}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

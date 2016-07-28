@@ -1,6 +1,4 @@
 var audio = null;
-var chapterProgressbar = null;
-var layerProgressbar = null;
 var isLayerVisible = false;
 
 function backToChapter(link) {
@@ -12,7 +10,7 @@ function main(){
 
     initPageNavigation();
     initAudioControls();
-    initLayerControl();
+    initLayerControls();
     initLayerElements();
 }
 
@@ -108,7 +106,7 @@ function initAudioControls(){
         });
 }
 
-/* Layers */
+/* additional Layers */
 
 function showLayers(){
     console.log("showLayers");
@@ -129,7 +127,7 @@ function hideLayers(){
     });
 }
 
-function initLayerControl() {
+function initLayerControls() {
 	$('.mehr').on('click', function(event) {
         console.log("mehr. click");
 		if (isLayerVisible) {
@@ -138,6 +136,7 @@ function initLayerControl() {
 			showLayers();
 		}
         event.stopPropagation();
+        return true;
 	});
 
 	$('.layer').click(function(event){
@@ -147,14 +146,17 @@ function initLayerControl() {
         event.stopPropagation();
     });
 
-     $(window).bind('wheel', function(e) {
-        if(e.originalEvent.wheelDelta > 0) { // up
-            hideLayers();
-        } else { // down
-            showLayers();
-        }
-    });
+    // NO SCROLL
+//     $(window).bind('wheel', function(e) {
+//        if(e.originalEvent.wheelDelta > 0) { // up
+//            hideLayers();
+//        } else { // down
+//            showLayers();
+//        }
+//    });
 }
+
+/* Layers */
 
 function initLayerElements() {
 	if (debug)
