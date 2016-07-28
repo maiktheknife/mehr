@@ -161,6 +161,16 @@ function initLayerElements() {
 		$(".layer-element-plus-social-media").css("border", "1px solid red");
 
 	startFirstVideo();
+
+	$('video').hover(
+    function(){ // mouse-enter
+        $('video').each(function(){
+            $(this).get(0).pause();
+        });
+        $(this).get(0).play();
+    }, function() { // mouse-exit
+        $(this).get(0).pause();
+    });
 }
 
 function startFirstVideo() {
