@@ -203,6 +203,21 @@ div.layer-container {
 }
 
 .social-media {
-    position: absolute; bottom: 0; left: 0; height: 40px;
+    display: flex;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
     border: 1px solid blue;
+}
+
+a.social-media-link {
+    flex: 1;
+    margin-left: 10px;
+    height: 100%
+}
+
+a.social-media-link>img {
+    height: 100%;
 }
