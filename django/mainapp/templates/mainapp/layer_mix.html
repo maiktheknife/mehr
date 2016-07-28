@@ -54,7 +54,7 @@
     <div class="content">
         {% for ace in layer.additionalcontentelement_set.all %}
         {% if ace.type == 0 %}
-        <div class="layer-element video-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+        <div class="layer-element video-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
             <video loop muted style="width: 100%; height: 100%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
@@ -62,15 +62,15 @@
             </video>
         </div>
         {% elif ace.type == 1 %}
-        <div class="layer-element image-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+        <div class="layer-element image-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
             <img src="{% static ace.image.url %}" style="width: 100%; height: 100%;"/>
         </div>
         {% elif ace.type == 2 %}
-        <div class="layer-element text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+        <div class="layer-element text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
             {{ ace.text }}
         </div>
         {% elif ace.type == 3 %}
-        <div class="layer-element video-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+        <div class="layer-element video-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
             <video loop muted style="width: 50%; height: 100%;">
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
@@ -81,7 +81,7 @@
             </div>
         </div>
         {% elif ace.type == 4 %}
-        <div class="layer-element image-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%;">
+        <div class="layer-element image-text-element {{ ace.frontend_id }}" style="width: {{ ace.width }}%; height: {{ ace.height }}%; margin-top: {{ace.position_x}}%; margin-left: {{ace.position_y}}%;">
             <img src="{% static ace.image.url %}" style="width: 50%; height: 100%;"/>
             <div class="text" style="width: 50%; height: 100%; overflow: hidden;">
                 {{ ace.text }}
