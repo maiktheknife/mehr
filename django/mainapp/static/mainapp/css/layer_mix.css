@@ -197,3 +197,7 @@ div.layer-container {
     padding: 0px 20%;
     text-align: center;
 }
+
+.layer-element {
+    border: 1px solid red;
+}
