@@ -1,5 +1,7 @@
-
 function main() {
+
+    /* set listeners */
+
     $('#id_type').change(function(){
         updateFields($(this).val());
     });
@@ -28,25 +30,27 @@ function main() {
             "#id_additionalcontentelement_set-2-text");
     });
 
+    /* set field values at startup */
+
+    updateFields($('#id_type').val());
+
     updateInlineFields(
-        '',
+        $("#id_additionalcontentelement_set-0-type").val(),
         "#id_additionalcontentelement_set-0-video",
         "#id_additionalcontentelement_set-0-image",
         "#id_additionalcontentelement_set-0-text");
 
      updateInlineFields(
-        '',
+        $("#id_additionalcontentelement_set-1-type").val(),
         "#id_additionalcontentelement_set-1-video",
         "#id_additionalcontentelement_set-1-image",
         "#id_additionalcontentelement_set-1-text");
 
     updateInlineFields(
-        '',
+        $("#id_additionalcontentelement_set-2-type").val(),
         "#id_additionalcontentelement_set-2-video",
         "#id_additionalcontentelement_set-2-image",
         "#id_additionalcontentelement_set-2-text");
-
-    updateFields('');
 }
 
 function updateFields(selectedValue) {
@@ -63,7 +67,7 @@ function updateFields(selectedValue) {
     */
 //    console.log("updateFields: '" + selectedValue + "'");
 
-    if (selectedValue == "") { // no selection
+    if (!selectedValue || selectedValue == "") { // no selection
         $("#id_video").closest("fieldset").hide();
         $("#id_ambient_music").closest("fieldset").hide();
         $("#galleryimage_set-group").hide();
@@ -82,8 +86,6 @@ function updateFields(selectedValue) {
         $("h2:contains('Additional content elements')").parent().show();
         // FixMe hides the video upload in the additional content groups too
 
-
-
     } else if (selectedValue == 2) { // gallery
          $("#id_video").closest("fieldset").hide();
          $("#id_ambient_music").closest("fieldset").show();
@@ -98,7 +100,7 @@ function updateFields(selectedValue) {
 function updateInlineFields(selectedValue, selVideo, selImage, selText){
     console.log('updateInlineFields: ' + selVideo + " - " + selImage + " - " + selText);
 
-    if (selectedValue == "") { // no selection
+    if (!selectedValue || selectedValue == "") { // no selection
         $(selVideo).closest(".form-row").hide();
         $(selImage).closest(".form-row").hide();
         $(selText).closest(".form-row").hide();
