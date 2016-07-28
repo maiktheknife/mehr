@@ -72,8 +72,6 @@ div.timeline:hover .chapter-overview {
 .chapter-overview .transbox {
     color: white;
     background-color: rgba(242, 242, 242, 0.5);
-
-    border-right: 1px dotted black;
 }
 
 .chapter-overview .transbox.active {
