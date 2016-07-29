@@ -82,7 +82,7 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		context["video"] = additional_content.video
 		site = "mainapp/layer_video.html"
 	elif additional_content.type == AdditionalContent.TYPE_MISC:
-		site = "mainapp/layer_mix.html"
+		site = "mainapp/layer_mix2.html"
 	else:
 		site = "mainapp/layer_gallery.html"
 

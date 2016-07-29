@@ -186,26 +186,26 @@ div.layer-container {
 
 .pos {
     display: block;
+    padding: 1%;
 }
 
 .pos video {
-    display: inline;
-    width: 60%;
-    height: 60%;
+    width: 70%;
+    height: 70%;
     margin: 10px;
 }
 
 .pos img {
     display: inline;
-    width: 60%;
-    height: 60%;
+    width: 70%;
+    height: 70%;
     margin: 10px;
 }
 
 .pos p {
     width: 100%;
     height: 100%;
-    margin: 10px;
+    font-size: 1.5em;
 }
 
 .pos.float-left img {
@@ -220,6 +220,17 @@ div.layer-container {
 
 }
 
+.pos.float-left video {
+    float: left;
+}
+
+.pos.float-right video {
+    float: right;
+}
+
+.pos.float-normal video {
+
+}
 
 /* Sozial */
 .social-media {
