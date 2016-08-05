@@ -1,0 +1,5 @@
+# Django with addons
+
+django == 1.9.6
+django-bootstrap3 == 7.0.1
+django-fontawesome == 0.2.6
