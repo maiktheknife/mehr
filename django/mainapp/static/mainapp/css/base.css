@@ -3,7 +3,39 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+
+    font-family: caslon, sans-serif !important;
+    color: white;
 }
+
+a {
+    text-decoration: none;
+
+    font-family: avenir, sans-serif;
+    color: white;
+
+	-webkit-transition: color 1s;
+    -moz-background-size : color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+}
+
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: blue;
+}
+
+
+/* Header / Footer */
+
+.header {
+	font-size: 3.5em;
+}
+
+.mehr {
+	font-size: 3.5em;
+}
+
 
 /* Overlay */
 
@@ -35,6 +67,7 @@ html, body {
 }
 
 .sub-elements {
+    display: none;
     list-style: none;
 }
 

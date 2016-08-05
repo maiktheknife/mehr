@@ -1,21 +1,8 @@
-body {
-   color: white;
-}
-
 a {
-    text-decoration: none;
-
-    font-family: avenir, sans-serif;
     color: blue;
-
-	-webkit-transition: color 1s;
-    -moz-background-size : color 1s;
-    -o-transition: color 1s;
-    transition: color 1s;
 }
 
 a:hover, a:focus, a:active {
-    text-decoration: none;
     color: white;
 }
 
@@ -53,13 +40,13 @@ div.timeline progress {
 }
 
 .header {
-    font-size: 3.5em;
     align-self: flex-start;
+    z-index: 9999;
 }
 
 .mehr {
-    font-size: 3.5em;
     align-self: flex-end;
+    z-index: 9999;
 }
 
 .carousel {
@@ -148,11 +135,11 @@ progress::-webkit-progress-value {
  */
 
 .flickity-prev-next-button {
-   background: transparent;
+    background: transparent;
 }
 
 .flickity-page-dots {
-  display: none;
+    display: none;
 }
 
 /*

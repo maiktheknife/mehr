@@ -1,20 +1,8 @@
-body {
-   color: blue;
-}
-
 a {
-    text-decoration: none;
-    font-family: avenir, sans-serif;
     color: blue;
-
-	-webkit-transition: color 1s;
-    -moz-background-size : color 1s;
-    -o-transition: color 1s;
-    transition: color 1s;
 }
 
 a:hover, a:focus, a:active {
-    text-decoration: none;
     color: white;
 }
 

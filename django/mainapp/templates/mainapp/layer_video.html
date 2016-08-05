@@ -7,16 +7,6 @@
     <script src='{% static "mainapp/js/layer_video.js" %}'></script>
     <script type='text/javascript'>
         var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id current_time %}";
-        // play-pause
-        var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
-        var playIconBlau = "{% static 'mainapp/images/play_blau.png' %}";
-        var pauseIconWeiß = "{% static 'mainapp/images/pause_weiß.png' %}";
-        var pauseIconBlau = "{% static 'mainapp/images/pause_blau.png' %}";
-        // volume
-        var volumeOnIconWeiß = "{% static 'mainapp/images/ton_an_weiß.png' %}";
-        var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
-        var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
-        var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
 
         {% with next_layer=layer.get_next %}
         {% if next_layer %}

@@ -5,26 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    {# Load jquery and custom javascript #}
     <script src='{% static "mainapp/js/libs/jquery.js" %}'></script>
     <script src='{% static "mainapp/js/base.js" %}'></script>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load fontawesome %}
+    {% fontawesome_stylesheet %}
     <script>
         // nav mouse cursor
         var arrowLeft = "{% static "mainapp/images/small/pfeil_links_weiß.png" %}";
         var arrowRight = "{% static "mainapp/images/small/pfeil_rechts_weiß.png" %}";
-
+        // menu
         var closeWhite = "{% static "mainapp/images/schließen_weiß.png" %}";
         var closeBlue = "{% static "mainapp/images/schließen_blau.png" %}";
+        // play-pause
+        var playIconWeiß = "{% static 'mainapp/images/play_weiß.png' %}";
+        var playIconBlau = "{% static 'mainapp/images/play_blau.png' %}";
+        var pauseIconWeiß = "{% static 'mainapp/images/pause_weiß.png' %}";
+        var pauseIconBlau = "{% static 'mainapp/images/pause_blau.png' %}";
+        // volume
+        var volumeOnIconWeiß = "{% static 'mainapp/images/ton_an_weiß.png' %}";
+        var volumeOnIconBlau = "{% static 'mainapp/images/ton_an_blau.png' %}";
+        var volumeOffIconWeiß = "{% static 'mainapp/images/ton_aus_weiß.png' %}";
+        var volumeOffIconBlau = "{% static 'mainapp/images/ton_aus_blau.png' %}";
     </script>
     {% block js %} {% endblock %}
-    {# Load bootstrap3 #}
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {# Load fontawesome #}
-    {% load fontawesome %}
-    {% fontawesome_stylesheet %}
-    {# Load custom css #}
     <style rel="stylesheet" type="text/css">
         @font-face {
             font-family: avenir;
@@ -35,10 +41,6 @@
             font-family: caslon;
             src: url("{% static 'mainapp/font/ACaslonPro-Bold.otf' %}");
         }
-
-        body {
-            font-family: caslon, sans-serif !important;
-        }
     </style>
     <link href='{% static "mainapp/css/base.css" %}' rel="stylesheet" type="text/css"/>
     {% block css %} {% endblock %}
@@ -48,9 +50,8 @@
     <img class="closebtn" src="{% static 'mainapp/images/schließen_weiß.png' %}">
     <ul class="overlay-content text-center">
         {% for p in people %}
-        <li><a onclick="switchPerson('{{p.id}}'); return false;" class="cover-content" href="#">{{ p.name }}</a></li>
-        <ul class="sub-elements" id="{{p.id}}" style="display:none;">
-            <!--<li><a href="{% url 'mainapp:personPage' p.id %}">Übersicht</a></li>-->
+        <li><a class="cover-content" href="#" data-personid="{{ p.id }}">{{ p.name }}</a></li>
+        <ul class="sub-elements" id="{{ p.id }}">
             {% for c in p.chapter_set.all %}
                 <li><a href="{% url 'mainapp:chapterPage' p.id c.get_relative_id %}">{{ c.name }}</a></li>
             {% endfor %}
