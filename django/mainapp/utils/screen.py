@@ -26,6 +26,26 @@ class Widget:
 		self.height = height
 
 
+class PositionGenerator:
+	def __init__(self, step_size, free_space):
+		self.step_size = step_size
+		self.free_space = free_space
+
+	def generate_position(self, widget):
+		# maybe throw an exception if the width is > 100 - 2 * free_space (the widget would be to wide)
+
+		if 100 - 2 * self.free_space - widget.position[0] - widget.width > 0:
+			random_range = min(self.step_size, 100 - 2 * self.free_space - widget.position[0] - widget.width)
+			x_pos = widget.position[0] + self.free_space + random() * random_range
+		else:
+			random_range = min(self.step_size, 100 - 2 * self.free_space - widget.width)
+			x_pos = self.free_space + random() * random_range
+
+		y_pos = widget.position[1] + self.free_space + random() * self.step_size
+
+		return x_pos, y_pos
+
+
 class Screen:
 	def __init__(self):
 		self.widgets = []
@@ -34,15 +54,13 @@ class Screen:
 		self.widgets.append(widget)
 
 	def get_valid_position(self, width, height):
-		valid_position_found = False
+		position_generator = PositionGenerator(10, 3)
 
 		widget = Widget(width, height)
-		while not valid_position_found:
-			print("in find position loop")
-			widget.position = (random() * (100 - width), random() * (100 - height))
+		widget.position = position_generator.generate_position(widget)
 
-			if self.test_position(widget):
-				valid_position_found = True
+		while not self.test_position(widget):
+			widget.position = position_generator.generate_position(widget)
 
 		return widget.position
 
