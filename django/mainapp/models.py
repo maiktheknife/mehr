@@ -202,19 +202,20 @@ class AdditionalContentElement(models.Model):
 		else:
 			return ""
 
-	# def save(self, *args, **kwargs):
-	# 	elements = self.additional_content.additionalcontentelement_set.all()
-	# 	if self.type == 0 or self.type == 3:
-	# 		self.first_video_flag = True not in map(lambda x: x.first_video_flag, elements)
-	#
-	# 	screen = Screen()
-	# 	for element in elements:
-	# 		screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
-	#
-	# 	(self.position_x, self.position_y) = screen.get_valid_position(self.width, self.height)
-	# 	self.frontend_id = "layer-mix-element-" + str(len(elements))
-	#
-	# 	super(AdditionalContentElement, self).save(*args, **kwargs)
+	def save(self, *args, **kwargs):
+		elements = self.additional_content.additionalcontentelement_set.all()
+		if self.type == 0 or self.type == 3:
+			self.first_video_flag = True not in map(lambda x: x.first_video_flag, elements)
+
+		screen = Screen()
+		for element in elements:
+			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
+
+		(self.position_x, self.position_y) = screen.get_valid_position(self.width, self.height)
+		print("x %s, y%s" % (self.position_x, self.position_y))
+		self.frontend_id = "layer-mix-element-" + str(len(elements))
+
+		super(AdditionalContentElement, self).save(*args, **kwargs)
 
 	def __str__(self):
 		type_string = self.type_choices[int(self.type)][1]

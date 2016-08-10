@@ -8,7 +8,6 @@
     <script type='text/javascript'>
         var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id current_time %}";
         var debug = {{ debug_mode }};
-
         var first_video_class = null;
         {% for ace in layer.additionalcontentelement_set.all %}
             {% if ace.first_video_flag %}
@@ -37,7 +36,7 @@
 </audio>
 {% endif %}
 <div class="box">
-    <div style="height: 5%;">
+    <div>
         <a class="header" href="#">...</a>
     </div>
     <div class="content">
@@ -45,40 +44,35 @@
         <div class="layer-element-plus-social-media" style="position: fixed;width: {{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
             {% if ace.type == 0 %}
             <div class="layer-element video-element {{ ace.frontend_id }}">
-                <video loop muted style="width: 100%; height: 100%;">
+                <video loop muted>
                     <source src="{{ ace.video.url }}" type="video/mp4">
                     <source src="{{ ace.video.url }}" type="video/webm">
                     Your browser does not support the video tag.
                 </video>
             </div>
             {% elif ace.type == 1 %}
-            <div class="layer-element image-element {{ ace.frontend_id }}">
-                <img src="{% static ace.image.url %}" style="width: 100%; height: 100%;"/>
+            <div class="layer-element image-element {{ ace.frontend_id }} {{ css_classes|random }}">
+                <img src="{% static ace.image.url %}" />
             </div>
             {% elif ace.type == 2 %}
-            <div class="layer-element text-element {{ ace.frontend_id }}">
-                {{ ace.text }}
+            <div class="layer-element text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+                <p>{{ ace.text }}</p>
             </div>
             {% elif ace.type == 3 %}
-            <div class="layer-element video-text-element {{ ace.frontend_id }}">
-                <video loop muted style="width: 50%; height: 100%;">
+            <div class="layer-element video-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+                <video loop muted>
                     <source src="{{ ace.video.url }}" type="video/mp4">
                     <source src="{{ ace.video.url }}" type="video/webm">
                     Your browser does not support the video tag.
-                </video><br/>
-                <div class="text" style="width: 50%; height: 100%; overflow: hidden;">
-                    {{ ace.text }}
-                </div>
+                </video>
+                <p class="text">{{ ace.text }}</p>
             </div>
             {% elif ace.type == 4 %}
-            <div class="layer-element image-text-element {{ ace.frontend_id }}">
-                <img src="{% static ace.image.url %}" style="width: 50%; height: 50%;"/>
-                <div class="text" style="width: 50%; height: 100%; overflow: hidden;">
-                    {{ ace.text }}
-                </div>
+            <div class="layer-element image-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+                <img src="{% static ace.image.url %}"/>
+                <p class="text">{{ ace.text }}</p>
             </div>
             {% endif %}
-
             <div class="social-media">
                 {% for social_media_link in ace.socialmedialink_set.all %}
                 <a class="social-media-link" href="{{ social_media_link.link }}">
@@ -89,7 +83,7 @@
         </div>
         {% endfor %}
     </div>
-    <div style="height: 5%;">
+    <div>
         <a class="mehr" href="#">mehr.</a>
     </div>
 </div>
@@ -101,7 +95,9 @@
 <div id="layer-container" class="layer-container">
     {% for l in chapter.additionalcontent_set.all %}
     {% if layer.id != l.id %}
-    <div class="layer" style="background-image: url('{{ l.image.url }}');" data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
+    <div class="layer"
+         style="background-image: url('{{ l.image.url }}');"
+         data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
         <div class="layer-title">{{l.name}}</div>
         <div class="layer-description">{{l.description}}</div>
     </div>

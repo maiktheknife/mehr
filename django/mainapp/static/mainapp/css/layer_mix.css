@@ -30,11 +30,7 @@ div {
     justify-content: center;
 }
 
-div.timeline {
-    position: absolute;
-    width: 100%;
-    height: 5px;
-}
+
 
 div.box div {
     flex-direction: row;
@@ -42,14 +38,6 @@ div.box div {
 
 div.box div.cont {
     flex-direction: column;
-}
-
-div.timeline progress {
-    width: 100%;
-    height: 100%;
-
-    padding: 0;
-    margin: 0;
 }
 
 #layerProgressbar {
@@ -95,9 +83,17 @@ input {
 /*
  * Timeline
  */
-progress {
+
+div.timeline {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+}
+
+div.timeline progress {
     width: 100%;
     height: 100%;
+
     padding: 0;
     margin: 0;
 
@@ -201,6 +197,63 @@ div.layer-container {
 .layer-element {
     padding-bottom: 40px;
 }
+
+
+/* Grid */
+
+.content {
+    padding: 5% 2%;
+}
+
+.layer-element {
+    display: block;
+    padding: 1%;
+}
+
+.layer-element video {
+    width: 70%;
+    height: 70%;
+    margin: 10px;
+}
+
+.layer-element img {
+    display: inline;
+    width: 70%;
+    height: 70%;
+    margin: 10px;
+}
+
+.layer-element p {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.layer-element.float-left img {
+    float: left;
+}
+
+.layer-element.float-right img {
+    float: right;
+}
+
+.layer-element.float-normal img {
+
+}
+
+.layer-element.float-left video {
+    float: left;
+}
+
+.layer-element.float-right video {
+    float: right;
+}
+
+.layer-element.float-normal video {
+
+}
+
+/* Sozial */
 
 .social-media {
     display: flex;
