@@ -39,53 +39,56 @@
     <div>
         <a class="header" href="#">...</a>
     </div>
-    <div class="content">
-        {% for ace in layer.additionalcontentelement_set.all %}
-        <div class="layer-element-plus-social-media" style="position: fixed; width: {{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_y}}%; left: {{ace.position_x}}%;">
-            {% if ace.type == 0 %}
-            <div class="layer-element video-element {{ ace.frontend_id }}">
-                <video loop muted>
-                    <source src="{{ ace.video.url }}" type="video/mp4">
-                    <source src="{{ ace.video.url }}" type="video/webm">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            {% elif ace.type == 1 %}
-            <div class="layer-element image-element {{ ace.frontend_id }} {{ css_classes|random }}">
-                <img src="{% static ace.image.url %}" />
-            </div>
-            {% elif ace.type == 2 %}
-            <div class="layer-element text-element {{ ace.frontend_id }} {{ css_classes|random }}">
-                <p>{{ ace.text }}</p>
-            </div>
-            {% elif ace.type == 3 %}
-            <div class="layer-element video-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
-                <video loop muted>
-                    <source src="{{ ace.video.url }}" type="video/mp4">
-                    <source src="{{ ace.video.url }}" type="video/webm">
-                    Your browser does not support the video tag.
-                </video>
-                <p class="text">{{ ace.text }}</p>
-            </div>
-            {% elif ace.type == 4 %}
-            <div class="layer-element image-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
-                <img src="{% static ace.image.url %}"/>
-                <p class="text">{{ ace.text }}</p>
-            </div>
-            {% endif %}
-            <div class="social-media">
-                {% for social_media_link in ace.socialmedialink_set.all %}
-                <a class="social-media-link" href="{{ social_media_link.link }}">
-                    <img src="{% static social_media_link.platform.icon.url %}">
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
+    <!--empty div to ensure the pretty layout -->
+    <div>
     </div>
     <div>
         <a class="mehr" href="#">mehr.</a>
     </div>
+</div>
+<div class="content">
+    {% for ace in layer.additionalcontentelement_set.all %}
+    <div class="layer-element-plus-social-media" style="position: absolute; width: {{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_y}}%; left: {{ace.position_x}}%;">
+        {% if ace.type == 0 %}
+        <div class="layer-element video-element {{ ace.frontend_id }}">
+            <video loop muted>
+                <source src="{{ ace.video.url }}" type="video/mp4">
+                <source src="{{ ace.video.url }}" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        {% elif ace.type == 1 %}
+        <div class="layer-element image-element {{ ace.frontend_id }} {{ css_classes|random }}">
+            <img src="{% static ace.image.url %}" />
+        </div>
+        {% elif ace.type == 2 %}
+        <div class="layer-element text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+            <p>{{ ace.text }}</p>
+        </div>
+        {% elif ace.type == 3 %}
+        <div class="layer-element video-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+            <video loop muted>
+                <source src="{{ ace.video.url }}" type="video/mp4">
+                <source src="{{ ace.video.url }}" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            <p class="text">{{ ace.text }}</p>
+        </div>
+        {% elif ace.type == 4 %}
+        <div class="layer-element image-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+            <img src="{% static ace.image.url %}"/>
+            <p class="text">{{ ace.text }}</p>
+        </div>
+        {% endif %}
+        <div class="social-media">
+            {% for social_media_link in ace.socialmedialink_set.all %}
+            <a class="social-media-link" href="{{ social_media_link.link }}">
+                <img src="{% static social_media_link.platform.icon.url %}">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
 </div>
 <div class="audio-controls">
     <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
