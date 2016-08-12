@@ -25,6 +25,9 @@ class Widget:
 		self.width = width
 		self.height = height
 
+	def __str__(self):
+		return "pos: {:5.2f}, {:6.2f} | size: {:5.2f} * {:5.2f}".format(self.position[0], self.position[1], self.width, self.height)
+
 
 class PositionGenerator:
 	def __init__(self, step_size, free_space):
@@ -47,14 +50,15 @@ class PositionGenerator:
 
 
 class Screen:
-	def __init__(self):
+	def __init__(self, margin):
 		self.widgets = []
+		self.margin = margin
 
 	def add_widget(self, widget):
 		self.widgets.append(widget)
 
 	def get_valid_position(self, width, height):
-		position_generator = PositionGenerator(10, 3)
+		position_generator = PositionGenerator(10, self.margin)
 
 		widget = Widget(width, height)
 		widget.position = position_generator.generate_position(widget)

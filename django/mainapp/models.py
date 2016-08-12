@@ -207,7 +207,7 @@ class AdditionalContentElement(models.Model):
 		if self.type == 0 or self.type == 3:
 			self.first_video_flag = True not in map(lambda x: x.first_video_flag, elements)
 
-		screen = Screen()
+		screen = Screen(3)
 		for element in elements:
 			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
 
