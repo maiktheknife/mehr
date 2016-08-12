@@ -212,7 +212,7 @@ class AdditionalContentElement(models.Model):
 			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
 
 		(self.position_x, self.position_y) = screen.get_valid_position(self.width, self.height)
-		print("x %s, y%s" % (self.position_x, self.position_y))
+		print(Widget(self.width, self.height, (self.position_x, self.position_y)))
 		self.frontend_id = "layer-mix-element-" + str(len(elements))
 
 		super(AdditionalContentElement, self).save(*args, **kwargs)

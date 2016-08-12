@@ -41,7 +41,7 @@
     </div>
     <div class="content">
         {% for ace in layer.additionalcontentelement_set.all %}
-        <div class="layer-element-plus-social-media" style="position: fixed;width: {{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_x}}%; left: {{ace.position_y}}%;">
+        <div class="layer-element-plus-social-media" style="position: fixed; width: {{ ace.width }}%; height: {{ ace.height }}%; top: {{ace.position_y}}%; left: {{ace.position_x}}%;">
             {% if ace.type == 0 %}
             <div class="layer-element video-element {{ ace.frontend_id }}">
                 <video loop muted>
