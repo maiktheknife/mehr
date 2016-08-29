@@ -1,0 +1,288 @@
+a {
+    text-decoration: none;
+
+    font-family: avenir, sans-serif;
+    color: blue;
+
+    -webkit-transition: color 1s;
+    -moz-background-size : color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+}
+
+a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: white;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+}
+
+div.header-link {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: green;
+}
+
+div.content {
+  position: relative;
+
+  margin-top: 45px;
+  margin-bottom: 74px;
+
+  border: 2px solid red;
+  z-index: -1;
+}
+
+#footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background: lightblue;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+ * Audio Controls
+ */
+
+div.audio-controls {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    z-index: 9999;
+}
+
+input {
+    width: 60px;
+    height: 60px;
+    outline: none;
+}
+
+/*
+ * Timeline
+ */
+
+div.timeline {
+    position: relative;
+    height: 5px;
+}
+
+div.timeline progress {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    /* Turns off styling */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    /* gets rid of default border in Firefox and Opera. */
+    border: none;
+}
+
+/* the Progress Bar Background */
+progress,                          /* Firefox  */
+progress[role][aria-valuenow] {    /* Polyfill */
+   background: transparent !important; /* !important is needed by the polyfill */
+}
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+/* the Progress Bar Value */
+/* IE10 */
+progress {
+    color: blue;
+}
+/* Firefox */
+progress::-moz-progress-bar {
+    background: blue;
+}
+/* Chrome */
+progress::-webkit-progress-value {
+    background: blue;
+}
+
+/*
+ * Layer
+ */
+
+div.layer-container {
+    display: none;
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.layer {
+    position: relative;
+
+    height: auto;
+    min-height: 250px;
+    width: 100%;
+
+    text-align: center;
+    cursor: pointer;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    transition: visibility 1s, opacity 0.5s linear;
+}
+
+.layer:hover .layer-title {
+    display: none;
+}
+
+.layer:hover .layer-description {
+    display: flex;
+}
+
+.layer .layer-title {
+    display: flex;
+
+    text-align: center;
+    font-size: 6em;
+}
+
+.layer .layer-description {
+    display: none;
+
+    font-size: 2.5em;
+    line-height: 0.95;
+    padding: 0px 20%;
+    text-align: center;
+}
+
+.layer-element {
+    padding-bottom: 40px;
+}
+
+
+/* Grid */
+
+/*.content {
+    padding: 5% 2%;
+}*/
+
+.layer-element {
+    display: block;
+    padding: 1%;
+}
+
+.layer-element video {
+    width: 60%;
+    height: 60%;
+    margin: 10px;
+}
+
+.layer-element img {
+    display: inline;
+    width: 60%;
+    height: 60%;
+    margin: 10px;
+}
+
+.layer-element p {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.layer-element.float-left img {
+    float: left;
+}
+
+.layer-element.float-right img {
+    float: right;
+}
+
+.layer-element.float-normal img {
+
+}
+
+.layer-element.float-left video {
+    float: left;
+}
+
+.layer-element.float-right video {
+    float: right;
+}
+
+.layer-element.float-normal video {
+
+}
+
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.layer-element-plus-social-media {
+    border: 2px solid #333;
+    float: left;
+    width: 30%;
+}
+
+.masonry-grid-sizer,
+.masonry-width-0 { width: 25%; }
+.masonry-width-1 { width: 50%; }
+.masonry-width-2 { width: 75%; }
+.masonry-width-3 { width: 100%; }
+
+.masonry-height-0 { height: 100px; }
+.masonry-height-1 { height: 200px; }
+.masonry-height-2 { height: 300px; }
+.masonry-height-3 { height: 400px; }
+
+
+/* Sozial */
+
+.social-media {
+    display: flex;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    border: 1px solid blue;
+}
+
+a.social-media-link {
+    flex: 1;
+    margin-left: 10px;
+    height: 100%;
+}
+
+a.social-media-link>img {
+    height: 100%;
+}

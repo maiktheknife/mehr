@@ -1,0 +1,77 @@
+https://codepen.io/pen/
+
+=== HTML: =========================================
+
+<div id="header">
+  <div class="progress">progress</div>
+  <div class="header-link">
+    mehr.
+  </div>
+</div>
+<div id="content">
+  <div>aaaaaaaaaaaaa</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>asteuhsantehu</div>
+  <div>bbbbbbbbbbbbb</div>
+</div>
+<div id="footer">
+  <a>footer</a>
+</div>
+
+
+=== CSS: ==========================================
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.progress {
+  height: 20px;
+  background: red;
+}
+
+.header-link {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: green;
+}
+
+#content {
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border: 2px solid;
+  z-index: -1
+}
+
+#footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  background: lightblue;
+}

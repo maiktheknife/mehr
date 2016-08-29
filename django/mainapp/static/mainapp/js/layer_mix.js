@@ -12,6 +12,8 @@ function main(){
     initAudioControls();
     initLayerControl();
     initLayerElements();
+
+    initMasonry();
 }
 
 function initPageNavigation() {
@@ -170,6 +172,16 @@ function initLayerElements() {
     }, function() { // mouse-exit
         $(this).get(0).pause();
     });
+}
+
+function initMasonry() {
+	$('div.grid').masonry({
+		itemSelector: '.layer-element-plus-social-media',
+		//itemSelector: '.grid-item',
+		columnWidth: '.masonry-grid-sizer',
+		//columnWidth: '.grid-sizer',
+                percentPosition: true
+	});
 }
 
 function startFirstVideo() {

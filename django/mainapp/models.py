@@ -196,6 +196,12 @@ class AdditionalContentElement(models.Model):
 	def get_size(self):
 		return self.width, self.height
 
+	def get_height_category(self):
+		return min(int(self.height) // 25, 3)
+
+	def get_width_category(self):
+		return min(int(self.width) // 25, 3)
+
 	def get_autoplay(self):
 		if self.first_video_flag:
 			return "autoplay"
