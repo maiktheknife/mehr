@@ -4,6 +4,7 @@
 {% comment %}{{ layer.name }} - mehr.{% endcomment %}
 {% endblock %}
 {% block js %}
+<script src='{% static "mainapp/js/libs/imagesloaded.pkgd.min.js" %}'></script>
 <script src='{% static "mainapp/js/libs/masonry.pkgd.min.js" %}'></script>
 <script src='{% static "mainapp/js/layer_mix.js" %}'></script>
 <script type='text/javascript'>
@@ -39,43 +40,43 @@
         <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
     </div>
     <div class="header-link">
-        <a href="#">...</a>
+        <a class="header" href="#">...</a>
     </div>
 </div>
 <div class="content grid">
-    <div class="masonry-grid-sizer"></div>
+    <div class="grid-sizer"></div>
     {% for ace in layer.additionalcontentelement_set.all %}
-    <div class="layer-element-plus-social-media masonry-width-{{ace.get_width_category}} masonry-height-{{ace.get_height_category}}">
+    <div class="grid-item layer-element-plus-social-media masonry-width-{{ace.get_width_category}} masonry-height-{{ace.get_height_category}} {{ css_classes|random }}">
         {% if ace.type == 0 %}
-        <div class="layer-element video-element {{ ace.frontend_id }}">
+        <!--<div class="layer-element video-element {{ ace.frontend_id }}">-->
             <video loop muted>
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
-        </div>
+        <!--</div>-->
         {% elif ace.type == 1 %}
-        <div class="layer-element image-element {{ ace.frontend_id }} {{ css_classes|random }}">
+        <!--<div class="layer-element image-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
             <img src="{% static ace.image.url %}" />
-        </div>
+        <!--</div>-->
         {% elif ace.type == 2 %}
-        <div class="layer-element text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+        <!--<div class="layer-element text-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
             <p>{{ ace.text }}</p>
-        </div>
+        <!--</div>-->
         {% elif ace.type == 3 %}
-        <div class="layer-element video-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+        <!--<div class="layer-element video-text-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
             <video loop muted>
                 <source src="{{ ace.video.url }}" type="video/mp4">
                 <source src="{{ ace.video.url }}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
             <p class="text">{{ ace.text }}</p>
-        </div>
+        <!--</div>-->
         {% elif ace.type == 4 %}
-        <div class="layer-element image-text-element {{ ace.frontend_id }} {{ css_classes|random }}">
+        <!--<div class="layer-element image-text-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
             <img src="{% static ace.image.url %}"/>
             <p class="text">{{ ace.text }}</p>
-        </div>
+        <!--</div>-->
         {% endif %}
         <div class="social-media">
             {% for social_media_link in ace.socialmedialink_set.all %}

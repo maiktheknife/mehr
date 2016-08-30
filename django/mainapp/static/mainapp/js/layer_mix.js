@@ -12,7 +12,6 @@ function main(){
     initAudioControls();
     initLayerControl();
     initLayerElements();
-
     initMasonry();
 }
 
@@ -175,13 +174,29 @@ function initLayerElements() {
 }
 
 function initMasonry() {
-	$('div.grid').masonry({
-		itemSelector: '.layer-element-plus-social-media',
+    console.log("initMasonry");
+	var grid = $('div.grid').masonry({
+		itemSelector: '.grid-item',
 		//itemSelector: '.grid-item',
-		columnWidth: '.masonry-grid-sizer',
+		columnWidth: '.grid-sizer',
 		//columnWidth: '.grid-sizer',
-                percentPosition: true
+        percentPosition: true,
+        gutter: 10
 	});
+
+	// layout Masonry after each image loads
+    grid.imagesLoaded().progress( function() {
+        //console.log("image loaded");
+        grid.masonry('layout');
+    });
+
+	// layout Masonry after each video loads
+    $('video').each(function() {
+        $(this).get(0).addEventListener('loadeddata', function() {
+            //console.log("video loaded");
+            grid.masonry('layout');
+        }, false);
+    });
 }
 
 function startFirstVideo() {
