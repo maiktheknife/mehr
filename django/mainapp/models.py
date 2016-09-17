@@ -176,11 +176,6 @@ class AdditionalContentElement(models.Model):
 	)
 
 	type = models.IntegerField(choices=type_choices)
-
-	position_x = models.FloatField(default=0, editable=False)
-	position_y = models.FloatField(default=0, editable=False)
-	width = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
-	height = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
 	frontend_id = models.CharField(max_length=30, default="", editable=False)
 	first_video_flag = models.BooleanField(default=False, editable=False)
 
@@ -189,18 +184,6 @@ class AdditionalContentElement(models.Model):
 	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
-
-	def get_position(self):
-		return self.position_x, self.position_y
-
-	def get_size(self):
-		return self.width, self.height
-
-	def get_height_category(self):
-		return min(int(self.height) // 25, 3)
-
-	def get_width_category(self):
-		return min(int(self.width) // 25, 3)
 
 	def get_autoplay(self):
 		if self.first_video_flag:

@@ -1,7 +1,7 @@
 {% extends "mainapp/base/base.html" %}
 {% load staticfiles %}
 {% block title %}
-{% comment %}{{ layer.name }} - mehr.{% endcomment %}
+{{ layer.name }} - mehr.
 {% endblock %}
 {% block js %}
 <script src='{% static "mainapp/js/libs/imagesloaded.pkgd.min.js" %}'></script>
@@ -26,7 +26,6 @@
     }
     </style>
 {% endblock %}
-
 {% block content %}
 {% if layer.ambient_music %}
 <audio id="ambient_music" autoplay>
@@ -35,79 +34,70 @@
     Your browser does not support the audio tag.
 </audio>
 {% endif %}
-<div id="header">
-    <div class="timeline">
-        <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
-    </div>
-    <div class="header-link">
-        <a class="header" href="#">...</a>
-    </div>
+<div class="timeline">
+    <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
 </div>
-<div class="content grid">
-    <div class="grid-sizer"></div>
-    {% for ace in layer.additionalcontentelement_set.all %}
-    <div class="grid-item layer-element-plus-social-media masonry-width-{{ace.get_width_category}} masonry-height-{{ace.get_height_category}} {{ css_classes|random }}">
-        {% if ace.type == 0 %}
-        <!--<div class="layer-element video-element {{ ace.frontend_id }}">-->
-            <video loop muted>
-                <source src="{{ ace.video.url }}" type="video/mp4">
-                <source src="{{ ace.video.url }}" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
-        <!--</div>-->
-        {% elif ace.type == 1 %}
-        <!--<div class="layer-element image-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
-            <img src="{% static ace.image.url %}" />
-        <!--</div>-->
-        {% elif ace.type == 2 %}
-        <!--<div class="layer-element text-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
-            <p>{{ ace.text }}</p>
-        <!--</div>-->
-        {% elif ace.type == 3 %}
-        <!--<div class="layer-element video-text-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
-            <video loop muted>
-                <source src="{{ ace.video.url }}" type="video/mp4">
-                <source src="{{ ace.video.url }}" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
-            <p class="text">{{ ace.text }}</p>
-        <!--</div>-->
-        {% elif ace.type == 4 %}
-        <!--<div class="layer-element image-text-element {{ ace.frontend_id }} {{ css_classes|random }}">-->
-            <img src="{% static ace.image.url %}"/>
-            <p class="text">{{ ace.text }}</p>
-        <!--</div>-->
-        {% endif %}
-        <div class="social-media">
-            {% for social_media_link in ace.socialmedialink_set.all %}
-            <a class="social-media-link" href="{{ social_media_link.link }}">
-                <img src="{% static social_media_link.platform.icon.url %}">
-            </a>
+<div class="audio-controls">
+    <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
+    <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
+</div>
+<div class="wrapper">
+    <div class="header">
+        <a href="#">...</a>
+    </div>
+    <div class="content grid">
+        <div class="grid-sizer"></div>
+        {% for ace in layer.additionalcontentelement_set.all %}
+        <div class="grid-item {{ css_classes|random }}">
+            {% if ace.type == 0 %}
+                <video loop muted>
+                    <source src="{{ ace.video.url }}" type="video/mp4">
+                    <source src="{{ ace.video.url }}" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+            {% elif ace.type == 1 %}
+                <img src="{% static ace.image.url %}" />
+            {% elif ace.type == 2 %}
+                <p>{{ ace.text }}</p>
+            {% elif ace.type == 3 %}
+                <video loop muted>
+                    <source src="{{ ace.video.url }}" type="video/mp4">
+                    <source src="{{ ace.video.url }}" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="text">{{ ace.text }}</p>
+            {% elif ace.type == 4 %}
+                <img src="{% static ace.image.url %}"/>
+                <p class="text">{{ ace.text }}</p>
+            {% endif %}
+            <div class="social-media">
+                {% for social_media_link in ace.socialmedialink_set.all %}
+                <a class="social-media-link" href="{{ social_media_link.link }}">
+                    <img src="{% static social_media_link.platform.icon.url %}">
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="footer">
+        <div class="mehr">
+            <a href="#">mehr.</a>
+        </div>
+        {% if chapter.get_additional_count > 0 %}
+        <div class="layer-container">
+            {% for l in chapter.additionalcontent_set.all %}
+            {% if layer.id != l.id %}
+            <div class="layer"
+                 style="background-image: url('{{ l.image.url }}');"
+                 data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
+                <div class="layer-title">{{l.name}}</div>
+                <div class="layer-description">{{l.description}}</div>
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
+        {% endif %}
     </div>
-    {% endfor %}
 </div>
-<div id="footer">
-    <div class="audio-controls">
-        <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
-        <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
-    </div>
-    <a class="mehr" href="#">mehr.</a>
-</div>
-
-{% if chapter.get_additional_count > 0 %}
-<div id="layer-container" class="layer-container">
-    {% for l in chapter.additionalcontent_set.all %}
-    {% if layer.id != l.id %}
-    <div class="layer"
-         style="background-image: url('{{ l.image.url }}');"
-         data-layerlink="{% url 'mainapp:additionalContentPage' person.id chapter.get_relative_id l.get_relative_id %}">
-        <div class="layer-title">{{l.name}}</div>
-        <div class="layer-description">{{l.description}}</div>
-    </div>
-    {% endif %}
-    {% endfor %}
-</div>
-{% endif %}
 {% endblock %}
