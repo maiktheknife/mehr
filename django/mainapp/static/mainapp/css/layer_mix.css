@@ -1,5 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-   color: blue;
+    color: black;
 }
 
 a {
@@ -8,54 +12,10 @@ a {
     font-family: avenir, sans-serif;
     color: blue;
 
-	-webkit-transition: color 1s;
+    -webkit-transition: color 1s;
     -moz-background-size : color 1s;
     -o-transition: color 1s;
     transition: color 1s;
-}
-
-a:hover, a:focus, a:active {
-    text-decoration: none;
-    color: white;
-}
-
-.box {
-    position: fixed;
-}
-
-div {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    flex-flow: center;
-    align-items: center;
-    justify-content: center;
-}
-
-div.box div {
-    flex-direction: row;
-}
-
-div.box div.cont {
-    flex-direction: column;
-}
-
-#layerProgressbar {
-    position: absolute;
-    bottom: 0;
-
-    width: 100%;
-    height: 5px;
-}
-
-.header {
-    align-self: flex-start;
-}
-
-.mehr {
-    align-self: flex-end;
 }
 
 /*
@@ -85,17 +45,15 @@ input {
  */
 
 div.timeline {
-    position: absolute;
-    width: 100%;
+    position: relative;
     height: 5px;
 }
 
 div.timeline progress {
+    position: absolute;
+
     width: 100%;
     height: 100%;
-
-    padding: 0;
-    margin: 0;
 
     /* Turns off styling */
     appearance: none;
@@ -104,12 +62,6 @@ div.timeline progress {
 
     /* gets rid of default border in Firefox and Opera. */
     border: none;
-}
-
-progress.layer-progressbar {
-    position: relative;
-    bottom: 0;
-    left: 0;
 }
 
 /* the Progress Bar Background */
@@ -137,123 +89,120 @@ progress::-webkit-progress-value {
 }
 
 /*
- * Layer
+ * Wrapper
  */
 
-div.layer-container {
-    display: none;
-    position: relative;
-
-    width: 100%;
-    height: auto;
-
-    flex-direction: column;
-    flex-flow: center;
-    align-items: center;
-    justify-content: center;
+.wrapper .header, .wrapper .footer, .wrapper .footer .layer-container, .wrapper .footer .layer-container .layer {
+	display: flex;
+	flex-direction: column;
+	flex-flow: center;
+	align-items: center;
+	justify-content: center;
 }
 
-.layer {
-    position: relative;
-
-    height: auto;
-    min-height: 250px;
-    width: 100%;
-
-    text-align: center;
-    cursor: pointer;
-
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-
-    transition: visibility 1s, opacity 0.5s linear;
+.wrapper .content {
+    margin: 20px;
 }
 
-.layer:hover .layer-title {
-    display: none;
+.wrapper .header {
+	align-self: flex-start;
 }
 
-.layer:hover .layer-description {
-    display: flex;
+/* Layer */
+
+.wrapper .footer .layer-container {
+	display: none;
+	position: relative;
+	width: 100%;
+	height: auto;
 }
 
-.layer .layer-title {
-    display: flex;
+.wrapper .footer .layer-container .layer {
+	position: relative;
+	height: auto;
+	min-height: 200px;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	transition: visibility 1s, opacity 0.5s linear;
+	color: white;
+}
 
-    text-align: center;
+.wrapper .footer .layer-container .layer:hover .layer-title {
+	display: none;
+}
+
+.wrapper .footer .layer-container .layer:hover .layer-description {
+	display: flex;
+}
+
+.wrapper .footer .layer-container .layer .layer-title {
+	display: flex;
+	text-align: center;
 	font-size: 6em;
 }
 
-.layer .layer-description {
-    display: none;
-
-    font-size: 2.5em;
-    line-height: 0.95;
-    padding: 0px 20%;
-    text-align: center;
+.wrapper .footer .layer-container .layer .layer-description {
+	display: none;
+	font-size: 2.5em;
+	line-height: 0.95;
+	padding: 0px 20%;
+	text-align: center;
 }
-
-.layer-element {
-    padding-bottom: 40px;
-}
-
 
 /* Grid */
 
-.content {
-    padding: 5% 2%;
-}
-
-.layer-element {
+.grid:after {
+    content: '';
     display: block;
-    padding: 1%;
+    clear: both;
 }
 
-.layer-element video {
-    width: 60%;
-    height: 60%;
-    margin: 10px;
+.grid-item {
+    width: 99%;
+    margin-bottom: 20px;
 }
 
-.layer-element img {
-    display: inline;
-    width: 60%;
-    height: 60%;
-    margin: 10px;
+@media screen and (min-width: 600px) {
+    .grid-item { width: 48%; }
 }
 
-.layer-element p {
+@media screen and (min-width: 1200px) {
+    .grid-item { width: 32%; }
+}
+
+.grid-item img, .grid-item video {
+    display: block;
+    max-width: 100%;
+}
+
+.grid-item img,
+.grid-item video {
+    width: 70%;
+    height: 70%;
+    padding: 10px;
+}
+
+.grid-item p {
     width: 100%;
     height: 100%;
     font-size: 1.5em;
 }
 
-.layer-element.float-left img {
+.grid-item.float-left img,
+.grid-item.float-left video {
     float: left;
 }
 
-.layer-element.float-right img {
+.grid-item.float-right img,
+.grid-item.float-left video {
     float: right;
 }
 
-.layer-element.float-normal img {
-
-}
-
-.layer-element.float-left video {
-    float: left;
-}
-
-.layer-element.float-right video {
-    float: right;
-}
-
-.layer-element.float-normal video {
-
-}
-
-/* Sozial */
+/* Sozial
 
 .social-media {
     display: flex;
@@ -268,9 +217,10 @@ div.layer-container {
 a.social-media-link {
     flex: 1;
     margin-left: 10px;
-    height: 100%
+    height: 100%;
 }
 
 a.social-media-link>img {
     height: 100%;
 }
+*/

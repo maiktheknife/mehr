@@ -47,20 +47,20 @@ function initPageNavigation() {
 
 function toggleAudioStatus(){
     if (audio.paused) {
-        $("#video-toggle").attr('src', pauseIconWeiß);
+        $("#audio-toggle").attr('src', pauseIconWeiß);
         audio.play();
     } else {
-        $("#video-toggle").attr('src', playIconWeiß);
+        $("#audio-toggle").attr('src', playIconWeiß);
         audio.pause();
     }
 }
 
 function toggleAudioVolume(){
     if (audio.muted) {
-        $("#video-volume").attr('src', volumeOffIconWeiß);
+        $("#audio-volume").attr('src', volumeOffIconWeiß);
         audio.muted = false;
     } else {
-        $("#video-volume").attr('src', volumeOnIconWeiß);
+        $("#audio-volume").attr('src', volumeOnIconWeiß);
         audio.muted = true;
     }
 }
@@ -111,10 +111,10 @@ function initAudioControls(){
 
 function showLayers(){
     console.log("showLayers");
-    $('#layer-container').show();
+    $('.layer-container').show();
     isLayerVisible = true;
     $('html, body').animate({
-            scrollTop : $('#layer-container').offset().top
+            scrollTop : $('.layer-container').offset().top
     }, 1000);
 }
 
@@ -123,7 +123,7 @@ function hideLayers(){
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
-        $('#layer-container').hide();
+        $('.layer-container').hide();
         isLayerVisible = false;
     });
 }
@@ -157,10 +157,7 @@ function initLayerControl() {
 }
 
 function initLayerElements() {
-	if (debug)
-		$(".layer-element-plus-social-media").css("border", "1px solid red");
-
-	startFirstVideo();
+	$('video').first().get(0).play();
 
 	$('video').hover(
     function(){ // mouse-enter
@@ -175,13 +172,10 @@ function initLayerElements() {
 
 function initMasonry() {
     console.log("initMasonry");
-	var grid = $('div.grid').masonry({
-		itemSelector: '.grid-item',
-		//itemSelector: '.grid-item',
-		columnWidth: '.grid-sizer',
-		//columnWidth: '.grid-sizer',
+	var grid = $('.grid').masonry({
+        itemSelector: '.grid-item',
         percentPosition: true,
-        gutter: 10
+        gutter: 20
 	});
 
 	// layout Masonry after each image loads
@@ -197,14 +191,6 @@ function initMasonry() {
             grid.masonry('layout');
         }, false);
     });
-}
-
-function startFirstVideo() {
-	if (first_video_class != null) {
-		var video = $(first_video_class).get(0);
-		video.play();
-		//$("." + first_video_class).get(0).play()
-	}
 }
 
 $(document).ready(main);

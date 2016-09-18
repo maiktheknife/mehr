@@ -1,8 +1,6 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
-from .utils.screen import Screen, Widget
 
 
 class SocialMediaPlatform(models.Model):
@@ -176,35 +174,10 @@ class AdditionalContentElement(models.Model):
 	)
 
 	type = models.IntegerField(choices=type_choices)
-	frontend_id = models.CharField(max_length=30, default="", editable=False)
-	first_video_flag = models.BooleanField(default=False, editable=False)
-
 	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-
 	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
-
-	def get_autoplay(self):
-		if self.first_video_flag:
-			return "autoplay"
-		else:
-			return ""
-
-	def save(self, *args, **kwargs):
-		elements = self.additional_content.additionalcontentelement_set.all()
-		if self.type == 0 or self.type == 3:
-			self.first_video_flag = True not in map(lambda x: x.first_video_flag, elements)
-
-		screen = Screen(3)
-		for element in elements:
-			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
-
-		(self.position_x, self.position_y) = screen.get_valid_position(self.width, self.height)
-		print(Widget(self.width, self.height, (self.position_x, self.position_y)))
-		self.frontend_id = "layer-mix-element-" + str(len(elements))
-
-		super(AdditionalContentElement, self).save(*args, **kwargs)
 
 	def __str__(self):
 		type_string = self.type_choices[int(self.type)][1]

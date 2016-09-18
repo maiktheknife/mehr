@@ -62,11 +62,6 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]
 
-	if settings.DEBUG:
-		debug_mode = "true"
-	else:
-		debug_mode = "false"
-
 	context = {
 		"people": persons,
 		"person": person,
@@ -74,7 +69,7 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		"layer": additional_content,
 		"current_time": chapter_time,
 		"chapter_progress": chapterutils.get_global_chapter_progress(chapter, chapters, int(chapter_time)),
-		"debug_mode": debug_mode,
+		"debug_mode": "true" if settings.DEBUG else "false",
 		"css_classes": ["float-left", "float-normal", "float-right", ]
 	}
 
@@ -82,8 +77,7 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		context["video"] = additional_content.video
 		site = "mainapp/layer_video.html"
 	elif additional_content.type == AdditionalContent.TYPE_MISC:
-		site = "mainapp/layer_mix_masonry.html"
-		# site = "mainapp/layer_mix.html"
+		site = "mainapp/layer_mix.html"
 	else:
 		site = "mainapp/layer_gallery.html"
 
