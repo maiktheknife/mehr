@@ -128,7 +128,7 @@ progress::-webkit-progress-value {
 	background-position: center center;
 	background-size: cover;
 	transition: visibility 1s, opacity 0.5s linear;
-	color: white;
+	color: blue;
 }
 
 .wrapper .footer .layer-container .layer:hover .layer-title {
@@ -142,12 +142,14 @@ progress::-webkit-progress-value {
 .wrapper .footer .layer-container .layer .layer-title {
 	display: flex;
 	text-align: center;
+	text-shadow: 5px 5px 10px white;
 	font-size: 6em;
 }
 
 .wrapper .footer .layer-container .layer .layer-description {
 	display: none;
 	font-size: 2.5em;
+	text-shadow: 5px 5px 10px white;
 	line-height: 0.95;
 	padding: 0px 20%;
 	text-align: center;
