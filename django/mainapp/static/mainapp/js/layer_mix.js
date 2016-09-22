@@ -110,7 +110,7 @@ function initAudioControls(){
 /* Layers */
 
 function showLayers(){
-    console.log("showLayers");
+    // console.log("showLayers");
     $('.layer-container').show();
     isLayerVisible = true;
     $('html, body').animate({
@@ -119,7 +119,7 @@ function showLayers(){
 }
 
 function hideLayers(){
-    console.log("hideLayers");
+    // console.log("hideLayers");
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
@@ -130,7 +130,7 @@ function hideLayers(){
 
 function initLayerControl() {
 	$('.mehr').on('click', function(event) {
-        console.log("mehr. click");
+        // console.log("mehr. click");
 		if (isLayerVisible) {
 			hideLayers()
 		} else {
@@ -140,7 +140,7 @@ function initLayerControl() {
 	});
 
 	$('.layer').click(function(event){
-	    console.log("layer click");
+	    // console.log("layer click");
         var layerLink = $(this).attr("data-layerlink");
         window.location.href = layerLink;
         event.stopPropagation();
@@ -171,7 +171,7 @@ function initLayerElements() {
 }
 
 function initMasonry() {
-    console.log("initMasonry");
+    // console.log("initMasonry");
 	var grid = $('.grid').masonry({
         itemSelector: '.grid-item',
         percentPosition: true,

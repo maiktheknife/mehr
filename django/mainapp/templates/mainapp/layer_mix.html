@@ -33,13 +33,13 @@
     <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
     Your browser does not support the audio tag.
 </audio>
-{% endif %}
-<div class="timeline">
-    <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
-</div>
 <div class="audio-controls">
     <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
     <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
+</div>
+{% endif %}
+<div class="timeline">
+    <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
 </div>
 <div class="wrapper">
     <div class="header">
