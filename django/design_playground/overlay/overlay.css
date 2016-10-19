@@ -3,43 +3,67 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    color: #ffffff;
+    color: white;
 }
+
+/*
+ * overlay
+ */
 
 .overlay {
     height: 100%;
-    width: 0%;
+    width: 100%;
     position: fixed;
     z-index: 999999;
     top: 0;
     left: 0;
     background-color: rgba(19, 92, 251, 0.6);
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
     transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* overlay menu */
+
+.overlay .overlay-menu {
+    list-style: none;
 
     display: flex;
     flex-direction: row;
     flex-flow: center;
     align-items: center;
     justify-content: center;
+    flex: 1 0 0;
+
+    background: red;
 }
 
-.overlay-content {
+.overlay .overlay-menu a.cover-menu {
+    padding: 50px;
+    font-size: 25px;
+}
+
+.overlay .overlay-menu .cover-menu.active {
+    color: blue;
+}
+
+.overlay .overlay-content {
     list-style: none;
-    position: relative;
-    left: 15%;
-    top: -7%;
+    display: flex;
     flex-direction: column;
+    flex: 4 0 0;
+
+    background: green;
 }
 
-.overlay-menu {
+.overlay .overlay-content .sub-elements {
+    display: none;
     list-style: none;
-    position: relative;
-    top: 30%;
-    right: 11%;
-    flex-direction: row;
-    display: inherit;
 }
 
 .overlay a {
@@ -55,8 +79,14 @@ html, body {
     color: #051cf1;
 }
 
+.overlay .sub-elements {
+    line-height: 0.9;
+}
+
 .closebtn {
     position: absolute;
+    width: 80px;
+    height: 80px;
     top: 20px;
     right: 45px;
     font-size: 60px !important;
@@ -73,8 +103,4 @@ html, body {
 
 a.cover-content {
     font-size:75px;
-}
-
-a.cover-menu {
-    font-size:45px;
 }

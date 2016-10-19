@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="overlay.js"></script>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="overlay.css">
+</head>
+<body>
+<a class="header text-center" href="#">OPEN</a>
+<div id="myNav" class="overlay">
+    <img class="closebtn" src="../res/schließen_weiß.png">
+    <!--<a href="#" class="closebtn" onclick="closeNav()">×</a>-->
+    <ul class="overlay-menu text-center">
+        <li class="menu-item"><a href="#" class="cover-menu">Home</a></li>
+        <li class="menu-item"><a href="#" class="cover-menu active">Künstler</a></li>
+        <li class="menu-item"><a href="#" class="cover-menu">About</a></li>
+        <li class="menu-item"><a href="#" class="cover-menu">Impressum</a></li>
+    </ul>
+    <ul class="overlay-content">
+        <li><a class="cover-content" href="#" data-personid="1">{{ p.name_1 }}</a>
+            <ul class="sub-elements" id="1">
+                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="#">{{ c.name }}</a></li>
+            </ul>
+        </li>
+        <li><a class="cover-content" href="#" data-personid="2">{{ p.name_2 }}</a>
+            <ul class="sub-elements" id="2">
+                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="#">{{ c.name }}</a></li>
+            </ul>
+        </li>
+        <li><a class="cover-content" href="#" data-personid="3">{{ p.name_3 }}</a>
+            <ul class="sub-elements" id="3">
+                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="#">{{ c.name }}</a></li>
+                <li><a href="#">{{ c.name }}</a></li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
+</body>
+</html>

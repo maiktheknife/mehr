@@ -26,7 +26,9 @@ a:hover, a:focus, a:active {
 }
 
 
-/* Header / Footer */
+/*
+ * Header / Footer
+ */
 
 .header {
 	font-size: 3.5em;
@@ -38,8 +40,9 @@ a:hover, a:focus, a:active {
 	z-index: 9999;
 }
 
-
-/* Overlay */
+/*
+ * Overlay
+ */
 
 .overlay {
     height: 0%;
