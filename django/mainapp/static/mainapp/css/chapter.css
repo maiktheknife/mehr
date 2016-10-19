@@ -177,14 +177,12 @@ div.layer-container {
     display: flex;
 
     text-align: center;
-    text-shadow: 5px 5px 10px blue;
 	font-size: 6em;
 }
 
 .layer .layer-description {
     display: none;
 
-    text-shadow: 5px 5px 10px blue;
     font-size: 2.5em;
     line-height: 0.95;
     padding: 0px 20%;

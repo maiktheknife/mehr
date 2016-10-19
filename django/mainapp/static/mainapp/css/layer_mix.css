@@ -142,14 +142,12 @@ progress::-webkit-progress-value {
 .wrapper .footer .layer-container .layer .layer-title {
 	display: flex;
 	text-align: center;
-	text-shadow: 5px 5px 10px white;
 	font-size: 6em;
 }
 
 .wrapper .footer .layer-container .layer .layer-description {
 	display: none;
 	font-size: 2.5em;
-	text-shadow: 5px 5px 10px white;
 	line-height: 0.95;
 	padding: 0px 20%;
 	text-align: center;
@@ -165,7 +163,7 @@ progress::-webkit-progress-value {
 
 .grid-item {
     width: 99%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 @media screen and (min-width: 600px) {

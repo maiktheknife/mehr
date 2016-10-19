@@ -171,7 +171,6 @@ div.layer-container {
 
     text-align: center;
 	font-size: 6em;
-	text-shadow: 5px 5px 10px white;
 }
 
 .layer .layer-description {
@@ -181,5 +180,4 @@ div.layer-container {
     line-height: 0.95;
     padding: 0px 20%;
     text-align: center;
-    text-shadow: 5px 5px 10px white;
 }
