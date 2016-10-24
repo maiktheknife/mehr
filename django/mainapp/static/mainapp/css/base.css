@@ -25,7 +25,6 @@ a:hover, a:focus, a:active {
     color: blue;
 }
 
-
 /*
  * Header / Footer
  */
@@ -52,38 +51,89 @@ a:hover, a:focus, a:active {
     top: 0;
     left: 0;
     background-color: rgba(19, 92, 251, 0.6);
+    overflow: auto;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: scroll;
     transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* overlay menu */
+
+.overlay .overlay-menu {
+    list-style: none;
 
     display: flex;
     flex-direction: row;
     flex-flow: center;
     align-items: center;
     justify-content: center;
+    flex: 1 0 0;
 }
 
-.overlay-content {
-    list-style: none;
-    position: relative;
-    left: 15%;
-    top: -7%;
+.overlay .overlay-menu a.cover-menu {
+    padding: 50px;
+    font-size: 25px;
+}
+
+.overlay .overlay-menu .cover-menu.active {
+    color: blue;
+}
+
+.overlay .overlay-content {
+    display: flex;
+    flex-direction: column;
+    flex-flow: center;
+    align-items: center;
+    justify-content: center;
+    flex: 4 0 0;
+}
+/*
+.overlay :after {
+  content: "";
+  display: block;
+  height: 50px;
+  width: 100%;
+}
+*/
+
+/* overlay artists */
+
+.overlay .overlay-content .artists  {
+    display: flex;
     flex-direction: column;
 }
 
-.sub-elements {
-    display: none;
+.overlay .overlay-content .artists > ul  {
+    list-style: none;
+    padding: 0px;
+}
+
+.overlay .overlay-content .artists ul  {
     list-style: none;
 }
 
-.overlay-menu {
+.overlay .overlay-content .artists .sub-elements {
+    display: none;
     list-style: none;
-    position: relative;
-    top: 30%;
-    right: 20%;
-    flex-direction: row;
-    display: inherit;
+    line-height: 0.9;
 }
+
+/* overlay about, imprint */
+
+.about, .imprint {
+    max-width: 70%;
+    font-size: 20px;
+    display: none;
+
+}
+
+/* stuff */
 
 .overlay a {
     padding: 8px;
@@ -94,20 +144,8 @@ a:hover, a:focus, a:active {
     transition: 0.3s;
 }
 
-.overlay .overlay-content a {
-    font-family: caslon;
-}
-
-.overlay .overlay-menu a {
-    font-family: avenir;
-}
-
-.overlay a:hover, .overlay a:focus {
+.overlay a:hover, .overlay a:focus  {
     color: #051cf1;
-}
-
-.overlay .sub-elements {
-    line-height: 0.9;
 }
 
 .closebtn {
@@ -130,13 +168,4 @@ a:hover, a:focus, a:active {
 
 a.cover-content {
     font-size:75px;
-}
-
-a.cover-menu {
-    font-size:25px;
-}
-
-.menu-item {
-    margin-left: 15%;
-    margin-right: 15%;
 }

@@ -19,17 +19,32 @@ function initMenu(){
         closeNav(e);
     });
 
-    $('.cover-content').click(function(e){
-        var personId = $(this).attr("data-personid");
-        switchPerson(personId);
+    $('.closebtn').hover(
+        function(e){
+            $(this).attr("src", closeBlue);
+        }, function(e){
+            $(this).attr("src", closeWhite);
     });
 
-    $('.closebtn').hover(
-    function(e){
-        $(this).attr("src", closeBlue);
-    }, function(e){
-        $(this).attr("src", closeWhite);
+    $('.overlay-menu a').click(function(e) {
+        $('.menu-item .cover-menu').each(function() {
+            $(this).removeClass('active');
+        });
+
+        $('.overlay-content section').each(function(){
+            $(this).css('display', 'none');
+        });
+
+        var targetSectionAnchor = $(this).attr("href").substring(1); // truncate '#'
+        var target = '.overlay-content section[class="' + targetSectionAnchor + '"]';
+        // alert(target);
+        $(target).css('display', 'flex');
     });
+
+    $('.overlay-content .artists .cover-content').click(function(e){
+        switchPerson($(this).attr("data-personid"));
+    });
+
 }
 
 function isOverLayVisible(){

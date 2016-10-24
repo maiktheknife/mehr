@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from os.path import join
 
-from .models import Person, AdditionalContent, Intro
+from .models import Person, AdditionalContent, Menu
 from .utils import chapterutils
 
 
@@ -12,10 +12,8 @@ def index(request):
 	## i am ugly
 	# images = list(map(lambda x: join(settings.STATIC_URL, 'mainapp', 'images', 'index', x).replace('\\', '/'), listdir(path)))
 
-	intro = Intro.objects.first()
-
 	context = {
-		"intro": intro,
+		"menu": Menu.objects.first(),
 		"people": Person.objects.all(),
 		"firstID": Person.objects.first().id,
 	}
@@ -32,6 +30,7 @@ def person_view(request, person_id):
 	person = get_object_or_404(Person, pk=person_id)
 
 	context = {
+		"menu": Menu.objects.first(),
 		"people": persons,
 		"person": person,
 	}
@@ -45,6 +44,7 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 	chapter = chapters[int(relative_chapter_id)]
 
 	context = {
+		"menu": Menu.objects.first(),
 		"people": persons,
 		"person": person,
 		"chapter": chapter,
@@ -63,6 +63,7 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 	additional_content = list(chapter.additionalcontent_set.all())[int(relative_additional_content_id)]
 
 	context = {
+		"menu": Menu.objects.first(),
 		"people": persons,
 		"person": person,
 		"chapter": chapter,

@@ -11,9 +11,11 @@ class SocialMediaPlatform(models.Model):
 		return self.url
 
 
-class Intro(models.Model):
+class Menu(models.Model):
 	video = models.FileField()
 	text = models.TextField(max_length=100, blank=True)
+	imprint = models.TextField(blank=True)
+	about = models.TextField(blank=True)
 
 
 class Person(models.Model):
