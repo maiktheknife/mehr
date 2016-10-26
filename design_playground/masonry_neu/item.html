@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.js"></script>
+    <script src='../js/imagesloaded.pkgd.min.js'></script>
+    <script src='../js/masonry.pkgd.min.js'></script>
+    <title>Grid Item</title>
+    <style>
+        .grid {
+          background: #DDD;
+          width: 80%;
+          margin-left: 10%;
+        }
+
+        .grid:after {
+          content: '';
+          display: block;
+          clear: both;
+        }
+
+        .grid .grid-item {
+            background: #EEE;
+            max-width: 50%;
+
+            overflow: auto;
+        }
+
+        .grid .grid-item img {
+            max-width: 50%;
+
+            float: right;
+            padding: 0px 0px 0px 0px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="grid">
+    <div class="grid-item">
+        Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+        Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+        Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+        Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+        <p>
+            <img src="https://img.pr0gramm.com/2016/08/23/c48373b8f6d2328a.jpg">
+            Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+            Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+            Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+            Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+        </p>
+    </div>
+</div>
+</body>
+</html>
