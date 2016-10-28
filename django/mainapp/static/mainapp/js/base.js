@@ -65,12 +65,19 @@ function openNav(e) {
     $('.sub-elements').each(function(){
         $(this).css('display', 'none');
     });
+
+    // hide artist name on person page
+    $('div.content .child1').css('display', 'none');
+
     document.getElementById("myNav").style.height = "100%";
     e.stopPropagation();
 }
 
 function closeNav(e) {
     $("body").css("cursor", defaultCursor);
+
+    // show artist name again on person page
+    $('div.content .child1').css('display', '');
 
     document.getElementById("myNav").style.height = "0%";
     e.stopPropagation();
