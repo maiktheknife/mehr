@@ -3,6 +3,9 @@
 ##Prepare
 ```bash
 pip install -r requirements.txt
+
+tar -xvzf hachoir3-superdesk-3.0a1.post2.tar.gz
+python hachoir3-superdesk-3.0a1.post2/setup.py install
 ```
 
 ## Run
