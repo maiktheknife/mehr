@@ -1,6 +1,10 @@
+import logging
+
 from django.db import models
 from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
+
+logger = logging.getLogger('mehr')
 
 
 class SocialMediaPlatform(models.Model):
@@ -84,7 +88,9 @@ class Chapter(models.Model):
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
 	def save(self, *args, **kwargs):
+		logger.debug('analyse metadata from uploaded file')
 		# save first, so we can work with the uploaded file
+
 		super(Chapter, self).save(*args, **kwargs)
 
 		metadata = MetadataReader(self.video.path)

@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from os.path import join
@@ -5,8 +7,11 @@ from os.path import join
 from .models import Person, AdditionalContent, Menu
 from .utils import chapterutils
 
+logger = logging.getLogger('mehr')
+
 
 def index(request):
+	logger.debug('render index page')
 	# images
 	# path = join(settings.BASE_DIR, 'mainapp', 'static', 'mainapp', 'images', 'index')
 	## i am ugly
@@ -21,11 +26,14 @@ def index(request):
 
 
 def person_view_start(request):
+	logger.debug('render index page without a person_id')
 	first_person = Person.objects.first()
 	return redirect("mainapp:personPage", person_id=first_person.id)
 
 
 def person_view(request, person_id):
+	logger.debug('render person page ID: %s' % person_id)
+
 	persons = Person.objects.all()
 	person = get_object_or_404(Person, pk=person_id)
 
@@ -38,6 +46,8 @@ def person_view(request, person_id):
 
 
 def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
+	logger.debug('render chapter page: PID: %s CID: %s at %s sec.' % (person_id, relative_chapter_id, chapter_time))
+
 	persons = Person.objects.all()
 	person = get_object_or_404(Person, pk=person_id)
 	chapters = list(person.chapter_set.all())
@@ -55,6 +65,8 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 
 
 def additional_content_view(request, person_id, relative_chapter_id, relative_additional_content_id, chapter_time=0):
+	logger.debug('render additional page: PID: %s CID: %s at %s sec. AID: %s' % (person_id, relative_chapter_id, chapter_time, relative_additional_content_id))
+
 	persons = Person.objects.all()
 	person = get_object_or_404(Person, pk=person_id)
 	chapters = list(person.chapter_set.all())
