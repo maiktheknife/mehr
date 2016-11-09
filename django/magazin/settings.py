@@ -24,7 +24,11 @@ SECRET_KEY = '(uh4kvhsew(_9p=pzvu+yzm_@n@i01_5iy%78-!o9kumy+&82y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'django.mehr.nunki.uberspace.de',
+	'mehr.space',
+]
 
 # Application definition
 
@@ -104,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de-de'
 
 TIME_ZONE = 'Europe/Berlin'
 
@@ -114,9 +118,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+USE_X_FORWARDED_HOST = True
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_ROOT = '/var/www/virtual/mehr/django.mehr.nunki.uberspace.de/static'
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
