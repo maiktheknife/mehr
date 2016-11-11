@@ -150,12 +150,14 @@ LOGGING = {
 			'level': 'DEBUG',
 			'class': 'logging.FileHandler',
 			'filename': 'log/debug.log',
+			'encoding': 'utf8',
 			'formatter': 'verbose'
 		},
 		'mehr': {
 			'level': 'DEBUG',
 			'class': 'logging.FileHandler',
 			'filename': 'log/mehr.log',
+			'encoding': 'utf8',
 			'formatter': 'verbose'
 		},
 	},
