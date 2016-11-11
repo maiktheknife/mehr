@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fuerberni-masonry</title>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <style>
+        body {
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+        }
+
+        img, p {
+            width: 100%;
+        }
+
+        .grid-item {
+            width: 200px;
+            margin: 0 50px;
+            border: 1px solid red;
+        }
+
+        .grid-item p {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+<div class="grid">
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+    <div class="grid-item">
+        <img src="placeholder.png">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+    </div>
+</div>
+<script>
+    var elem = document.querySelector('.grid');
+    var columnWidth = 200;
+    var columnMargin = 50;
+    var maxTopPadding = 100;
+    var maxLeftPadding = Math.floor(columnWidth * 0.5);
+
+    // "randomness"
+    for(var i = 0; i < elem.children.length; i++) {
+        elem.children[i].style.paddingTop = Math.floor(Math.random() * maxTopPadding) + 'px';
+        elem.children[i].style.paddingLeft = Math.floor(Math.random() * maxLeftPadding) + 'px';
+        elem.children[i].getElementsByTagName('p')[0].style.left = Math.floor(
+                                                                    Math.random() * columnMargin * 2 - columnMargin
+                                                                ) + 'px';
+
+        // order
+        if (Math.random() < .5) {
+            elem.children[i].appendChild(elem.children[i].children[0]);
+        }
+
+        // picture
+        if (Math.random() < .5) {
+            elem.children[i].getElementsByTagName('img')[0].src = 'placeholder2.png';
+        }
+    }
+
+    // masonry
+    var msnry = new Masonry( elem, {
+      // options
+      itemSelector: '.grid-item',
+      columnWidth: columnWidth
+    });
+
+</script>
+</body>
+</html>

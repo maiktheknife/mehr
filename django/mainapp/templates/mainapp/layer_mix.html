@@ -9,7 +9,6 @@
 <script src='{% static "mainapp/js/layer_mix.js" %}'></script>
 <script type='text/javascript'>
     var chapterLink = "{% url 'mainapp:chapterPage' person.id chapter.get_relative_id current_time %}";
-    var debug = {{ debug_mode }};
     var first_video_class = null;
     {% for ace in layer.additionalcontentelement_set.all %}
         {% if ace.first_video_flag %}
@@ -47,7 +46,7 @@
     </div>
     <div class="content grid">
         {% for ace in layer.additionalcontentelement_set.all %}
-        <div class="grid-item {{ css_classes|random }}">
+        <div class="grid-item">
             {% if ace.type == 0 %}
                 <video loop muted>
                     <source src="{{ ace.video.url }}" type="video/mp4">

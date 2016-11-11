@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fuerberni</title>
+    <style>
+        body {
+    font-size: 20px;
+    font-weight: bold;
+    }
+
+    img, p {
+        width: 100%;
+    }
+
+    .container {
+        float: left;
+        color: blue;
+    }
+    </style>
+</head>
+
+<body>
+<div class="container" id="0">
+    <img src="placeholder.png">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+</div>
+<div class="container" id="1">
+    <img src="placeholder.png">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+</div>
+<div class="container" id="2">
+    <img src="placeholder.png">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+</div>
+<div class="container" id="3">
+    <img src="placeholder.png">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+</div>
+<div class="container" id="4">
+    <img src="placeholder.png">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+</div>
+
+<script>
+    var container = document.getElementsByClassName('container');
+    var minMargin = 50;
+    var marginAplifier = 80;
+    var minWidth = 120;
+    var widthAmplifier = 240;
+    var offset = 50;
+
+    for(var i = 0; i < container.length; i++){
+        // "shuffle"
+        if (Math.random() < .5) {
+            container[i].appendChild(container[i].children[0]);
+        }
+
+        // random style
+        container[i].style.width = Math.floor(Math.random() * widthAmplifier + minWidth) + 'px';
+        container[i].style.marginTop = Math.floor(Math.random() * marginAplifier + minMargin) + 'px';
+        container[i].style.marginBottom = Math.floor(Math.random() * marginAplifier + minMargin) + 'px';
+        container[i].style.marginLeft = Math.floor(Math.random() * marginAplifier + minMargin) + 'px';
+        container[i].style.marginRight = Math.floor(Math.random() * marginAplifier + minMargin) + 'px';
+
+        // offset
+        if (Math.random() < .5) {
+            container[i].getElementsByTagName('p')[0].style.marginLeft = offset + 'px';
+        } else {
+            container[i].getElementsByTagName('img')[0].style.marginLeft = offset + 'px';
+        }
+    }
+</script>
+</body>
+</html>

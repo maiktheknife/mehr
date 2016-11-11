@@ -1,5 +1,4 @@
 var audio = null;
-var isLayerVisible = false;
 
 function backToChapter(link) {
     document.location.href = link;
@@ -8,11 +7,11 @@ function backToChapter(link) {
 function main(){
     audio = $("#ambient_music").get(0);
 
-    initPageNavigation();
-    initAudioControls();
-    initLayerControl();
-    initLayerElements();
-    initMasonry();
+//    initPageNavigation();
+//    initAudioControls();
+//    initLayerControl();
+//    initLayerElements();
+    initRandomness();
 }
 
 function initPageNavigation() {
@@ -170,13 +169,32 @@ function initLayerElements() {
     });
 }
 
-function initMasonry() {
-    // console.log("initMasonry");
-	var grid = $('.grid').masonry({
+/* Randomness */
+
+function initRandomness(){
+    var elem = document.querySelector('.grid');
+    var columnWidth = 200;
+    var columnMargin = 50;
+    var maxTopPadding = 100;
+    var maxLeftPadding = Math.floor(columnWidth * 0.5);
+
+    // "randomness"
+    for(var i = 0; i < elem.children.length; i++) {
+        elem.children[i].style.paddingTop = Math.floor(Math.random() * maxTopPadding) + 'px';
+        elem.children[i].style.paddingLeft = Math.floor(Math.random() * maxLeftPadding) + 'px';
+        elem.children[i].getElementsByTagName('p')[0].style.left = Math.floor(Math.random() * columnMargin * 2 - columnMargin) + 'px';
+
+        // order
+        if (Math.random() < .5) {
+            elem.children[i].appendChild(elem.children[i].children[0]);
+        }
+    }
+
+    var grid = $('.grid').masonry({
         itemSelector: '.grid-item',
-        percentPosition: true,
-        gutter: 20
-	});
+        columnWidth: columnWidth
+//        gutter: 20
+    });
 
 	// layout Masonry after each image loads
     grid.imagesLoaded().progress( function() {

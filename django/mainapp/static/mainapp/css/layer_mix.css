@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     color: black;
 }
@@ -155,6 +151,29 @@ progress::-webkit-progress-value {
 
 /* Grid */
 
+.grid{
+    margin: 0px;
+}
+
+img, p {
+    width: 100%;
+}
+
+.grid-item {
+    width: 200px;
+    margin: 0 50px;
+    border: 1px solid red;
+}
+
+.grid-item p {
+    position: relative;
+}
+
+.grid-item img, .grid-item video {
+    max-width: 150%;
+}
+
+/*
 .grid:after {
     content: '';
     display: block;
@@ -201,6 +220,7 @@ progress::-webkit-progress-value {
 .grid-item.float-left video {
     float: right;
 }
+*/
 
 /* Sozial
 

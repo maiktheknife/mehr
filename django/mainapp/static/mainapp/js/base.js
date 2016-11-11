@@ -39,6 +39,8 @@ function initMenu(){
         var target = '.overlay-content section[class="' + targetSectionAnchor + '"]';
         // alert(target);
         $(target).css('display', 'flex');
+
+        e.stopPropagation();
     });
 
     $('.overlay-content .artists .cover-content').click(function(e){
