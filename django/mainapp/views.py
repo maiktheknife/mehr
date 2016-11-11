@@ -2,7 +2,6 @@ import logging
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
-from os.path import join
 
 from .models import Person, AdditionalContent, Menu
 from .utils import chapterutils
@@ -12,10 +11,6 @@ logger = logging.getLogger('mehr')
 
 def index(request):
 	logger.debug('render index page')
-	# images
-	# path = join(settings.BASE_DIR, 'mainapp', 'static', 'mainapp', 'images', 'index')
-	## i am ugly
-	# images = list(map(lambda x: join(settings.STATIC_URL, 'mainapp', 'images', 'index', x).replace('\\', '/'), listdir(path)))
 
 	context = {
 		"menu": Menu.objects.first(),

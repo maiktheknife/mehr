@@ -114,7 +114,11 @@ TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 
-USE_L10N = True
+# Disable Format localization
+# cause probs when unsing django flaot values as javascript values
+# see: https://docs.djangoproject.com/es/1.10/topics/i18n/formatting/
+#      https://docs.djangoproject.com/es/1.10/ref/contrib/humanize/
+USE_L10N = False
 
 USE_TZ = True
 
@@ -145,13 +149,13 @@ LOGGING = {
 		'file': {
 			'level': 'DEBUG',
 			'class': 'logging.FileHandler',
-			'filename': './debug.log',
+			'filename': 'log/debug.log',
 			'formatter': 'verbose'
 		},
 		'mehr': {
 			'level': 'DEBUG',
 			'class': 'logging.FileHandler',
-			'filename': './mehr.log',
+			'filename': 'log/mehr.log',
 			'formatter': 'verbose'
 		},
 	},
