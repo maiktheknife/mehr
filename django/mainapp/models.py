@@ -1,7 +1,6 @@
 import logging
 
 from django.db import models
-from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
 
 logger = logging.getLogger('mehr')
@@ -27,7 +26,6 @@ class Person(models.Model):
 	PREVIEW_TYPE_IMAGES = 1
 
 	name = models.CharField(max_length=100)
-	twitter_account = models.URLField(max_length=255)
 	type_choices = (
 		(PREVIEW_TYPE_VIDEO, "Video"), (PREVIEW_TYPE_IMAGES, "Images")
 	)
@@ -80,29 +78,9 @@ class Person(models.Model):
 
 class Chapter(models.Model):
 	name = models.CharField(max_length=100)
-	video = models.FileField(null=True, upload_to=user_chapter_path)
-	duration = models.FloatField(default=0, editable=False)
-	start_time = models.FloatField(default=0, editable=False)
+	video = models.URLField()
 	additional_content_signal_time = models.FloatField(default=0)
-
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
-
-	def save(self, *args, **kwargs):
-		logger.debug('analyse metadata from uploaded file')
-		# save first, so we can work with the uploaded file
-
-		super(Chapter, self).save(*args, **kwargs)
-
-		metadata = MetadataReader(self.video.path)
-		self.duration = metadata.get_duration()
-
-		previous_chapters = self.person.chapter_set.filter(id__lt=self.id).order_by('-id')
-		if previous_chapters:
-			chapter = previous_chapters.first()
-			self.start_time = chapter.start_time + chapter.duration
-
-		# there might be a better solution than resaving.
-		super(Chapter, self).save(*args, **kwargs)
 
 	def get_relative_id(self):
 		return self.person.chapter_set.filter(id__lt=self.id).count()

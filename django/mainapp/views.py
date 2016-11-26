@@ -1,10 +1,8 @@
 import logging
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.conf import settings
 
 from .models import Person, AdditionalContent, Menu
-from .utils import chapterutils
 
 logger = logging.getLogger('mehr')
 
@@ -53,8 +51,7 @@ def chapter_view(request, person_id, relative_chapter_id, chapter_time=0):
 		"people": persons,
 		"person": person,
 		"chapter": chapter,
-		"current_time": chapter_time,
-		"all_chapters_duration": chapterutils.get_all_chapters_duration(chapters)
+		"current_time": chapter_time
 	}
 	return render(request, "mainapp/chapter.html", context)
 
@@ -76,9 +73,7 @@ def additional_content_view(request, person_id, relative_chapter_id, relative_ad
 		"chapter": chapter,
 		"layer": additional_content,
 		"current_time": chapter_time,
-		"chapter_progress": chapterutils.get_global_chapter_progress(chapter, chapters, int(chapter_time)),
-		"debug_mode": "true" if settings.DEBUG else "false",
-		"css_classes": ["float-left", "float-normal", "float-right", ]
+		"chapter_progress": 0
 	}
 
 	if additional_content.type == AdditionalContent.TYPE_VIDEO:

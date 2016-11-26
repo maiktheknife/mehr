@@ -53,8 +53,10 @@
                     <source src="{{ ace.video.url }}" type="video/webm">
                     Your browser does not support the video tag.
                 </video>
+                <p class="text"></p>
             {% elif ace.type == 1 %}
                 <img src="{% static ace.image.url %}" />
+                <p class="text"></p>
             {% elif ace.type == 2 %}
                 <p>{{ ace.text }}</p>
             {% elif ace.type == 3 %}

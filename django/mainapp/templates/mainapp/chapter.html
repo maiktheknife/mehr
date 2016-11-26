@@ -6,8 +6,6 @@
 {% block js %}
     <script type='text/javascript'>
     var personLink = "{% url 'mainapp:personPage' person.id %}";
-    var videoGlobalStartTime = {{ chapter.start_time }};
-    var allChaptersDuration = {{ all_chapters_duration }};
     var additionalContentSignalTime = "{{ chapter.additional_content_signal_time }}";
     var additionalContentsCount = "{{ chapter.get_additional_count }}";
 
@@ -68,8 +66,8 @@
     </div>
 </div>
 <video id="chapterVideo" autoplay>
-    <source src="{{ chapter.video.url }}" type="video/mp4">
-    <source src="{{ chapter.video.url }}" type="video/webm">
+    <source src="{{ chapter.video }}" type="video/mp4">
+    <source src="{{ chapter.video }}" type="video/webm">
     Your browser does not support the video tag.
 </video>
 <div class="video-controls">
