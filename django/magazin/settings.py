@@ -115,7 +115,7 @@ TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
 
 # Disable Format localization
-# cause probs when unsing django flaot values as javascript values
+# cause probs when using django float values as javascript values
 # see: https://docs.djangoproject.com/es/1.10/topics/i18n/formatting/
 #      https://docs.djangoproject.com/es/1.10/ref/contrib/humanize/
 USE_L10N = False
