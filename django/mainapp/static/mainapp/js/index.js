@@ -28,6 +28,11 @@ function initPageNavigation() {
                 break;
             }
     });
+
+    $(document).click(function() {
+        linkLocation = firstPersonLink;
+        $("body").fadeOut(1000, redirectPage);
+    });
 }
 
 function initBackGroundImageRotator(){
@@ -44,7 +49,7 @@ function initBackGroundImageRotator(){
             var infiniteLoop = setInterval(function(){ //loop through the items
                 if(currentItem == numberOfItems - 1){
                     currentItem = 0;
-                }else {
+                } else {
                     currentItem++;
                 }
                 $('body').css("background-image", "url(" + images[currentItem] + ")");
