@@ -74,7 +74,9 @@ function initBackGroundImageRotator(){
             }, itemInterval);
         }
     };
-    InfiniteRotator.init();
+    if (typeof images !== 'undefined') {
+        InfiniteRotator.init();
+    }
 }
 
 function initMouseMovementAwareness(){
