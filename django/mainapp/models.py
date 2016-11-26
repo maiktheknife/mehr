@@ -79,6 +79,7 @@ class Person(models.Model):
 class Chapter(models.Model):
 	name = models.CharField(max_length=100)
 	video = models.URLField()
+	duration = models.FloatField(default=0.0)
 	additional_content_signal_time = models.FloatField(default=0)
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
@@ -99,6 +100,13 @@ class Chapter(models.Model):
 
 	def get_additional_count(self):
 		return self.additionalcontent_set.count()
+
+	def start_time(self):
+		previous_chapters = self.person.chapter_set.filter(id__lt=self.id).order_by('-id')
+		if previous_chapters:
+			return sum(map(lambda x: x.duration, previous_chapters))
+		else:
+			return 0.0
 
 	def __str__(self):
 		return "{}; Chapter {}: {}".format(self.person, self.get_relative_id(), self.name)
