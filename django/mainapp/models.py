@@ -15,7 +15,7 @@ class SocialMediaPlatform(models.Model):
 
 
 class Menu(models.Model):
-	video = models.FileField()
+	video = models.URLField()
 	text = models.TextField(max_length=100, blank=True)
 	imprint = models.TextField(blank=True)
 	about = models.TextField(blank=True)
@@ -31,7 +31,7 @@ class Person(models.Model):
 	)
 	preview_type = models.IntegerField(choices=type_choices)
 	preview_text = models.TextField(max_length=300)
-	preview_video = models.FileField(null=True, blank=True, upload_to=user_preview_video_path)
+	preview_video = models.URLField(blank=True)
 
 	def get_relative_id(self):
 		return Person.objects.filter(id__lt=self.id).count()
@@ -69,7 +69,7 @@ class Person(models.Model):
 		return self.chapter_set.first()
 
 	def __str__(self):
-		return "{} ({})".format(self.name, self.id)
+		return "{} (#{})".format(self.name, self.id)
 
 	# Admin Page Anpassungen
 	get_images_count.short_description = '#Bilder'
@@ -132,7 +132,7 @@ class AdditionalContent(models.Model):
 	type = models.IntegerField(choices=type_choices)
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
-	video = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path)
+	video = models.URLField(blank=True)
 	ambient_music = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path, default=None)
 
 	def get_relative_id(self):

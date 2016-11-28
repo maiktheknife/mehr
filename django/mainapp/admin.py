@@ -48,17 +48,10 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 
 # Chapter
 
-class AdditionalContentInline(admin.TabularInline):
-	model = AdditionalContent
-	fields = ['name', 'description', 'image', ]
-	extra = 3
-
-
 class ChapterAdmin(admin.ModelAdmin):
 	list_filter = ['person']
 	list_display = ['person', 'name', 'video', 'get_additional_count']
 	ordering = ['id']
-	inlines = [AdditionalContentInline, ]
 
 
 # People
