@@ -7,10 +7,10 @@ function backToChapter(link) {
 function main(){
     audio = $("#ambient_music").get(0);
 
-//    initPageNavigation();
-//    initAudioControls();
-//    initLayerControl();
-//    initLayerElements();
+    initPageNavigation();
+    initAudioControls();
+    initLayerControl();
+    initLayerElements();
     initRandomness();
 }
 
@@ -173,8 +173,8 @@ function initLayerElements() {
 
 function initRandomness(){
     var elem = document.querySelector('.grid');
-    var columnWidth = 200;
-    var columnMargin = 50;
+    var columnWidth = 400;
+    var columnMargin = 100;
     var maxTopPadding = 100;
     var maxLeftPadding = Math.floor(columnWidth * 0.5);
 
