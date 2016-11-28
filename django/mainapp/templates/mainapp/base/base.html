@@ -46,24 +46,7 @@
     {% block css %} {% endblock %}
 </head>
 <body id="page" oncontextmenu="return false">
-<div id="myNav" class="overlay">
-    <img class="closebtn" src="{% static 'mainapp/images/schließen_weiß.png' %}">
-    <ul class="overlay-content text-center">
-        {% for p in people %}
-        <li><a class="cover-content" href="#" data-personid="{{ p.id }}">{{ p.name }}</a></li>
-        <ul class="sub-elements" id="{{ p.id }}">
-            {% for c in p.chapter_set.all %}
-                <li><a href="{% url 'mainapp:chapterPage' p.id c.get_relative_id %}">{{ c.name }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endfor %}
-    </ul>
-    <ul class="overlay-menu text-center">
-        <li class="menu-item"><a href="{% url 'mainapp:index' %}" class="cover-menu">Home</a></li>
-        <li class="menu-item"><a href="#" class="cover-menu">About</a></li>
-        <li class="menu-item"><a href="#" class="cover-menu">Impressum</a></li>
-    </ul>
-</div>
+{% include "mainapp/base/menu.html" %}
 {% block content %} {% endblock %}
 </body>
 </html>

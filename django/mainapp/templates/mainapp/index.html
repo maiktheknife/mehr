@@ -19,15 +19,15 @@
         <!--empty div to ensure the pretty layout -> flex with 3 boxes -> there is a correct center position -->
         <div></div>
         <div>
-            <p class="content">{{ intro.text|linebreaksbr }}</p>
+            <p class="content">{{ menu.text|linebreaksbr }}</p>
         </div>
         <div>
             <a class="mehr" href="{% url 'mainapp:personPage' firstID %}">mehr.</a>
         </div>
     </div>
     <video autoplay loop muted>
-        <source src="{{ intro.video.url }}" type="video/mp4">
-        <source src="{{ intro.video.url }}" type="video/webm">
+        <source src="{{ menu.video.url }}" type="video/mp4">
+        <source src="{{ menu.video.url }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
 {% endblock %}

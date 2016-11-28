@@ -3,3 +3,19 @@
 django == 1.9.6
 django-bootstrap3 == 7.0.1
 django-fontawesome == 0.2.6
+
+# Python Imaging Library https://python-pillow.org/
+pillow == 3.4.2
+
+# http://www.tornadoweb.org/
+tornado == 4.4.2
+
+# service deamon
+gunicorn==19.6.0
+
+# plsql database
+psycopg2==2.2.6.2
+
+# no clue
+backports-abc==0.4
+PyYAML==3.12

@@ -2,20 +2,15 @@
 
 ##Prepare
 ```bash
-pip install django
-pip install django-bootstrap3
-pip install django-fontawesome
+pip install -r requirements.txt
+
+tar -xvzf hachoir3-superdesk-3.0a1.post2.tar.gz
+python hachoir3-superdesk-3.0a1.post2/setup.py install
 ```
 
 ## Run
-if starting for the first time, run the following:
 ```bash
-$ python manage.py makemigrations mainapp
-$ python manage.py migrate
-```
-to start the application:
-```bash
-$ python manage.py runserver
+$ ./start.sh 
 ```
 -> The running application can be reached at <http://127.0.0.1:8000/mainapp>.
 

@@ -1,8 +1,10 @@
+import logging
+
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
-from .utils.screen import Screen, Widget
+
+logger = logging.getLogger('mehr')
 
 
 class SocialMediaPlatform(models.Model):
@@ -13,9 +15,11 @@ class SocialMediaPlatform(models.Model):
 		return self.url
 
 
-class Intro(models.Model):
+class Menu(models.Model):
 	video = models.FileField()
 	text = models.TextField(max_length=100, blank=True)
+	imprint = models.TextField(blank=True)
+	about = models.TextField(blank=True)
 
 
 class Person(models.Model):
@@ -84,7 +88,9 @@ class Chapter(models.Model):
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
 	def save(self, *args, **kwargs):
+		logger.debug('analyse metadata from uploaded file')
 		# save first, so we can work with the uploaded file
+
 		super(Chapter, self).save(*args, **kwargs)
 
 		metadata = MetadataReader(self.video.path)
@@ -176,52 +182,10 @@ class AdditionalContentElement(models.Model):
 	)
 
 	type = models.IntegerField(choices=type_choices)
-
-	position_x = models.FloatField(default=0, editable=False)
-	position_y = models.FloatField(default=0, editable=False)
-	width = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
-	height = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
-	frontend_id = models.CharField(max_length=30, default="", editable=False)
-	first_video_flag = models.BooleanField(default=False, editable=False)
-
 	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-
 	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
-
-	def get_position(self):
-		return self.position_x, self.position_y
-
-	def get_size(self):
-		return self.width, self.height
-
-	def get_height_category(self):
-		return min(int(self.height) // 25, 3)
-
-	def get_width_category(self):
-		return min(int(self.width) // 25, 3)
-
-	def get_autoplay(self):
-		if self.first_video_flag:
-			return "autoplay"
-		else:
-			return ""
-
-	def save(self, *args, **kwargs):
-		elements = self.additional_content.additionalcontentelement_set.all()
-		if self.type == 0 or self.type == 3:
-			self.first_video_flag = True not in map(lambda x: x.first_video_flag, elements)
-
-		screen = Screen(3)
-		for element in elements:
-			screen.add_widget(Widget(element.width, element.height, (element.position_x, element.position_y)))
-
-		(self.position_x, self.position_y) = screen.get_valid_position(self.width, self.height)
-		print(Widget(self.width, self.height, (self.position_x, self.position_y)))
-		self.frontend_id = "layer-mix-element-" + str(len(elements))
-
-		super(AdditionalContentElement, self).save(*args, **kwargs)
 
 	def __str__(self):
 		type_string = self.type_choices[int(self.type)][1]

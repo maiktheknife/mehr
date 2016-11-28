@@ -1,13 +1,13 @@
 from django.contrib import admin
 from .models import Person, Chapter, AdditionalContent, AdditionalContentElement, Image, GalleryImage
-from .models import SocialMediaPlatform, SocialMediaLink, Intro
+from .models import SocialMediaPlatform, SocialMediaLink, Menu
 
 
-class IntroAdmin(admin.ModelAdmin):
+class MenuAdmin(admin.ModelAdmin):
 	def has_add_permission(self, request):
-		base_add_permission = super(IntroAdmin, self).has_add_permission(request)
+		base_add_permission = super(MenuAdmin, self).has_add_permission(request)
 		if base_add_permission:
-			if Intro.objects.all().count() == 0:
+			if Menu.objects.all().count() == 0:
 				return True
 		return False
 
@@ -92,7 +92,7 @@ class PersonAdmin(admin.ModelAdmin):
 		js = ("mainapp/js/libs/jquery.js", "admin/js/person_admin.js", )
 
 
-admin.site.register(Intro, IntroAdmin)
+admin.site.register(Menu, MenuAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Chapter, ChapterAdmin)
 admin.site.register(AdditionalContent, AdditionalContentAdmin)

@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<div id="myNav" class="overlay">
+    <img class="closebtn" src="{% static 'mainapp/images/schließen_weiß.png' %}">
+    <ul class="overlay-menu">
+        <li class="menu-item"><a href="{% url 'mainapp:index' %}" class="cover-menu">Home</a></li>
+        <li class="menu-item"><a href="#artists" class="cover-menu active">Künstler</a></li>
+        <li class="menu-item"><a href="#about" class="cover-menu">About</a></li>
+        <li class="menu-item"><a href="#imprint" class="cover-menu">Impressum</a></li>
+    </ul>
+    <div class="overlay-content">
+        <section class="artists">
+            <ul class="">
+                {% for p in people %}
+                <li><a class="cover-content" href="#" data-personid="{{ p.id }}">{{ p.name }}</a>
+                    <ul class="sub-elements" id="{{ p.id }}">
+                        {% for c in p.chapter_set.all %}
+                        <li><a href="{% url 'mainapp:chapterPage' p.id c.get_relative_id %}">{{ c.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="about">
+            {{ menu.about|linebreaksbr }}
+        </section>
+        <section class="imprint">
+            {{ menu.imprint|linebreaksbr }}
+        </section>
+    </div>
+</div>

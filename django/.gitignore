@@ -5,5 +5,6 @@ public/
 
 *.iml
 *.pyc
+*.log
 
 db.sqlite3

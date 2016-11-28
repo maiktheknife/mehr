@@ -155,6 +155,7 @@ div.layer-container {
     background-size: cover;
 
     transition: visibility 1s, opacity 0.5s linear;
+    color: blue;
 }
 
 .layer:hover .layer-title {

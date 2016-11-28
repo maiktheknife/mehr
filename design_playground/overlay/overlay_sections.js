@@ -1,16 +1,10 @@
 var defaultCursor = null;
 
 function main(){
-    initPageAnimation();
     initMenu();
 }
 
-function initPageAnimation(){
-    $("body").css("display", "none");
-    $("body").fadeIn(1000);
-}
-
-function initMenu(){
+function initMenu() {
     $('.header').click(function(e){
         openNav(e);
     });
@@ -21,10 +15,10 @@ function initMenu(){
 
     $('.closebtn').hover(
         function(e){
-            $(this).attr("src", closeBlue);
+            $(this).attr("src", "../res/schließen_blau.png");
         }, function(e){
-            $(this).attr("src", closeWhite);
-    });
+            $(this).attr("src", "../res/schließen_weiß.png");
+        });
 
     $('.overlay-menu a').click(function(e) {
         $('.menu-item .cover-menu').each(function() {
@@ -47,11 +41,6 @@ function initMenu(){
 
 }
 
-function isOverLayVisible(){
-    var h = $('#myNav').height();
-    return h != 0;
-}
-
 function switchPerson(personId) {
     $('.sub-elements').css('display', 'none');
     var x = document.getElementById(personId);
@@ -65,19 +54,12 @@ function openNav(e) {
     $('.sub-elements').each(function(){
         $(this).css('display', 'none');
     });
-
-    // hide artist name on person page
-    $('div.content .child1').css('display', 'none');
-
     document.getElementById("myNav").style.height = "100%";
     e.stopPropagation();
 }
 
 function closeNav(e) {
     $("body").css("cursor", defaultCursor);
-
-    // show artist name again on person page
-    $('div.content .child1').css('display', '');
 
     document.getElementById("myNav").style.height = "0%";
     e.stopPropagation();
