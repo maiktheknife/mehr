@@ -169,7 +169,7 @@ class AdditionalContentElement(models.Model):
 
 	type = models.IntegerField(choices=type_choices)
 	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
+	video = models.URLField(blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
 

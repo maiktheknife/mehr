@@ -49,8 +49,8 @@
         <div class="grid-item">
             {% if ace.type == 0 %}
                 <video loop muted>
-                    <source src="{{ ace.video.url }}" type="video/mp4">
-                    <source src="{{ ace.video.url }}" type="video/webm">
+                    <source src="{{ ace.video }}" type="video/mp4">
+                    <source src="{{ ace.video }}" type="video/webm">
                     Your browser does not support the video tag.
                 </video>
                 <p class="text"></p>
@@ -61,8 +61,8 @@
                 <p>{{ ace.text }}</p>
             {% elif ace.type == 3 %}
                 <video loop muted>
-                    <source src="{{ ace.video.url }}" type="video/mp4">
-                    <source src="{{ ace.video.url }}" type="video/webm">
+                    <source src="{{ ace.video }}" type="video/mp4">
+                    <source src="{{ ace.video }}" type="video/webm">
                     Your browser does not support the video tag.
                 </video>
                 <p class="text">{{ ace.text }}</p>
