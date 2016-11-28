@@ -161,7 +161,6 @@ img, p {
 .grid-item {
     width: 400px;
     margin: 0 100px;
-    /*border: 1px solid red;*/
 }
 
 .grid-item p {

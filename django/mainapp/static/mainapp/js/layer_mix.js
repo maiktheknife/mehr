@@ -156,15 +156,19 @@ function initLayerControl() {
 }
 
 function initLayerElements() {
+    $('video').first().get(0).muted = false;
 	$('video').first().get(0).play();
 
 	$('video').hover(
     function(){ // mouse-enter
         $('video').each(function(){
+            $(this).get(0).muted = true;
             $(this).get(0).pause();
         });
+        $(this).get(0).muted = false;
         $(this).get(0).play();
     }, function() { // mouse-exit
+        $(this).get(0).muted = true;
         $(this).get(0).pause();
     });
 }

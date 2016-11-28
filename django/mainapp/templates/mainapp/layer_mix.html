@@ -48,7 +48,7 @@
         {% for ace in layer.additionalcontentelement_set.all %}
         <div class="grid-item">
             {% if ace.type == 0 %}
-                <video loop muted>
+                <video loop>
                     <source src="{{ ace.video }}" type="video/mp4">
                     <source src="{{ ace.video }}" type="video/webm">
                     Your browser does not support the video tag.
@@ -60,7 +60,7 @@
             {% elif ace.type == 2 %}
                 <p>{{ ace.text }}</p>
             {% elif ace.type == 3 %}
-                <video loop muted>
+                <video loop>
                     <source src="{{ ace.video }}" type="video/mp4">
                     <source src="{{ ace.video }}" type="video/webm">
                     Your browser does not support the video tag.
