@@ -226,7 +226,6 @@ function showLayers(){
         return; // no child layers, so do nothing
     }
 
-    // console.log("showLayers");
     pauseVideo();
     $('#layer-container').show();
     isLayerVisible = true;

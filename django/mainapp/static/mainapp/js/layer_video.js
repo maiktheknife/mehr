@@ -1,6 +1,7 @@
 var video = null;
 var chapterProgressbar = null;
 var layerProgressbar = null;
+var hasLayers = false;
 var isLayerVisible = false;
 
 function backToChapter(link) {
@@ -11,7 +12,7 @@ function main(){
     video = $("#layerVideo").get(0);
     chapterProgressbar = $("#chapterProgressbar").get(0);
     layerProgressbar = $("#layerProgressbar").get(0);
-
+    hasLayers = $("#layer-container").length >= 1;
     initPageNavigation();
     initLayerControl();
     initVideoPlayer();
@@ -141,7 +142,10 @@ function initVideoControls(){
 /* Layers */
 
 function showLayers(){
-    console.log("showLayers");
+    if (!hasLayers) {
+        return; // no child layers, so do nothing
+    }
+
     pauseVideo();
     $('#layer-container').show();
     isLayerVisible = true;
@@ -151,7 +155,7 @@ function showLayers(){
 }
 
 function hideLayers(){
-    console.log("hideLayers");
+    //console.log("hideLayers");
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
@@ -173,7 +177,7 @@ function initLayerControl() {
 	});
 
 	$('.layer').click(function(event){
-	    console.log("layer click");
+	    //console.log("layer click");
         var layerLink = $(this).attr("data-layerlink");
         var completeLink = layerLink + Math.floor(video.currentTime);
         window.location.href = completeLink;

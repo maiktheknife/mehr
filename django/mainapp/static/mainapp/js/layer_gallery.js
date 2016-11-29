@@ -1,9 +1,10 @@
 var audio = null;
+var hasLayers = false;
 var isLayerVisible = false;
 
 function main(){
     audio = $("#ambient_music").get(0);
-
+    hasLayers = $("#layer-container").length >= 1;
     initPageNavigation();
     initAudioControls();
     initLayerControl();
@@ -23,7 +24,6 @@ function initPageNavigation() {
                 break;
             case 40: // down
                 showLayers();
-
                 break;
             default:
                 break;
@@ -33,6 +33,10 @@ function initPageNavigation() {
     function redirectPage() {
         window.location = linkLocation;
     }
+
+    $('body').click(function(event) {
+        backToChapter(chapterLink);
+    });
 }
 
 /* Audio Control */
@@ -102,7 +106,10 @@ function initAudioControls(){
 /* Layers */
 
 function showLayers(){
-    console.log("showLayers");
+    if (!hasLayers) {
+        return; // no child layers, so do nothing
+    }
+
     $('#layer-container').show();
     isLayerVisible = true;
     $('html, body').animate({
@@ -111,7 +118,7 @@ function showLayers(){
 }
 
 function hideLayers(){
-    console.log("hideLayers");
+    // console.log("hideLayers");
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
@@ -132,7 +139,7 @@ function initLayerControl() {
 	});
 
 	$('.layer').click(function(event){
-	    console.log("layer click");
+	    // console.log("layer click");
         var layerLink = $(this).attr("data-layerlink");
         window.location.href = layerLink;
         event.stopPropagation();
@@ -144,7 +151,7 @@ function initLayerControl() {
 
 function initGallery(){
     $('.carousel').flickity({
-      draggable: true,
+      draggable: false,
       imagesLoaded: true,
       percentPosition: false,
       arrowShape: {
@@ -152,6 +159,19 @@ function initGallery(){
           x1: 50, y1: 35,
           x2: 45, y2: 5,
           x3: 85
+        }
+    });
+
+    $(document).keydown(function(e) {
+        switch(e.which) {
+            case 37: // left
+                $('.carousel').flickity('previous', true);
+                break;
+            case 39: // right
+                $('.carousel').flickity('next', true);
+                break;
+            default:
+                break;
         }
     });
 }

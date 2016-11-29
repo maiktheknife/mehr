@@ -1,4 +1,6 @@
 var audio = null;
+var isLayerVisible = false;
+var hasLayers = false;
 
 function backToChapter(link) {
     document.location.href = link;
@@ -6,7 +8,7 @@ function backToChapter(link) {
 
 function main(){
     audio = $("#ambient_music").get(0);
-
+    hasLayers = $("#layer-container").length >= 1;
     initPageNavigation();
     initAudioControls();
     initLayerControl();
@@ -109,7 +111,11 @@ function initAudioControls(){
 /* Layers */
 
 function showLayers(){
-    // console.log("showLayers");
+    console.log("showLayers: " + hasLayers);
+    if (!hasLayers) {
+        return; // no child layers, so do nothing
+    }
+
     $('.layer-container').show();
     isLayerVisible = true;
     $('html, body').animate({
@@ -118,7 +124,7 @@ function showLayers(){
 }
 
 function hideLayers(){
-    // console.log("hideLayers");
+    console.log("hideLayers");
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
@@ -128,8 +134,8 @@ function hideLayers(){
 }
 
 function initLayerControl() {
-	$('.mehr').on('click', function(event) {
-        // console.log("mehr. click");
+	$('.mehr a').on('click', function(event) {
+        console.log("mehr. click");
 		if (isLayerVisible) {
 			hideLayers()
 		} else {
