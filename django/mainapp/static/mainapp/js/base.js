@@ -49,6 +49,10 @@ function initMenu(){
 
 }
 
+function redirectPage(location) {
+    window.location = location;
+}
+
 function isOverLayVisible(){
     var h = $('#myNav').height();
     return h != 0;

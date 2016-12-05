@@ -6,21 +6,15 @@ function main(){
 function initPageAnimation2(){
     $("a").click(function(event){
         event.preventDefault();
-        linkLocation = this.href;
-        $("body").fadeOut(1000, redirectPage);
+        $("body").fadeOut(1000, redirectPage(this.href));
     });
-}
-
-function redirectPage() {
-    window.location = linkLocation;
 }
 
 function initPageNavigation() {
     $(document).keydown(function(e) {
          switch(e.which) {
             case 40: // down
-                linkLocation = firstPersonLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(firstPersonLink));
                 break;
             default:
                 break;
@@ -28,8 +22,7 @@ function initPageNavigation() {
     });
 
     $(document).click(function() {
-        linkLocation = firstPersonLink;
-        $("body").fadeOut(1000, redirectPage);
+        $("body").fadeOut(1000, redirectPage(firstPersonLink));
     });
 }
 

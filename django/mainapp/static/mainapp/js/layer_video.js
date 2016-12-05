@@ -4,10 +4,6 @@ var layerProgressbar = null;
 var hasLayers = false;
 var isLayerVisible = false;
 
-function backToChapter(link) {
-    document.location.href = link;
-}
-
 function main(){
     video = $("#layerVideo").get(0);
     chapterProgressbar = $("#chapterProgressbar").get(0);
@@ -26,8 +22,7 @@ function initPageNavigation() {
                 if (isLayerVisible) {
                     hideLayers();
                 } else {
-                    linkLocation = chapterLink;
-                    $("body").fadeOut(1000, redirectPage);
+                    $("body").fadeOut(1000, redirectPage(chapterLink));
                 }
                 break;
             case 40: // down
@@ -39,12 +34,8 @@ function initPageNavigation() {
             }
     });
 
-    function redirectPage() {
-        window.location = linkLocation;
-    }
-
     $('body').click(function(event) {
-        backToChapter(chapterLink);
+        redirectPage(chapterLink);
     });
 }
 
