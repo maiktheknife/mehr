@@ -64,20 +64,20 @@ function pauseVideo(){
 
 function toggleVideoStatus(){
     if (video.paused) {
-        $("#video-toggle").attr('src', pauseIconWeiß);
+        $("#video-toggle").attr('src', pauseIconWhite);
         playVideo();
     } else {
-        $("#video-toggle").attr('src', playIconWeiß);
+        $("#video-toggle").attr('src', playIconWhite);
         pauseVideo();
     }
 }
 
 function toggleVideoVolume(){
     if (video.muted) {
-        $("#video-volume").attr('src', volumeOffIconWeiß);
+        $("#video-volume").attr('src', volumeOffIconWhite);
         video.muted = false;
     } else {
-        $("#video-volume").attr('src', volumeOnIconWeiß);
+        $("#video-volume").attr('src', volumeOnIconWhite);
         video.muted = true;
     }
 }
@@ -97,15 +97,15 @@ function initVideoControls(){
     $('#video-toggle').hover(
     function(){ // mouse-enter
         if (video.paused) {
-            $(this).attr('src', playIconWeiß);
+            $(this).attr('src', playIconWhite);
         } else {
-            $(this).attr('src', pauseIconWeiß);
+            $(this).attr('src', pauseIconWhite);
         }
     }, function() { // mouse-exit
         if (video.paused) {
-            $(this).attr('src', playIconBlau);
+            $(this).attr('src', playIconBlue);
         } else {
-            $(this).attr('src', pauseIconBlau);
+            $(this).attr('src', pauseIconBlue);
         }
     });
 
@@ -117,15 +117,15 @@ function initVideoControls(){
     $('#video-volume').hover(
         function(){ // mouse-enter
             if (video.muted) {
-                $(this).attr('src', volumeOnIconWeiß);
+                $(this).attr('src', volumeOnIconWhite);
             } else {
-                $(this).attr('src', volumeOffIconWeiß);
+                $(this).attr('src', volumeOffIconWhite);
             }
         }, function() { // mouse-exit
             if (video.muted) {
-                $(this).attr('src', volumeOnIconBlau);
+                $(this).attr('src', volumeOnIconBlue);
             } else {
-                $(this).attr('src', volumeOffIconBlau);
+                $(this).attr('src', volumeOffIconBlue);
             }
         });
 }
@@ -170,8 +170,7 @@ function initLayerControl() {
 	$('.layer').click(function(event){
 	    //console.log("layer click");
         var layerLink = $(this).attr("data-layerlink");
-        var completeLink = layerLink + Math.floor(video.currentTime);
-        window.location.href = completeLink;
+        window.location.href = layerLink + Math.floor(video.currentTime);
         event.stopPropagation();
     });
 
