@@ -29,22 +29,19 @@ function initPageNavigation() {
     */
             case 37: // left
                 if (typeof previousChapterLink !== 'undefined') {
-                    linkLocation = previousChapterLink;
-                    $("body").fadeOut(1000, redirectPage);
+                    $("body").fadeOut(1000, redirectPage(previousChapterLink));
                 }
                 break;
             case 38: // up
                 if (isLayerVisible) {
                     hideLayers();
                 } else {
-                    linkLocation = personLink;
-                    $("body").fadeOut(1000, redirectPage);
+                    $("body").fadeOut(1000, redirectPage(personLink));
                 }
                 break;
             case 39: // right
                 if (typeof nextChapterLink !== 'undefined') {
-                    linkLocation = nextChapterLink;
-                    $("body").fadeOut(1000, redirectPage);
+                    $("body").fadeOut(1000, redirectPage(nextChapterLink));
                 }
                 break;
             case 40: // down
@@ -59,31 +56,19 @@ function initPageNavigation() {
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {
-                linkLocation = previousChapterLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(previousChapterLink));
             } else if (event.pageX > 2/3*maxX && typeof nextChapterLink != 'undefined') {
-                linkLocation = nextChapterLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(nextChapterLink));
             }
         }
     });
-
-    function redirectPage() {
-        window.location = linkLocation;
-    }
 }
 
 function initTimeline(){
     $('.transbox').click(function(event){
-        var chapterLink = $(this).attr("data-chapterlink");
-        linkLocation = chapterLink;
-        $("body").fadeOut(1000, redirectPage);
+        $("body").fadeOut(1000, redirectPage($(this).attr("data-chapterlink")));
         event.stopPropagation();
     });
-
-    function redirectPage() {
-        window.location = linkLocation;
-    }
 }
 
 function initMouseMovementAwareness(){
@@ -91,9 +76,9 @@ function initMouseMovementAwareness(){
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX && typeof previousChapterLink != 'undefined') {
-                $('body').css('cursor', "url("+ arrowLeft + "), pointer");
+                $('body').css('cursor', "url("+ arrowLeftWhite + "), pointer");
             }else if (event.pageX > 2/3*maxX && typeof nextChapterLink != 'undefined') {
-                $('body').css('cursor', "url("+ arrowRight + "), pointer");
+                $('body').css('cursor', "url("+ arrowRightWhite + "), pointer");
             }else {
                 $('body').css('cursor', "default");
             }
@@ -117,20 +102,20 @@ function pauseVideo(){
 
 function toggleVideoStatus(){
     if (video.paused) {
-        $("#video-toggle").attr('src', pauseIconBlau);
+        $("#video-toggle").attr('src', pauseIconBlue);
         playVideo();
     } else {
-        $("#video-toggle").attr('src', playIconBlau);
+        $("#video-toggle").attr('src', playIconBlue);
         pauseVideo();
     }
 }
 
 function toggleVideoVolume(){
     if (video.muted) {
-        $("#video-volume").attr('src', volumeOffIconBlau);
+        $("#video-volume").attr('src', volumeOffIconBlue);
         video.muted = false;
     } else {
-        $("#video-volume").attr('src', volumeOnIconBlau);
+        $("#video-volume").attr('src', volumeOnIconBlue);
         video.muted = true;
     }
 }
@@ -185,15 +170,15 @@ function initVideoControls(){
     $('#video-toggle').hover(
     function(){ // mouse-enter
         if (video.paused) {
-            $(this).attr('src', playIconBlau);
+            $(this).attr('src', playIconBlue);
         } else {
-            $(this).attr('src', pauseIconBlau);
+            $(this).attr('src', pauseIconBlue);
         }
     }, function() { // mouse-exit
         if (video.paused) {
-            $(this).attr('src', playIconWeiß);
+            $(this).attr('src', playIconWhite);
         } else {
-            $(this).attr('src', pauseIconWeiß);
+            $(this).attr('src', pauseIconWhite);
         }
     });
 
@@ -206,15 +191,15 @@ function initVideoControls(){
     $('#video-volume').hover(
         function(){ // mouse-enter
             if (video.muted) {
-                $(this).attr('src', volumeOnIconBlau);
+                $(this).attr('src', volumeOnIconBlue);
             } else {
-                $(this).attr('src', volumeOffIconBlau);
+                $(this).attr('src', volumeOffIconBlue);
             }
         }, function() { // mouse-exit
             if (video.muted) {
-                $(this).attr('src', volumeOnIconWeiß);
+                $(this).attr('src', volumeOnIconWhite);
             } else {
-                $(this).attr('src', volumeOffIconWeiß);
+                $(this).attr('src', volumeOffIconWhite);
             }
         });
 }
@@ -226,7 +211,6 @@ function showLayers(){
         return; // no child layers, so do nothing
     }
 
-    // console.log("showLayers");
     pauseVideo();
     $('#layer-container').show();
     isLayerVisible = true;
@@ -258,9 +242,7 @@ function initLayerControl() {
 
 	$('.layer').click(function(event){
 	    // console.log("layer click");
-        var layerLink = $(this).attr("data-layerlink");
-        var completeLink = layerLink + Math.floor(video.currentTime);
-        window.location.href = completeLink;
+        window.location.href = $(this).attr("data-layerlink") + Math.floor(video.currentTime);
     });
 
      $(window).bind('mousewheel DOMMouseScroll', function(ee) {

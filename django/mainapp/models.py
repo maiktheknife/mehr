@@ -1,7 +1,6 @@
 import logging
 
 from django.db import models
-from .utils.metadatareader import MetadataReader
 from .utils.pathutil import *
 
 logger = logging.getLogger('mehr')
@@ -16,7 +15,7 @@ class SocialMediaPlatform(models.Model):
 
 
 class Menu(models.Model):
-	video = models.FileField()
+	video = models.URLField()
 	text = models.TextField(max_length=100, blank=True)
 	imprint = models.TextField(blank=True)
 	about = models.TextField(blank=True)
@@ -27,13 +26,12 @@ class Person(models.Model):
 	PREVIEW_TYPE_IMAGES = 1
 
 	name = models.CharField(max_length=100)
-	twitter_account = models.URLField(max_length=255)
 	type_choices = (
 		(PREVIEW_TYPE_VIDEO, "Video"), (PREVIEW_TYPE_IMAGES, "Images")
 	)
 	preview_type = models.IntegerField(choices=type_choices)
 	preview_text = models.TextField(max_length=300)
-	preview_video = models.FileField(null=True, blank=True, upload_to=user_preview_video_path)
+	preview_video = models.URLField(blank=True)
 
 	def get_relative_id(self):
 		return Person.objects.filter(id__lt=self.id).count()
@@ -71,7 +69,7 @@ class Person(models.Model):
 		return self.chapter_set.first()
 
 	def __str__(self):
-		return "{} ({})".format(self.name, self.id)
+		return "{} (#{})".format(self.name, self.id)
 
 	# Admin Page Anpassungen
 	get_images_count.short_description = '#Bilder'
@@ -80,29 +78,10 @@ class Person(models.Model):
 
 class Chapter(models.Model):
 	name = models.CharField(max_length=100)
-	video = models.FileField(null=True, upload_to=user_chapter_path)
-	duration = models.FloatField(default=0, editable=False)
-	start_time = models.FloatField(default=0, editable=False)
+	video = models.URLField()
+	duration = models.FloatField(default=0.0)
 	additional_content_signal_time = models.FloatField(default=0)
-
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
-
-	def save(self, *args, **kwargs):
-		logger.debug('analyse metadata from uploaded file')
-		# save first, so we can work with the uploaded file
-
-		super(Chapter, self).save(*args, **kwargs)
-
-		metadata = MetadataReader(self.video.path)
-		self.duration = metadata.get_duration()
-
-		previous_chapters = self.person.chapter_set.filter(id__lt=self.id).order_by('-id')
-		if previous_chapters:
-			chapter = previous_chapters.first()
-			self.start_time = chapter.start_time + chapter.duration
-
-		# there might be a better solution than resaving.
-		super(Chapter, self).save(*args, **kwargs)
 
 	def get_relative_id(self):
 		return self.person.chapter_set.filter(id__lt=self.id).count()
@@ -121,6 +100,13 @@ class Chapter(models.Model):
 
 	def get_additional_count(self):
 		return self.additionalcontent_set.count()
+
+	def start_time(self):
+		previous_chapters = self.person.chapter_set.filter(id__lt=self.id).order_by('-id')
+		if previous_chapters:
+			return sum(map(lambda x: x.duration, previous_chapters))
+		else:
+			return 0.0
 
 	def __str__(self):
 		return "{}; Chapter {}: {}".format(self.person, self.get_relative_id(), self.name)
@@ -146,7 +132,7 @@ class AdditionalContent(models.Model):
 	type = models.IntegerField(choices=type_choices)
 	chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
-	video = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path)
+	video = models.URLField(blank=True)
 	ambient_music = models.FileField(null=True, blank=True, upload_to=user_chapter_layer_path, default=None)
 
 	def get_relative_id(self):
@@ -183,7 +169,7 @@ class AdditionalContentElement(models.Model):
 
 	type = models.IntegerField(choices=type_choices)
 	additional_content = models.ForeignKey(AdditionalContent, on_delete=models.CASCADE)
-	video = models.FileField(upload_to=user_additional_content_images_path, null=True, blank=True)
+	video = models.URLField(blank=True)
 	image = models.ImageField(upload_to=user_additional_content_images_path, null=True, blank=True)
 	text = models.TextField(max_length=1000, null=True, blank=True)
 

@@ -43,22 +43,15 @@ class AdditionalContentAdmin(admin.ModelAdmin):
 
 	# https://stackoverflow.com/questions/9330354/django-admin-disable-field-dynamically-based-on-other-selections
 	class Media:
-		js = ("mainapp/js/libs/jquery.js", "admin/js/layer_admin.js", )
+		js = ("mainapp/js/libs/jquery.js", "admin/js/layer_admin.js",)
 
 
 # Chapter
 
-class AdditionalContentInline(admin.TabularInline):
-	model = AdditionalContent
-	fields = ['name', 'description', 'image', ]
-	extra = 3
-
-
 class ChapterAdmin(admin.ModelAdmin):
 	list_filter = ['person']
-	list_display = ['person', 'name', 'video', 'start_time', 'duration', 'get_additional_count']
+	list_display = ['person', 'name', 'video', 'get_additional_count']
 	ordering = ['id']
-	inlines = [AdditionalContentInline, ]
 
 
 # People
@@ -77,10 +70,10 @@ class ImagesInline(admin.TabularInline):
 
 class PersonAdmin(admin.ModelAdmin):
 	list_filter = ['name']
-	list_display = ['name', 'twitter_account', 'preview_type', 'get_chapter_count']
+	list_display = ['name', 'preview_type', 'get_chapter_count']
 	ordering = ['name', ]
 	fieldsets = [
-		(None, {'fields': ['name', 'twitter_account', 'preview_text',]}),
+		(None, {'fields': ['name', 'preview_text', ]}),
 		('Preview', {'fields': ['preview_type']}),
 		('Preview Video', {
 			'fields': ['preview_video'],
@@ -89,7 +82,7 @@ class PersonAdmin(admin.ModelAdmin):
 	inlines = [ImagesInline, ChapterInline]
 
 	class Media:
-		js = ("mainapp/js/libs/jquery.js", "admin/js/person_admin.js", )
+		js = ("mainapp/js/libs/jquery.js", "admin/js/person_admin.js",)
 
 
 admin.site.register(Menu, MenuAdmin)

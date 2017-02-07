@@ -21,6 +21,10 @@
     <source src="{{ layer.ambient_music.url }}" type="audio/mpeg">
     Your browser does not support the audio tag.
 </audio>
+<div class="audio-controls">
+    <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
+    <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
+</div>
 {% endif %}
 <div class="timeline">
     <progress id="chapterProgressbar" value="{{ chapter_progress }}" max="100"></progress>
@@ -39,10 +43,6 @@
     <div>
         <a class="mehr" href="#">mehr.</a>
     </div>
-</div>
-<div class="audio-controls">
-    <input id="audio-toggle" type="image" src="{% static 'mainapp/images/pause_blau.png' %}" />
-    <input id="audio-volume" type="image" src="{% static 'mainapp/images/ton_aus_blau.png' %}" />
 </div>
 {% if chapter.get_additional_count > 0 %}
 <div id="layer-container" class="layer-container">

@@ -1,18 +1,15 @@
 var audio = null;
 var isLayerVisible = false;
-
-function backToChapter(link) {
-    document.location.href = link;
-}
+var hasLayers = false;
 
 function main(){
     audio = $("#ambient_music").get(0);
-
+    hasLayers = $("#layer-container").length >= 1;
     initPageNavigation();
     initAudioControls();
     initLayerControl();
     initLayerElements();
-    initMasonry();
+    initRandomness();
 }
 
 function initPageNavigation() {
@@ -22,8 +19,7 @@ function initPageNavigation() {
                 if (isLayerVisible) {
                     hideLayers();
                 } else {
-                    linkLocation = chapterLink;
-                    $("body").fadeOut(1000, redirectPage);
+                    $("body").fadeOut(1000, redirectPage(chapterLink));
                 }
                 break;
             case 40: // down
@@ -34,12 +30,8 @@ function initPageNavigation() {
             }
     });
 
-    function redirectPage() {
-        window.location = linkLocation;
-    }
-
     $('body').click(function(event) {
-        backToChapter(chapterLink);
+        redirectPage(chapterLink);
     });
 }
 
@@ -47,20 +39,20 @@ function initPageNavigation() {
 
 function toggleAudioStatus(){
     if (audio.paused) {
-        $("#audio-toggle").attr('src', pauseIconWeiß);
+        $("#audio-toggle").attr('src', pauseIconWhite);
         audio.play();
     } else {
-        $("#audio-toggle").attr('src', playIconWeiß);
+        $("#audio-toggle").attr('src', playIconWhite);
         audio.pause();
     }
 }
 
 function toggleAudioVolume(){
     if (audio.muted) {
-        $("#audio-volume").attr('src', volumeOffIconWeiß);
+        $("#audio-volume").attr('src', volumeOffIconWhite);
         audio.muted = false;
     } else {
-        $("#audio-volume").attr('src', volumeOnIconWeiß);
+        $("#audio-volume").attr('src', volumeOnIconWhite);
         audio.muted = true;
     }
 }
@@ -74,15 +66,15 @@ function initAudioControls(){
     $('#audio-toggle').hover(
     function(){ // mouse-enter
         if (audio.paused) {
-            $(this).attr('src', playIconWeiß);
+            $(this).attr('src', playIconWhite);
         } else {
-            $(this).attr('src', pauseIconWeiß);
+            $(this).attr('src', pauseIconWhite);
         }
     }, function() { // mouse-exit
         if (audio.paused) {
-            $(this).attr('src', playIconBlau);
+            $(this).attr('src', playIconBlue);
         } else {
-            $(this).attr('src', pauseIconBlau);
+            $(this).attr('src', pauseIconBlue);
         }
     });
 
@@ -94,15 +86,15 @@ function initAudioControls(){
     $('#audio-volume').hover(
         function(){ // mouse-enter
             if (audio.muted) {
-                $(this).attr('src', volumeOnIconWeiß);
+                $(this).attr('src', volumeOnIconWhite);
             } else {
-                $(this).attr('src', volumeOffIconWeiß);
+                $(this).attr('src', volumeOffIconWhite);
             }
         }, function() { // mouse-exit
             if (audio.muted) {
-                $(this).attr('src', volumeOnIconBlau);
+                $(this).attr('src', volumeOnIconBlue);
             } else {
-                $(this).attr('src', volumeOffIconBlau);
+                $(this).attr('src', volumeOffIconBlue);
             }
         });
 }
@@ -110,7 +102,11 @@ function initAudioControls(){
 /* Layers */
 
 function showLayers(){
-    // console.log("showLayers");
+    console.log("showLayers: " + hasLayers);
+    if (!hasLayers) {
+        return; // no child layers, so do nothing
+    }
+
     $('.layer-container').show();
     isLayerVisible = true;
     $('html, body').animate({
@@ -119,7 +115,7 @@ function showLayers(){
 }
 
 function hideLayers(){
-    // console.log("hideLayers");
+    console.log("hideLayers");
     $('html, body').animate({
         scrollTop : $('#page').offset().top
     }, 1000, function() {
@@ -129,8 +125,8 @@ function hideLayers(){
 }
 
 function initLayerControl() {
-	$('.mehr').on('click', function(event) {
-        // console.log("mehr. click");
+	$('.mehr a').on('click', function(event) {
+        console.log("mehr. click");
 		if (isLayerVisible) {
 			hideLayers()
 		} else {
@@ -141,8 +137,7 @@ function initLayerControl() {
 
 	$('.layer').click(function(event){
 	    // console.log("layer click");
-        var layerLink = $(this).attr("data-layerlink");
-        window.location.href = layerLink;
+        redirectPage($(this).attr("data-layerlink"));
         event.stopPropagation();
     });
 
@@ -157,26 +152,49 @@ function initLayerControl() {
 }
 
 function initLayerElements() {
+    $('video').first().get(0).muted = false;
 	$('video').first().get(0).play();
 
 	$('video').hover(
     function(){ // mouse-enter
         $('video').each(function(){
+            $(this).get(0).muted = true;
             $(this).get(0).pause();
         });
+        $(this).get(0).muted = false;
         $(this).get(0).play();
     }, function() { // mouse-exit
+        $(this).get(0).muted = true;
         $(this).get(0).pause();
     });
 }
 
-function initMasonry() {
-    // console.log("initMasonry");
-	var grid = $('.grid').masonry({
+/* Randomness */
+
+function initRandomness(){
+    var elem = document.querySelector('.grid');
+    var columnWidth = 400;
+    var columnMargin = 100;
+    var maxTopPadding = 100;
+    var maxLeftPadding = Math.floor(columnWidth * 0.5);
+
+    // "randomness"
+    for(var i = 0; i < elem.children.length; i++) {
+        elem.children[i].style.paddingTop = Math.floor(Math.random() * maxTopPadding) + 'px';
+        elem.children[i].style.paddingLeft = Math.floor(Math.random() * maxLeftPadding) + 'px';
+        elem.children[i].getElementsByTagName('p')[0].style.left = Math.floor(Math.random() * columnMargin * 2 - columnMargin) + 'px';
+
+        // order
+        if (Math.random() < .5) {
+            elem.children[i].appendChild(elem.children[i].children[0]);
+        }
+    }
+
+    var grid = $('.grid').masonry({
         itemSelector: '.grid-item',
-        percentPosition: true,
-        gutter: 20
-	});
+        columnWidth: columnWidth
+//        gutter: 20
+    });
 
 	// layout Masonry after each image loads
     grid.imagesLoaded().progress( function() {

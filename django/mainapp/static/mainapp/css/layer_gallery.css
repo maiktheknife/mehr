@@ -66,8 +66,8 @@ div.timeline progress {
 
 div.audio-controls {
     position: fixed;
-    bottom: 0px;
-    left: 0px;
+    bottom: 0;
+    left: 0;
     display: block;
 
     width: auto;
@@ -135,7 +135,7 @@ progress::-webkit-progress-value {
  */
 
 .flickity-prev-next-button {
-    background: transparent;
+    display: none;
 }
 
 .flickity-page-dots {
@@ -169,8 +169,7 @@ div.layer-container {
     text-align: center;
     cursor: pointer;
 
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: no-repeat center center;
     background-size: cover;
 
     transition: visibility 1s, opacity 0.5s linear;
@@ -197,6 +196,6 @@ div.layer-container {
 
     font-size: 2.5em;
     line-height: 0.95;
-    padding: 0px 20%;
+    padding: 0 20%;
     text-align: center;
 }

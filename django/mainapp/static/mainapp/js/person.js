@@ -8,20 +8,16 @@ function initPageNavigation() {
     $(document).keydown(function(e) {
          switch(e.which) {
             case 37: // left
-                linkLocation = previousPersonLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(previousPersonLink));
                 break;
             case 38: // up
-                linkLocation = homeLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(homeLink));
                 break;
             case 39: // right
-                linkLocation = nextPersonLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(nextPersonLink));
                 break;
             case 40: // down
-                linkLocation = chapterLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(chapterLink));
                 break;
             default:
                 break;
@@ -30,26 +26,19 @@ function initPageNavigation() {
 
     $(".mehr").click(function(event){
         event.preventDefault();
-        linkLocation = this.href;
-        $("body").fadeOut(1000, redirectPage);
+        $("body").fadeOut(1000, redirectPage(this.href));
     });
 
     $('body').click(function(event){
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX) {
-                linkLocation = previousPersonLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(previousPersonLink));
             } else if (event.pageX > 2/3*maxX) {
-                linkLocation = nextPersonLink;
-                $("body").fadeOut(1000, redirectPage);
+                $("body").fadeOut(1000, redirectPage(nextPersonLink));
             }
         }
     });
-
-    function redirectPage() {
-        window.location = linkLocation;
-    }
 
 }
 
@@ -74,7 +63,9 @@ function initBackGroundImageRotator(){
             }, itemInterval);
         }
     };
-    InfiniteRotator.init();
+    if (typeof images !== 'undefined') {
+        InfiniteRotator.init();
+    }
 }
 
 function initMouseMovementAwareness(){
@@ -82,9 +73,9 @@ function initMouseMovementAwareness(){
         if (!isOverLayVisible()) {
             var maxX = $(window).width();
             if (event.pageX < 1/3*maxX) {
-                $('body').css('cursor', "url("+ arrowLeft + "), pointer");
+                $('body').css('cursor', "url("+ arrowLeftWhite + "), pointer");
             }else if (event.pageX > 2/3*maxX) {
-                $('body').css('cursor', "url("+ arrowRight + "), pointer");
+                $('body').css('cursor', "url("+ arrowRightWhite + "), pointer");
             }else {
                 $('body').css('cursor', "default");
             }
