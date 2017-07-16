@@ -3,9 +3,6 @@
 ## Prepare
 ```bash
 pip install -r requirements.txt
-
-tar -xvzf hachoir3-superdesk-3.0a1.post2.tar.gz
-python hachoir3-superdesk-3.0a1.post2/setup.py install
 ```
 
 ## Run
@@ -24,5 +21,4 @@ $ python manage.py createsuperuser
 * [Django](https://www.djangoproject.com/)
 * [Django-bootstrap3](https://github.com/dyve/django-bootstrap3)
 * [Django-fontawesome](https://github.com/redouane/django-fontawesome)
-* [hachoir3](https://bitbucket.org/haypo/hachoir3) / [hachoir3 windows](https://pypi.python.org/pypi/hachoir3-superdesk/3.0a1.post2)
-
+* [hachoir3](https://bitbucket.org/haypo/hachoir3)
