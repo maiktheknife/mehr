@@ -24,11 +24,11 @@ SECRET_KEY = '(uh4kvhsew(_9p=pzvu+yzm_@n@i01_5iy%78-!o9kumy+&82y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = [
-	'django.mehr.nunki.uberspace.de',
-	'mehr.space',
-]
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [
+# 	'django.mehr.nunki.uberspace.de',
+# 	'mehr.space',
+# ]
 
 # Application definition
 
@@ -82,8 +82,11 @@ WSGI_APPLICATION = 'magazin.wsgi.application'
 
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+		'ENGINE': 'django.db.backends.postgresql',
+		'NAME': 'postgres', #database name
+		'USER': 'postgres',
+		'HOST': 'db',
+		'PORT': '5432',
 	}
 }
 
@@ -127,7 +130,8 @@ USE_X_FORWARDED_HOST = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_ROOT = '/var/www/virtual/mehr/django.mehr.nunki.uberspace.de/static'
+# STATIC_ROOT = '/var/www/virtual/mehr/django.mehr.nunki.uberspace.de/static'
+STATIC_ROOT = 'static/'
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
@@ -149,14 +153,14 @@ LOGGING = {
 		'file': {
 			'level': 'DEBUG',
 			'class': 'logging.FileHandler',
-			'filename': 'log/debug.log',
+			'filename': 'logs/debug.log',
 			'encoding': 'utf8',
 			'formatter': 'verbose'
 		},
 		'mehr': {
 			'level': 'DEBUG',
 			'class': 'logging.FileHandler',
-			'filename': 'log/mehr.log',
+			'filename': 'logs/mehr.log',
 			'encoding': 'utf8',
 			'formatter': 'verbose'
 		},

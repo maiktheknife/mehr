@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+
+  web:
+    image: maiktheknife/mehr_django
+    volumes:
+      - mehr_data:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  mehr_data:
