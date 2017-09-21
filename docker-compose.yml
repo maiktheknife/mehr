@@ -6,12 +6,12 @@ services:
 
   web:
     image: maiktheknife/mehr_django
-#    volumes:
-#      - mehr_data:/code
+    volumes:
+      - mehr_data:/code
     ports:
       - "8000:8000"
     depends_on:
       - db
 
-#volumes:
-#  mehr_data:
+volumes:
+  mehr_data:

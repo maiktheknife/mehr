@@ -1,10 +1,10 @@
-FROM python:3
+FROM python:3.6
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update
-RUN apt-get install -y netcat
-RUN apt-get clean
+RUN apt-get update && \
+    apt-get install -y netcat && \
+    apt-get clean
 
 WORKDIR /code
 ADD django /code/django
