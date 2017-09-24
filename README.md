@@ -1,10 +1,10 @@
 # Mehr
-An implementation for a bachelor thesis (communications design) as a Docker Image
+An implementation for a bachelor thesis (communications design) as a Docker Image.
 
 ## Build &amp; Run
 ```bash
 docker build -t maiktheknife/mehr_django .
-docker-compose up --remove-orphans --abort-on-container-exit
+docker-compose up --remove-orphans -d
 ```
 
 ## Usage
